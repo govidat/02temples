@@ -1,0 +1,33 @@
+Install Vuetify
+
+# npm
+npm install vuetify
+
+Install a webpack-simple template
+$ vue init vuetifyjs/webpack-simple my-project
+$ cd my-project
+$ npm install
+$ npm run dev
+
+Copied the content from 0101Templesvuet
+
+Install axios
+$ npm install axios
+
+For IE and Safari support
+
+// my-project/
+$ npm install babel-polyfill --save
+// or
+$ yarn add babel-polyfill
+content_copy
+// my-project/src/index.js
+import 'babel-polyfill'
+...
+new Vue()
+
+
+to display multiple level selection of saint
+v-for n in bomlevelsaint
+	v-if children exists at this level
+	call zFilterN getsaintId with Parent as [0] as initial value of sel_saints_id array[n-1 element], selected saintgrp to be stored as [nth element] 

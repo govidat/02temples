@@ -1,0 +1,61 @@
+[
+  {
+    "Id": 667,
+    "Ln": "Tamil",
+    "Song": ["அல்லிமாமலர்", "எல்லையிலடி", "கொல்லிகாவலன்", "சொல்லினின்தமிழ்"],
+    "Tables":
+        [
+          {
+            "Header": ["TaHeadCol1", "TaHeadCol2"],
+            "Text":
+              [
+                ["அல்லி மாமலர் மங்கைநாதன்", "அரங்கன்" ],
+                ["அகவிதழ்களையுடைய சிறந்த (தாமரை) மலரில் பிறந்த பிராட்டிக்குக் கணவனான", "ஸ்ரீரங்கநாதனுடைய"]
+              ]
+          }
+        ],
+
+    "Details":
+        [
+          {
+            "Header": "TaExpln of xyz",
+            "Text": ["***- எல்லையி லடிமைத்திறமாவது", "அடிவரவு: தேட்டு தோடேறு தோய்த்த"]
+          }
+        ]
+  },
+  {
+    "Id": 667,
+    "Ln": "English",
+    "Song": ["NA"],
+    "Tables":
+        [
+          {
+            "Header": ["EnHeadCol1", "EnHeadCol2"],
+            "Text":
+              [
+                ["En11", "En12" ],
+                ["En21", "En22"]
+              ]
+          }
+        ],
+
+    "Details":
+        [
+          {
+            "Header": "EnExpln of xyz",
+            "Text": ["This sweet of decad of Tamil songs", "by Kulasekara, Ruler of Kolli"]
+          }
+        ]
+  },
+  {
+    "Id": 667,
+    "Ln": "Telugu",
+    "Details":
+        [
+          {
+            "Header": "TeExpln of xyz",
+            "Text": ["TeThis sweet of decad of Tamil songs", "Teby Kulasekara, Ruler of Kolli"]
+          }
+        ]
+  }
+]

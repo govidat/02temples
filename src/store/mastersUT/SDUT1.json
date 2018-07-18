@@ -1,0 +1,27 @@
+[
+  {
+    "Id": 1762,
+    "Song":
+      {"Tamil": ["கோழியும", "பாழியும்", "வாழிய ", "ஆழியொன்"]},
+      "Tables": [
+        {
+          "Header": {"Tamil": ["TaHeadCol1", "TaHeadCol2"]},
+          "Text":
+            {"Tamil": [
+              ["கோழியும்"],
+              ["உறையூரையும்"]
+            ]}
+        }
+      ],
+    "Details": [
+      {
+        "Header": {"Tamil": "TaExpln of xyz"},
+        "Text": {"Tamil": ["***- தோழீ! இப்பெரியவர் "]}
+      },
+      {
+        "Header": {"English": "EnExpln of xyz"},
+        "Text": {"English": ["Was he the cowherd Lord", "Was he the cowherd Lord"]}
+      }
+    ]
+  }
+]
