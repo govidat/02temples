@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 import { languages } from './customize.js'
-import {header_desc, ism, ism_desc, pps, pps_desc, pps_ism } from './mastersUT/General.js'
+import {ism, pps, pps_ism } from './mastersUT/General.js'
 import {saint, saint_desc, saint_ism, saint_ism_old, saint_temple} from './mastersUT/saints.js'
 
 import {temple, temple_desc, temple_ism, temple_ism_old, temple_pps} from './mastersUT/temples.js'
@@ -13,20 +13,18 @@ import {temple_detail} from './mastersUT/templedetail.js';
 
 import {saint2, saint_hier, saint_hier_desc, ism_saint} from './mastersUT/saints.js'
 
-// import {helper_desc} from './helper.js';
-
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
     languages: languages,
-    main_ln_id : 'en',
+
     add_ln_id: [],
     all_ln_id : ['en'],
-    header_desc: header_desc,
+    // header_desc: header_desc,
 
     ism: ism,
-    ism_desc: ism_desc,
+    // ism_desc: ism_desc,
 
     saint: saint,
     saint_desc: saint_desc,
@@ -49,7 +47,7 @@ export const store = new Vuex.Store({
     temple_song: temple_song,
 
     pps: pps,
-    pps_desc: pps_desc,
+    // pps_desc: pps_desc,
     pps_ism: pps_ism,
 
     saint_detail: saint_detail,
@@ -258,23 +256,26 @@ export const store = new Vuex.Store({
       initStore (state) {
         // using the Map set and get function to refer subsequently
         state.map_desc = new Map();
-        state.map_desc.set('header', state.header_desc).set('node0', state.ism_desc).set('node1', state.saint_desc).set('node2', state.temple_desc).set('node3', state.song_desc).set('node4', state.pps_desc);
+        // state.map_desc.set('header', state.header_desc).set('node0', state.ism_desc).set('node1', state.saint_desc).set('node2', state.temple_desc).set('node3', state.song_desc).set('node4', state.pps_desc);
+        state.map_desc.set('node1', state.saint_desc).set('node2', state.temple_desc).set('node3', state.song_desc);
         state.map_detail = new Map();
         state.map_detail.set('node1', state.saint_detail).set('node2', state.temple_detail);
         state.map_node = new Map();
         state.map_node.set('node0', state.ism).set('node1', state.saint).set('node2', state.temple).set('node3', state.song).set('node1_0', state.saint_ism).set('node2_0', state.temple_ism).set('node3_0', state.song_ism);
       },
 
-      update_main_ln (state, payload) {
-          state.main_ln_id = payload;
+      update_locale (state, payload) {
+          // state.main_ln_id = payload;
           // var x = [payload];
+          state.add_ln_id = state.add_ln_id.filter(x => x != payload);
           state.all_ln_id = [payload].concat(state.add_ln_id);
         },
 
       update_add_ln (state, payload) {
-          state.add_ln_id = payload;
+          state.add_ln_id = payload[0];
           // var x = [state.main_ln_id];
-          state.all_ln_id = [state.main_ln_id].concat(payload);
+          // state.all_ln_id = [state.main_ln_id].concat(payload);
+          state.all_ln_id = [payload[1]].concat(payload[0]);
         },
 
 

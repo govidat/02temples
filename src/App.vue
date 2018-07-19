@@ -13,10 +13,7 @@
           <v-list-tile>
             <v-list-tile-action><v-icon>filter</v-icon></v-list-tile-action>
             <v-list-tile-content>
-              <!-- this just diplays "Selections" as left column1 header -->
-              <!-- itemid, default_ln_id, default desc -->
-              {{ get_desc(1, 'en', 'NA', 'header') }}
-              <!-- {{ get_desc3}} -->
+              {{$t('stat_message.' + '1')}}
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -26,18 +23,17 @@
       <v-list>
         <v-list-group v-for="item in [{id: 10, model: false},{id: 20, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="">
           <v-list-tile slot="activator"><v-list-tile-content> <v-list-tile-title>
-              <!-- itemid, default_ln_id, default desc -->
-                  {{ get_desc(item.id, 'en', 'NA', 'header') }}
-              <!-- {{ get_desc2(item.id)}} -->
+              {{$t('stat_message.' + item.id)}}
                 </v-list-tile-title></v-list-tile-content></v-list-tile>
 
           <!-- 10 node0 is ism @update:selected="handle_node0(0, ...arguments)" get_ism([0],[]) get_ism_cp-->
-          <zfilter3 v-if="item.id == 10" :headerinput= "[ 5, 10]" :items="get_ism([0],[])" :selected.sync="sel_node0[0]" :node= "'node0'" ></zfilter3>
+          <zfilter3 v-if="item.id == 10" :headerinput= "[ 5, 10]" :items="get_ism([0],[])" :selected.sync="sel_node0[0]" :node= "'node0'" :msg= "'node0_desc'" ></zfilter3>
           <!-- following is a radio button selection of radio options -->
           <template v-if="item.id == 20">
             <v-container fluid>
               <v-radio-group v-model="radios" :mandatory="false" v-for="elem in [21,22,23]">
-                <v-radio :label="get_desc(elem, 1, 'NA', 'header')" :value="elem"></v-radio>
+                <v-radio :label="$t('stat_message.' + elem)" :value="elem"></v-radio>
+                <!-- <v-radio :label="get_desc(elem, 1, 'NA', 'header')" :value="elem"></v-radio> -->
               </v-radio-group></v-container>
           </template>
         </v-list-group>
@@ -49,14 +45,16 @@
         <v-list-group v-for="item in [{id: 30, model: false},{id: 40, model: false},{id: 50, model: false}]"
           v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="">
           <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
-                {{ get_desc(item.id, 'en', 'NA', 'header') }}
+                {{$t('stat_message.' + item.id)}}
+                <!-- {{ get_desc(item.id, 'en', 'NA', 'header') }} -->
           </v-list-tile-title></v-list-tile-content></v-list-tile>
           <!-- Sublist => 30 Saints 40 Temples 50 Songs-->
           <template v-if="item.id == 30">
             <!-- Sublist : 31 for Saint-Group 30 for Saints-->
             <v-list-group v-for="item in [{id: 31, model: false},{id: 30, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
               <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
-                {{ get_desc(item.id, 'en', 'NA', 'header') }}
+                {{$t('stat_message.' + item.id)}}
+                <!-- {{ get_desc(item.id, 'en', 'NA', 'header') }} -->
               </v-list-tile-title></v-list-tile-content></v-list-tile>
               <!-- Sublist of 2010  : 31 for Saint-Group 30 for Saints-->
               <zfilter3 v-if="item.id == 31" :headerinput= "[ 5, 31]" :items="get_node('node1', [0], 'node1_0', 'node0', true, sel_node0[sel_node0_bomheight - 1])" :selected.sync="f10sel_node1[0]" :node= "'node1'" ></zfilter3>
@@ -73,7 +71,8 @@
             <!-- Sublist => 42 State 41 District 40 Temple-->
             <v-list-group v-for="item in [{id: 42, model: false},{id: 41, model: false},{id: 40, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
               <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
-                {{ get_desc(item.id, 'en', 'NA', 'header') }}
+                {{$t('stat_message.' + item.id)}}
+                <!-- {{ get_desc(item.id, 'en', 'NA', 'header') }} -->
               </v-list-tile-title></v-list-tile-content></v-list-tile>
               <!-- <zfilter v-if="item.id == 40" :headerinput= "[ 5, 40]" :items="get_temple(f10sel_node2[1].map(x => x.id),sel_node0[sel_node0_bomheight - 1])" :selected="f10sel_node2[2]" :main_ln_id="main_ln_id" :node= "'node2'" @message="handlef10_node2(2, ...arguments)"></zfilter> -->
               <zfilter3 v-if="item.id == 42" :headerinput= "[ 5, 42]" :items="get_node('node2', [0], 'node2_0', 'node0', true, sel_node0[sel_node0_bomheight - 1])" :selected.sync="f10sel_node2[0]" :node= "'node2'"></zfilter3>
@@ -87,7 +86,8 @@
             <v-list-group v-for="item in [{id: 52, model: false},{id: 51, model: false},{id: 50, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
             <!-- <v-list-group v-for="item in selList2030" v-model="item.model" :key="item.title.Id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group> -->
               <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
-                {{ get_desc(item.id, 'en', 'NA', 'header') }}
+                {{$t('stat_message.' + item.id)}}
+                <!-- {{ get_desc(item.id, 'en', 'NA', 'header') }} -->
               </v-list-tile-title></v-list-tile-content></v-list-tile>
               <!-- <zfilter v-if="item.id == 50" :headerinput= "[ 5, 50]" :items="get_song(f10sel_node3[1].map(x => x.id),sel_node0[sel_node0_bomheight - 1])" :selected="f10sel_node3[2]" :main_ln_id="main_ln_id" :node= "'node3'" @message="handlef10_node3(2, ...arguments)"></zfilter> -->
               <zfilter3 v-if="item.id == 52" :headerinput= "[ 5, 52]" :items="get_node('node3', [0], 'node3_0', 'node0', true, sel_node0[sel_node0_bomheight - 1])" :selected.sync="f10sel_node3[0]" :node= "'node3'"></zfilter3>
@@ -103,14 +103,16 @@
         <v-list-group v-for="item in [{id: 30, model: false},{id: 40, model: false}]"
           v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="">
           <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
-                {{ get_desc(item.id, 'en', 'NA', 'header') }}
+                {{$t('stat_message.' + item.id)}}
+                <!-- {{ get_desc(item.id, 'en', 'NA', 'header') }} -->
           </v-list-tile-title></v-list-tile-content></v-list-tile>
           <!-- Sublist => 30 Saints 40 Temples 50 Songs-->
           <template v-if="item.id == 30">
             <!-- Sublist : 31 for Saint-Group 30 for Saints-->
             <v-list-group v-for="item in [{id: 31, model: false},{id: 30, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
               <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
-                {{ get_desc(item.id, 'en', 'NA', 'header') }}
+                {{$t('stat_message.' + item.id)}}
+                <!-- {{ get_desc(item.id, 'en', 'NA', 'header') }} -->
               </v-list-tile-title></v-list-tile-content></v-list-tile>
               <!-- Sublist of 2010  : 31 for Saint-Group 30 for Saints-->
               <zfilter3 v-if="item.id == 31" :headerinput= "[ 5, 31]" :items="get_saint([0],sel_node0[sel_node0_bomheight - 1])" :selected.sync="f20sel_node1[0]" :node= "'node1'"></zfilter3>
@@ -122,7 +124,8 @@
             <!-- Sublist => 42 State 41 District 40 Temple-->
             <v-list-group v-for="item in [{id: 42, model: false},{id: 41, model: false},{id: 40, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
               <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
-                {{ get_desc(item.id, 'en', 'NA', 'header') }}
+                {{$t('stat_message.' + item.id)}}
+                <!-- {{ get_desc(item.id, 'en', 'NA', 'header') }} -->
               </v-list-tile-title></v-list-tile-content></v-list-tile>
               <zfilter3 v-if="item.id == 42" :headerinput= "[ 5, 42]" :items="get_temple([0],sel_node0[sel_node0_bomheight - 1])" :selected.sync="f20sel_node2[0]" :node= "'node2'"></zfilter3>
               <zfilter3 v-if="item.id == 41" :headerinput= "[ 5, 41]" :items="get_temple(f20sel_node2[0].map(x => x.id),sel_node0[sel_node0_bomheight - 1])" :selected.sync="f20sel_node2[1]" :node= "'node2'"></zfilter3>
@@ -139,11 +142,12 @@
         <v-list-group v-for="item in [{id: 43, model: false},{id: 40, model: false}]"
           v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="">
             <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
-              {{ get_desc(item.id, 'en', 'NA', 'header') }}
+                {{$t('stat_message.' + item.id)}}
+              <!-- {{ get_desc(item.id, 'en', 'NA', 'header') }} -->
               <!-- 0607{{ item.title[mainLang] }} -->
             </v-list-tile-title></v-list-tile-content></v-list-tile>
           <!-- 43 node4 is pps -->
-            <zfilter3 v-if="item.id == 43" :headerinput= "[ 5, 43]" :items="get_pps([0],sel_node0[sel_node0_bomheight - 1])" :selected.sync="f30sel_node4[0]" :node= "'node4'"></zfilter3>
+            <zfilter3 v-if="item.id == 43" :headerinput= "[ 5, 43]" :items="get_pps([0],sel_node0[sel_node0_bomheight - 1])" :selected.sync="f30sel_node4[0]" :node= "'node4'" :msg ="'node4_desc'"></zfilter3>
 
             <!-- <template v-if="item.id == 43">
               <v-list-group v-for="item in [{id: 43, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
@@ -157,7 +161,8 @@
               <!-- Sublist => 42 State 41 District 40 Temple-->
               <v-list-group v-for="item in [{id: 42, model: false},{id: 41, model: false},{id: 40, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
                 <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
-                  {{ get_desc(item.id, 'en', 'NA', 'header') }}
+                {{$t('stat_message.' + item.id)}}
+                  <!-- {{ get_desc(item.id, 'en', 'NA', 'header') }} -->
                 </v-list-tile-title></v-list-tile-content></v-list-tile>
                 <zfilter3 v-if="item.id == 42" :headerinput= "[ 5, 42]" :items="get_temple2([0],f30sel_node4[f30sel_node4_bomheight - 1])" :selected.sync="f30sel_node2[0]" :node= "'node2'"></zfilter3>
                 <zfilter3 v-if="item.id == 41" :headerinput= "[ 5, 41]" :items="get_temple2(f30sel_node2[0].map(x => x.id),f30sel_node4[f30sel_node4_bomheight - 1])" :selected.sync="f30sel_node2[1]" :node= "'node2'"></zfilter3>
@@ -191,7 +196,9 @@
         <v-icon>remove</v-icon>
       </v-btn> -->
       <v-toolbar-title>
-        {{ get_desc(0, 'en', 'NA', 'header') }}
+        {{$t('stat_message.' + '0')}}
+        <!-- {{$t("stat_message.title")}} -->
+        <!-- {{ get_desc(0, 'en', 'NA', 'header') }} -->
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- Badge is used only of the badge num value is > 0 -->
@@ -205,12 +212,12 @@
           <v-select :items="languages" v-model="mlang" label="Language"></v-select>
         </v-card> -->
         <v-card height='40px' flat color="transparent">
-          <v-select :items="languages" v-model="main_ln_id" label="Language"></v-select>
+          <v-select :items="languages" v-model="$i18n.locale" label="Language"></v-select>
           <!-- <v-select :items="languages" v-model="main_ln_id" label="Language" @input="update_main_ln"></v-select> -->
         </v-card>
 
         <v-card height='40px' flat color="transparent">
-          <v-select  :items="languages.filter(item => item.value !== main_ln_id)" v-model="add_ln_id" multiple label="Add Languages"></v-select>
+          <v-select  :items="languages.filter(item => item.value !== $i18n.locale)" v-model="add_ln_id" multiple label="Add Languages"></v-select>
         </v-card>
         <!-- <v-card height='40px' flat color="transparent">
           <v-select  :items="filLanguages" v-model="alang" multiple label="Add Languages"></v-select>
@@ -220,7 +227,8 @@
       <v-tabs color="transparent" right slot="extension">
         <!-- <v-tab v-for="(item, j) in ztoolbar1" :key="j" @click.stop="ztool = item.menu"> -->
         <v-tab v-for="item in ztoolbar1" @click.stop="ztool = item.menu">
-          {{ get_desc(item.id, 'en', 'NA', 'header') }}
+                {{$t('stat_message.' + item.id)}}
+          <!-- {{ get_desc(item.id, 'en', 'NA', 'header') }} -->
           <!--0607 {{ item.title[mainLang]}} -->
           <!-- <v-badge v-if="item.badgeNum>0">
             <span slot="badge">{{item.badgeNum}}</span>
@@ -355,6 +363,15 @@ export default {
   },
   name: 'App',
   watch: {
+    main_ln_id : function () {
+      this.$store.commit('update_locale', this.$i18n.locale)
+    },
+
+    // update_main_ln (payload) {
+    //   this.$store.commit('update_main_ln', payload)
+    // },
+
+
 
     // IDEA: if ism is changed subsequently F10, F20 , f30 should be filtered should be revaluate
     sel_node0 : function () {
@@ -482,7 +499,7 @@ export default {
     ...mapState(
       ['languages', 'ism',
         'saint', 'saint_ism', 'temple', 'temple_ism', 'song', 'song_ism',
-        'saint_song', 'temple_song', 'pps', 'main_ln_id', 'all_ln_id'
+        'saint_song', 'temple_song', 'pps', 'all_ln_id'
 
       ]
     ),
@@ -511,22 +528,26 @@ export default {
     get_song3: 'get_song3',
     }),
 
-    main_ln_id: {
-      get () {
-        return this.$store.state.main_ln_id
-      },
-      set (payload) {
-        this.$store.commit('update_main_ln', payload)
-        this.$store.commit('update_add_ln', this.add_ln_id.filter(item => item != payload ))
-      }
+    main_ln_id : function () {
+      return this.$i18n.locale;
     },
+
+    // main_ln_id: {
+    //   get () {
+    //     return this.$store.state.main_ln_id
+    //   },
+    //   set (payload) {
+    //     this.$store.commit('update_main_ln', payload)
+    //     this.$store.commit('update_add_ln', this.add_ln_id.filter(item => item != payload ))
+    //   }
+    // },
 
     add_ln_id: {
       get () {
         return this.$store.state.add_ln_id
       },
       set (payload) {
-        this.$store.commit('update_add_ln', payload)
+        this.$store.commit('update_add_ln', [payload, this.$i18n.locale])
       }
     },
 

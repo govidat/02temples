@@ -50,10 +50,7 @@
               @click="changeSort(header.value)"
             >
               <v-icon v-if="header.sortable" small>arrow_upward</v-icon>
-              <!-- Call the function to display in the required language -->
-              <!-- {{ 'hello' }} -->
-              {{ get_desc(header.id, 'en', 'NA', 'header') }}
-              <!-- itemid, main_ln_id, default_ln_id, default desc, tab_name -->
+                {{$t('stat_message.' + header.id)}}
             </th>
           </tr>
         </template>
@@ -72,7 +69,8 @@
             <!-- <td>{{ props.item.Name[mainLang] }}</td> -->
             <td>
               <!-- Call the function to display in the required language -->
-              {{ get_desc(props.item.id, 'en', 'NA', node ) }}
+              {{$t(msg + '.' + props.item.id)}}
+              <!-- {{ get_desc(props.item.id, 'en', 'NA', node ) }} -->
             </td>
             <!-- <td class="text-xs-right">{{ props.item.calories }}</td> -->
           </tr>
@@ -103,7 +101,7 @@ import { mapGetters } from 'vuex'
 
   export default {
 
-    props: ['value', 'headerinput', 'items', 'selected', 'node'],
+    props: ['value', 'headerinput', 'items', 'selected', 'node', 'msg'],
 
     // mixins: [fn_desc],
 
