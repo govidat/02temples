@@ -35,6 +35,11 @@ export var messages = {
     node4_desc: {
       1: 'Divya Desam',
       2: '275 Saiva Sthalangal'
+    },
+    node1h_desc: {
+      1: 'msgAlwars',
+      2: 'Nayanmars',
+      3: 'Others'
     }
   },
   ta: {
@@ -73,6 +78,11 @@ export var messages = {
     node4_desc: {
       1: '108 திவ்ய தேசம்',
       2: '275 சைவ ஸ்தலங்கள்'
+    },
+    node1h_desc: {
+      1: 'ஆழ்வார்கள்',
+      2: 'நாயன்மார்கள்',
+      3: 'மற்ற'
     }
   },
   te: {
@@ -112,6 +122,11 @@ export var messages = {
     node4_desc: {
       1: '108 దివ్య దేశము',
       2: '275 సావ ఆలయాలు'
+    },
+    node1h_desc: {
+      1: 'ఆల్వార్స్',
+      2: 'నయనమార్స్',
+      3: 'ఇతర'
     }
   }
 }

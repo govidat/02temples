@@ -5,15 +5,15 @@
 //   {Id:12, IsmId: [2], SaintGr1Id: 2, Name: { English: "EnKulasekara Alwar", Tamil: "TaKulasekara Alwar", Telugu: "TeKulasekara Alwar" }}
 //   ];
 
-export var saint = [
-  {id: 1, p_id: 0},
-  {id: 2, p_id: 0},
-  {id: 3, p_id: 0},
-  {id: 4, p_id: 1},
-  {id: 5, p_id: 1},
-  {id: 10, p_id: 1},
-  {id: 12, p_id: 2}
-  ];
+// export var saint = [
+//   {id: 1, p_id: 0},
+//   {id: 2, p_id: 0},
+//   {id: 3, p_id: 0},
+//   {id: 4, p_id: 1},
+//   {id: 5, p_id: 1},
+//   {id: 10, p_id: 1},
+//   {id: 12, p_id: 2}
+//   ];
 
 export var saint_desc = [
   {id: 1, ln_id: 'en', desc: 'Alwars'},
@@ -78,11 +78,11 @@ export var saint_temple = [
 //   { Id: 3, Name: {English: "Others", Tamil: "மற்ற", Telugu: "ఇతర"}, IsmId: [2], SaintId: [12] }
 // ];
 
-export var saint2 = [
-  {id: 4, h_id: [1]},
-  {id: 5, h_id: [1]},
-  {id: 10, h_id: [1]},
-  {id: 12, h_id: [2]}
+export var saint = [
+  {id: 4, path: [1]},
+  {id: 5, path: [1]},
+  {id: 10, path: [1]},
+  {id: 12, path: [2]}
   ];
 
 export var saint_hier = [
