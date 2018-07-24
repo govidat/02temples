@@ -62,8 +62,8 @@
 // ];
 
 export var ism = [
-  {id: 1, p_id: 0},
-  {id: 2, p_id: 0}
+  {id: 1, h_path: []},
+  {id: 2, h_path: []}
 ];
 
 // export var ism_desc = [
@@ -76,8 +76,8 @@ export var ism = [
 // ];
 
 export var pps = [
-  {id: 1, p_id: 0},
-  {id: 2, p_id: 0}
+  {id: 1, h_path: []},
+  {id: 2, h_path: []}
   // { id: 1},
   // { id: 2}
 ];

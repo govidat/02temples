@@ -17,47 +17,47 @@
 //   }
 // ]
 
-export var temple = [
-  {id: 31, p_id: 0},
-  {id: 18, p_id: 0},
-  {id: 101, p_id: 31},
-  {id: 102, p_id: 31},
-  {id: 103, p_id: 18},
-  {id: 202, p_id: 101},
-  {id: 205, p_id: 101},
-  {id: 226, p_id: 102},
-  {id: 276, p_id: 103},
-  ];
+// export var temple = [
+//   {id: 31, p_id: 0},
+//   {id: 18, p_id: 0},
+//   {id: 101, p_id: 31},
+//   {id: 102, p_id: 31},
+//   {id: 103, p_id: 18},
+//   {id: 202, p_id: 101},
+//   {id: 205, p_id: 101},
+//   {id: 226, p_id: 102},
+//   {id: 276, p_id: 103},
+//   ];
 
-export var temple_desc = [
-  {id: 18, ln_id: 'en', desc: 'EnKerala'},
-  {id: 18, ln_id: 'ta', desc: 'TaKerala'},
-  {id: 18, ln_id: 'te', desc: 'TeKerala'},
-  {id: 31, ln_id: 'en', desc: 'EnTamilnadu'},
-  {id: 31, ln_id: 'ta', desc: 'TaTamilnadu'},
-  {id: 31, ln_id: 'te', desc: 'TeTamilnadu'},
-  {id: 101, ln_id: 'en', desc: 'EnTrichy'},
-  {id: 101, ln_id: 'ta', desc: 'TaTrichy'},
-  {id: 101, ln_id: 'te', desc: 'TeTrichy'},
-  {id: 102, ln_id: 'en', desc: 'EnTanjavur'},
-  {id: 102, ln_id: 'ta', desc: 'TaTanjavur'},
-  {id: 102, ln_id: 'te', desc: 'TeTanjavur'},
-  {id: 103, ln_id: 'en', desc: 'EnKannanur'},
-  {id: 103, ln_id: 'ta', desc: 'TaKannanur'},
-  {id: 103, ln_id: 'te', desc: 'TeKannanur'},
-  {id: 202, ln_id: 'en', desc: 'EnEnThirukkozhi - Sri Azhagiya Manavala Perumal Temple'},
-  {id: 202, ln_id: 'ta', desc: 'TaEnThirukkozhi - Sri Azhagiya Manavala Perumal Temple'},
-  {id: 202, ln_id: 'te', desc: 'TeEnThirukkozhi - Sri Azhagiya Manavala Perumal Temple'},
-  {id: 205, ln_id: 'en', desc: 'EnEnThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple'},
-  {id: 205, ln_id: 'ta', desc: 'TaEnThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple'},
-  {id: 205, ln_id: 'te', desc: 'TeEnThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple'},
-  {id: 226, ln_id: 'en', desc: 'EnThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple'},
-  {id: 226, ln_id: 'ta', desc: 'TaThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple'},
-  {id: 226, ln_id: 'te', desc: 'TeThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple'},
-  {id: 276, ln_id: 'en', desc: 'EnThiruvaragunamangai - Sri Vijayaasana Perumal Temple'},
-  {id: 276, ln_id: 'ta', desc: 'TaThiruvaragunamangai - Sri Vijayaasana Perumal Temple'},
-  {id: 276, ln_id: 'te', desc: 'TeThiruvaragunamangai - Sri Vijayaasana Perumal Temple'}
-];
+// export var temple_desc = [
+//   {id: 18, ln_id: 'en', desc: 'EnKerala'},
+//   {id: 18, ln_id: 'ta', desc: 'TaKerala'},
+//   {id: 18, ln_id: 'te', desc: 'TeKerala'},
+//   {id: 31, ln_id: 'en', desc: 'EnTamilnadu'},
+//   {id: 31, ln_id: 'ta', desc: 'TaTamilnadu'},
+//   {id: 31, ln_id: 'te', desc: 'TeTamilnadu'},
+//   {id: 101, ln_id: 'en', desc: 'EnTrichy'},
+//   {id: 101, ln_id: 'ta', desc: 'TaTrichy'},
+//   {id: 101, ln_id: 'te', desc: 'TeTrichy'},
+//   {id: 102, ln_id: 'en', desc: 'EnTanjavur'},
+//   {id: 102, ln_id: 'ta', desc: 'TaTanjavur'},
+//   {id: 102, ln_id: 'te', desc: 'TeTanjavur'},
+//   {id: 103, ln_id: 'en', desc: 'EnKannanur'},
+//   {id: 103, ln_id: 'ta', desc: 'TaKannanur'},
+//   {id: 103, ln_id: 'te', desc: 'TeKannanur'},
+//   {id: 202, ln_id: 'en', desc: 'EnEnThirukkozhi - Sri Azhagiya Manavala Perumal Temple'},
+//   {id: 202, ln_id: 'ta', desc: 'TaEnThirukkozhi - Sri Azhagiya Manavala Perumal Temple'},
+//   {id: 202, ln_id: 'te', desc: 'TeEnThirukkozhi - Sri Azhagiya Manavala Perumal Temple'},
+//   {id: 205, ln_id: 'en', desc: 'EnEnThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple'},
+//   {id: 205, ln_id: 'ta', desc: 'TaEnThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple'},
+//   {id: 205, ln_id: 'te', desc: 'TeEnThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple'},
+//   {id: 226, ln_id: 'en', desc: 'EnThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple'},
+//   {id: 226, ln_id: 'ta', desc: 'TaThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple'},
+//   {id: 226, ln_id: 'te', desc: 'TeThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple'},
+//   {id: 276, ln_id: 'en', desc: 'EnThiruvaragunamangai - Sri Vijayaasana Perumal Temple'},
+//   {id: 276, ln_id: 'ta', desc: 'TaThiruvaragunamangai - Sri Vijayaasana Perumal Temple'},
+//   {id: 276, ln_id: 'te', desc: 'TeThiruvaragunamangai - Sri Vijayaasana Perumal Temple'}
+// ];
 
 export var temple_ism = [
   {id: 18, to_id: 1},
@@ -99,4 +99,25 @@ export var temple_pps = [
   {pps_id: 1, temple_id: 205},
   {pps_id: 1, temple_id: 226},
   {pps_id: 2, temple_id: 276}
+];
+
+export var temple = [
+  {id: 2, h_path: [31, 3101]},
+  {id: 5, h_path: [31, 3101]},
+  {id: 26, h_path: [31, 3102]},
+  {id: 76, h_path: [18, 1803]}
+  ];
+
+export var temple_hier = [
+  {id: 18, path: [18]},
+  {id: 31, path: [31]},
+  {id: 3101, path: [31, 3101]},
+  {id: 3102, path: [31, 3102]},
+  {id: 1803, path: [18, 1803]}
+
+];
+
+export var ism_temple = [
+  {id: 1, to_id: [2, 5, 26]},
+  {id: 2, to_id: [76]}
 ];

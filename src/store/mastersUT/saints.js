@@ -15,30 +15,30 @@
 //   {id: 12, p_id: 2}
 //   ];
 
-export var saint_desc = [
-  {id: 1, ln_id: 'en', desc: 'Alwars'},
-  {id: 1, ln_id: 'ta', desc:  'ஆழ்வார்கள்'},
-  {id: 1, ln_id: 'te', desc:  'ఆల్వార్స్'},
-  {id: 2, ln_id: 'en', desc: 'Nayanmars'},
-  {id: 2, ln_id: 'ta', desc:  'நாயன்மார்கள்'},
-  {id: 2, ln_id: 'te', desc:  'నయనమార్స్'},
-  {id: 3, ln_id: 'en', desc: 'Others'},
-  {id: 3, ln_id: 'ta', desc:  'மற்ற'},
-  {id: 3, ln_id: 'te', desc:  'ఇతర'},
-  {id: 4, ln_id: 'en', desc: 'EnThirumazhisai Alwar'},
-  {id: 4, ln_id: 'ta', desc:  'TaThirumazhisai Alwar'},
-  {id: 4, ln_id: 'te', desc:  'TeThirumazhisai Alwar'},
-  {id: 5, ln_id: 'en', desc: 'EnThirumangai Alwar'},
-  {id: 5, ln_id: 'ta', desc:  'TaThirumangai Alwar'},
-  {id: 5, ln_id: 'te', desc:  'TeThirumangai Alwar'},
-  {id: 10, ln_id: 'en', desc: 'EnNammalwar'},
-  {id: 10, ln_id: 'ta', desc:  'TaNammalwar'},
-  {id: 10, ln_id: 'te', desc:  'TeNammalwar'},
-  {id: 12, ln_id: 'en', desc: 'EnSekkizhar'},
-  {id: 12, ln_id: 'ta', desc:  'TaSekkizhar'},
-  {id: 12, ln_id: 'te', desc:  'TeSekkizhar'},
-
-];
+// export var saint_desc = [
+//   {id: 1, ln_id: 'en', desc: 'Alwars'},
+//   {id: 1, ln_id: 'ta', desc:  'ஆழ்வார்கள்'},
+//   {id: 1, ln_id: 'te', desc:  'ఆల్వార్స్'},
+//   {id: 2, ln_id: 'en', desc: 'Nayanmars'},
+//   {id: 2, ln_id: 'ta', desc:  'நாயன்மார்கள்'},
+//   {id: 2, ln_id: 'te', desc:  'నయనమార్స్'},
+//   {id: 3, ln_id: 'en', desc: 'Others'},
+//   {id: 3, ln_id: 'ta', desc:  'மற்ற'},
+//   {id: 3, ln_id: 'te', desc:  'ఇతర'},
+//   {id: 4, ln_id: 'en', desc: 'EnThirumazhisai Alwar'},
+//   {id: 4, ln_id: 'ta', desc:  'TaThirumazhisai Alwar'},
+//   {id: 4, ln_id: 'te', desc:  'TeThirumazhisai Alwar'},
+//   {id: 5, ln_id: 'en', desc: 'EnThirumangai Alwar'},
+//   {id: 5, ln_id: 'ta', desc:  'TaThirumangai Alwar'},
+//   {id: 5, ln_id: 'te', desc:  'TeThirumangai Alwar'},
+//   {id: 10, ln_id: 'en', desc: 'EnNammalwar'},
+//   {id: 10, ln_id: 'ta', desc:  'TaNammalwar'},
+//   {id: 10, ln_id: 'te', desc:  'TeNammalwar'},
+//   {id: 12, ln_id: 'en', desc: 'EnSekkizhar'},
+//   {id: 12, ln_id: 'ta', desc:  'TaSekkizhar'},
+//   {id: 12, ln_id: 'te', desc:  'TeSekkizhar'},
+//
+// ];
 
 // saint_id first and ism_id next
 export var saint_ism = [
@@ -79,10 +79,10 @@ export var saint_temple = [
 // ];
 
 export var saint = [
-  {id: 4, path: [1]},
-  {id: 5, path: [1]},
-  {id: 10, path: [1]},
-  {id: 12, path: [2]}
+  {id: 4, h_path: [1]},
+  {id: 5, h_path: [1]},
+  {id: 10, h_path: [1]},
+  {id: 12, h_path: [2]}
   ];
 
 export var saint_hier = [
@@ -91,17 +91,17 @@ export var saint_hier = [
   {id: 3, path: [3]}
 ];
 
-export var saint_hier_desc = [
-  {id: 1, ln_id: 'en', desc: 'Alwars'},
-  {id: 1, ln_id: 'ta', desc:  'ஆழ்வார்கள்'},
-  {id: 1, ln_id: 'te', desc:  'ఆల్వార్స్'},
-  {id: 2, ln_id: 'en', desc: 'Nayanmars'},
-  {id: 2, ln_id: 'ta', desc:  'நாயன்மார்கள்'},
-  {id: 2, ln_id: 'te', desc:  'నయనమార్స్'},
-  {id: 3, ln_id: 'en', desc: 'Others'},
-  {id: 3, ln_id: 'ta', desc:  'மற்ற'},
-  {id: 3, ln_id: 'te', desc:  'ఇతర'}
-];
+// export var saint_hier_desc = [
+//   {id: 1, ln_id: 'en', desc: 'Alwars'},
+//   {id: 1, ln_id: 'ta', desc:  'ஆழ்வார்கள்'},
+//   {id: 1, ln_id: 'te', desc:  'ఆల్వార్స్'},
+//   {id: 2, ln_id: 'en', desc: 'Nayanmars'},
+//   {id: 2, ln_id: 'ta', desc:  'நாயன்மார்கள்'},
+//   {id: 2, ln_id: 'te', desc:  'నయనమార్స్'},
+//   {id: 3, ln_id: 'en', desc: 'Others'},
+//   {id: 3, ln_id: 'ta', desc:  'மற்ற'},
+//   {id: 3, ln_id: 'te', desc:  'ఇతర'}
+// ];
 // ism_id first and saint_id[]  next
 export var ism_saint = [
   {id: 1, to_id: [4,5,10]},

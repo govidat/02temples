@@ -40,7 +40,42 @@ export var messages = {
       1: 'msgAlwars',
       2: 'Nayanmars',
       3: 'Others'
+    },
+    node1_desc: {
+      4: 'msgEnThirumazhisai Alwar',
+      5: 'EnThirumangai Alwar',
+      10: 'EnNammalwar',
+      12: 'EnSekkizhar'
+    },
+    node2h_desc: {
+      18: 'msgEnKerala',
+      31: 'msgEnTamilnadu',
+      3101: 'EnTrichy',
+      3102: 'EnTanjavur',
+      1803: 'EnKannanur'
+    },
+    node2_desc: {
+      2: 'msgEnEnThirukkozhi - Sri Azhagiya Manavala Perumal Temple',
+      5: 'EnEnThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple',
+      26: 'EnThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple',
+      76: 'EnThiruvaragunamangai - Sri Vijayaasana Perumal Temple'
+    },
+    node3h_desc: {
+      1: 'msgEn-4KDP',
+      2: 'msgEn-Others',
+      11: 'EnThirumozhi',
+      12: 'EnThiruppavai',
+      21: 'EnThevaram'
+    },
+    node3_desc: {
+      667: 'Enmsg',
+      1762: '',
+      1736: '',
+      2417: '',
+      2784: '',
+      3571: ''
     }
+
   },
   ta: {
     $vuetify: {
@@ -83,6 +118,40 @@ export var messages = {
       1: 'ஆழ்வார்கள்',
       2: 'நாயன்மார்கள்',
       3: 'மற்ற'
+    },
+    node1_desc: {
+      4: 'TaThirumazhisai Alwar',
+      5: 'TaThirumangai Alwar',
+      10: 'TaNammalwar',
+      12: 'TaSekkizhar'
+    },
+    node2h_desc: {
+      18: 'msgTaKerala',
+      31: 'msgTaTamilnadu',
+      3101: 'TaTrichy',
+      3102: 'TaTanjavur',
+      1803: 'TaKannanur'
+    },
+    node2_desc: {
+      2: 'msgTaThirukkozhi - Sri Azhagiya Manavala Perumal Temple',
+      5: 'TaThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple',
+      26: 'TaThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple',
+      76: 'TaThiruvaragunamangai - Sri Vijayaasana Perumal Temple'
+    },
+    node3h_desc: {
+      1: 'msgTa-4KDP',
+      2: 'msgTa-Others',
+      11: 'TaThirumozhi',
+      12: 'TaThiruppavai',
+      21: 'TaThevaram'
+    },
+    node3_desc: {
+      667: 'Tamsg',
+      1762: '',
+      1736: '',
+      2417: '',
+      2784: '',
+      3571: ''
     }
   },
   te: {
@@ -127,6 +196,40 @@ export var messages = {
       1: 'ఆల్వార్స్',
       2: 'నయనమార్స్',
       3: 'ఇతర'
+    },
+    node1_desc: {
+      4: 'TeThirumazhisai Alwar',
+      5: 'TeThirumangai Alwar',
+      10: 'TeNammalwar',
+      12: 'TeSekkizhar'
+    },
+    node2h_desc: {
+      18: 'msgTeKerala',
+      31: 'msgTeTamilnadu',
+      3101: 'TeTrichy',
+      3102: 'TeTanjavur',
+      1803: 'TeKannanur'
+    },
+    node2_desc: {
+      2: 'msgTeThirukkozhi - Sri Azhagiya Manavala Perumal Temple',
+      5: 'TeThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple',
+      26: 'TeThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple',
+      76: 'TeThiruvaragunamangai - Sri Vijayaasana Perumal Temple'
+    },
+    node3h_desc: {
+      1: 'msgTe-4KDP',
+      2: 'msgTe-Others',
+      11: 'TeThirumozhi',
+      12: 'TeThiruppavai',
+      21: 'TeThevaram'
+    },
+    node3_desc: {
+      667: 'Temsg',
+      1762: '',
+      1736: '',
+      2417: '',
+      2784: '',
+      3571: ''
     }
   }
 }

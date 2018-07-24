@@ -68,51 +68,51 @@
 //   {Id:23,Saint:"Thiruvarangathu Amudhanaar",Name:"Ramanuja Nootrandhadi","TamSaint":"திருவரங்கத்தமுதனார்","TamComp":"இராமாநுச நூற்றந்தாதி"},
 //   {Id:24,Saint:"Nammalwar",Name:"Thiruvay Mozhi","TamSaint":"நம்மாழ்வார்","TamComp":"திருவாய்மொழி"},
 // ];
-export var song = [
-  {id: 10001, p_id: 0},
-  {id: 10002, p_id: 0},
-  {id: 11001, p_id: 10001},
-  {id: 11002, p_id: 10001},
-  {id: 17002, p_id: 10002},
-  {id:  667, p_id: 11001},
-  {id: 1762, p_id: 11001},
-  {id: 1736, p_id: 11001},
-  {id: 2417, p_id: 11002},
-  {id: 2784, p_id: 11002},
-  {id: 3571, p_id: 17002}
-  ];
-
-export var song_desc = [
-  {id: 10001, ln_id: 'en', desc: 'En-4KDP'},
-  {id: 10001, ln_id: 'ta', desc: 'Ta-4KDP'},
-  {id: 10001, ln_id: 'te', desc: 'Te-4KDP'},
-  {id: 10002, ln_id: 'en', desc: 'En-Others'},
-  {id: 10002, ln_id: 'ta', desc: 'Ta-Others'},
-  {id: 10002, ln_id: 'te', desc: 'Te-Others'},
-  {id: 11001, ln_id: 'en', desc: 'EnThirumozhi'},
-  {id: 11001, ln_id: 'ta', desc: 'TaThirumozhi'},
-  {id: 11001, ln_id: 'te', desc: 'TeThirumozhi'},
-  {id: 11002, ln_id: 'en', desc: 'EnThiruppavai'},
-  {id: 11002, ln_id: 'ta', desc: 'TaThiruppavai'},
-  {id: 11002, ln_id: 'te', desc: 'TeThiruppavai'},
-  {id: 17002, ln_id: 'en', desc: 'EnThevaram'},
-  {id: 17002, ln_id: 'ta', desc: 'TaThevaram'},
-  {id: 17002, ln_id: 'te', desc: 'TeThevaram'}
-];
-
-export var song_ism = [
-  {id: 10001, to_id: 1},
-  {id: 10002, to_id: 2},
-  {id: 11001, to_id: 1},
-  {id: 11002, to_id: 1},
-  {id: 17002, to_id: 2},
-  {id: 667, to_id: 1},
-  {id: 1762, to_id: 1},
-  {id: 1736, to_id: 1},
-  {id: 2417, to_id: 1},
-  {id: 2784, to_id: 1},
-  {id: 3571, to_id: 2}
-];
+// export var song = [
+//   {id: 10001, p_id: 0},
+//   {id: 10002, p_id: 0},
+//   {id: 11001, p_id: 10001},
+//   {id: 11002, p_id: 10001},
+//   {id: 17002, p_id: 10002},
+//   {id:  667, p_id: 11001},
+//   {id: 1762, p_id: 11001},
+//   {id: 1736, p_id: 11001},
+//   {id: 2417, p_id: 11002},
+//   {id: 2784, p_id: 11002},
+//   {id: 3571, p_id: 17002}
+//   ];
+//
+// export var song_desc = [
+//   {id: 10001, ln_id: 'en', desc: 'En-4KDP'},
+//   {id: 10001, ln_id: 'ta', desc: 'Ta-4KDP'},
+//   {id: 10001, ln_id: 'te', desc: 'Te-4KDP'},
+//   {id: 10002, ln_id: 'en', desc: 'En-Others'},
+//   {id: 10002, ln_id: 'ta', desc: 'Ta-Others'},
+//   {id: 10002, ln_id: 'te', desc: 'Te-Others'},
+//   {id: 11001, ln_id: 'en', desc: 'EnThirumozhi'},
+//   {id: 11001, ln_id: 'ta', desc: 'TaThirumozhi'},
+//   {id: 11001, ln_id: 'te', desc: 'TeThirumozhi'},
+//   {id: 11002, ln_id: 'en', desc: 'EnThiruppavai'},
+//   {id: 11002, ln_id: 'ta', desc: 'TaThiruppavai'},
+//   {id: 11002, ln_id: 'te', desc: 'TeThiruppavai'},
+//   {id: 17002, ln_id: 'en', desc: 'EnThevaram'},
+//   {id: 17002, ln_id: 'ta', desc: 'TaThevaram'},
+//   {id: 17002, ln_id: 'te', desc: 'TeThevaram'}
+// ];
+//
+// export var song_ism = [
+//   {id: 10001, to_id: 1},
+//   {id: 10002, to_id: 2},
+//   {id: 11001, to_id: 1},
+//   {id: 11002, to_id: 1},
+//   {id: 17002, to_id: 2},
+//   {id: 667, to_id: 1},
+//   {id: 1762, to_id: 1},
+//   {id: 1736, to_id: 1},
+//   {id: 2417, to_id: 1},
+//   {id: 2784, to_id: 1},
+//   {id: 3571, to_id: 2}
+// ];
 
 
 export var song_ism_old = [
@@ -145,4 +145,27 @@ export var temple_song = [
   {temple_id: 205, song_id: 2417},
   {temple_id: 226, song_id: 2784},
   {temple_id: 276, song_id: 3571}
+];
+
+export var song = [
+  {id: 667, h_path: [1, 11]},
+  {id: 1762, h_path: [1, 11]},
+  {id: 1736, h_path: [1, 11]},
+  {id: 2417, h_path: [1, 12]},
+  {id: 2784, h_path: [1, 12]},
+  {id: 3571, h_path: [2, 21]}
+  ];
+
+export var song_hier = [
+  {id: 1, path: [1]},
+  {id: 2, path: [2]},
+  {id: 11, path: [1, 11]},
+  {id: 12, path: [1, 12]},
+  {id: 21, path: [2, 21]}
+
+];
+
+export var ism_song = [
+  {id: 1, to_id: [667, 1762, 1736, 2417, 2784]},
+  {id: 2, to_id: [3571]}
 ];
