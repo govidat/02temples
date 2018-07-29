@@ -41,10 +41,10 @@
             <v-list-group v-for="item in [{id: 31, model: false},{id: 30, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
               <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
                 {{$t('stat_message.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
-              <!-- Sublist of 2010  : 31 for Saint-Group 30 for Saints-->
+              <!-- Sublist : 31 for Saint-Group 30 for Saints-->
               <!-- first get for hierarchy -->
               <zfilter3 v-if="item.id == 31" :headerinput= "[ 5, 31]"
-              :items="saint_hier.filter(x => max_f10node1h.includes(x.id) && x.path.length == 1)"
+              :items="saint_hier.filter(x => max_node1h.includes(x.id) && x.path.length == 1)"
               :selected.sync="f10sel_node1h[0]"
               :msg= "'node1h_desc'" ></zfilter3>
 
@@ -65,11 +65,11 @@
                 {{$t('stat_message.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
               <!-- first get for hierarchy -->
               <zfilter3 v-if="item.id == 42" :headerinput= "[ 5, 42]"
-              :items="temple_hier.filter(x => max_f10node2h.includes(x.id) && x.path.length == 1)"
+              :items="temple_hier.filter(x => max_node2h.includes(x.id) && x.path.length == 1)"
               :selected.sync="f10sel_node2h[0]"
               :msg= "'node2h_desc'" ></zfilter3>
               <zfilter3 v-if="item.id == 41" :headerinput= "[ 5, 41]"
-              :items="temple_hier.filter(x => max_f10node2h.includes(x.id) && x.path.length == 2 && x.path.some(r => f10sel_node2h[0].map(a => a.id).indexOf(r) >=0))"
+              :items="temple_hier.filter(x => max_node2h.includes(x.id) && x.path.length == 2 && x.path.some(r => f10sel_node2h[0].map(a => a.id).indexOf(r) >=0))"
               :selected.sync="f10sel_node2h[1]"
               :msg= "'node2h_desc'" ></zfilter3>
 
@@ -95,11 +95,11 @@
                 {{$t('stat_message.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
               <!-- first get for hierarchy -->
               <zfilter3 v-if="item.id == 52" :headerinput= "[ 5, 52]"
-              :items="song_hier.filter(x => max_f10node3h.includes(x.id) && x.path.length == 1)"
+              :items="song_hier.filter(x => max_node3h.includes(x.id) && x.path.length == 1)"
               :selected.sync="f10sel_node3h[0]"
               :msg= "'node3h_desc'" ></zfilter3>
               <zfilter3 v-if="item.id == 51" :headerinput= "[ 5, 51]"
-              :items="song_hier.filter(x => max_f10node3h.includes(x.id) && x.path.length == 2 && x.path.some(r => f10sel_node3h[0].map(a => a.id).indexOf(r) >=0))"
+              :items="song_hier.filter(x => max_node3h.includes(x.id) && x.path.length == 2 && x.path.some(r => f10sel_node3h[0].map(a => a.id).indexOf(r) >=0))"
               :selected.sync="f10sel_node3h[1]"
               :msg= "'node3h_desc'" ></zfilter3>
 
@@ -121,13 +121,26 @@
           v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="">
           <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
                 {{$t('stat_message.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
-          <!-- Sublist => 30 Saints 40 Temples 50 Songs-->
+          <!-- Sublist => 30 Saints 40 Temples -->
           <template v-if="item.id == 30">
             <!-- Sublist : 31 for Saint-Group 30 for Saints-->
             <v-list-group v-for="item in [{id: 31, model: false},{id: 30, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
               <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
                 {{$t('stat_message.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
               <!-- Sublist of 2010  : 31 for Saint-Group 30 for Saints-->
+              <!-- Sublist : 31 for Saint-Group 30 for Saints-->
+              <!-- first get for hierarchy -->
+              <zfilter3 v-if="item.id == 31" :headerinput= "[ 5, 31]"
+              :items="saint_hier.filter(x => max_node1h.includes(x.id) && x.path.length == 1)"
+              :selected.sync="f20sel_node1h[0]"
+              :msg= "'node1h_desc'" ></zfilter3>
+
+              <!-- then for the node -->
+              <zfilter3 v-if="item.id == 30" :headerinput= "[ 5, 30]"
+              :items="saint.filter(itm => itm.h_path.some(r => f20sel_node1h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))"
+              :selected.sync="f20sel_node1"
+              :msg= "'node1_desc'" ></zfilter3>
+
               <!-- <zfilter3 v-if="item.id == 31" :headerinput= "[ 5, 31]" :items="get_saint([0],sel_node0)" :selected.sync="f20sel_node1[0]" :node= "'node1'"></zfilter3>
               <zfilter3 v-if="item.id == 30" :headerinput= "[ 5, 30]" :items="get_saint(f20sel_node1[0].map(x => x.id),sel_node0)" :selected.sync="f20sel_node1[1]" :node= "'node1'"></zfilter3> -->
             </v-list-group>
@@ -138,6 +151,25 @@
             <v-list-group v-for="item in [{id: 42, model: false},{id: 41, model: false},{id: 40, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
               <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
                 {{$t('stat_message.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
+                <!-- first get for hierarchy -->
+                <zfilter3 v-if="item.id == 42" :headerinput= "[ 5, 42]"
+                :items="temple_hier.filter(x => max_node2h.includes(x.id) && x.path.length == 1)"
+                :selected.sync="f20sel_node2h[0]"
+                :msg= "'node2h_desc'" ></zfilter3>
+                <zfilter3 v-if="item.id == 41" :headerinput= "[ 5, 41]"
+                :items="temple_hier.filter(x => max_node2h.includes(x.id) && x.path.length == 2 && x.path.some(r => f20sel_node2h[0].map(a => a.id).indexOf(r) >=0))"
+                :selected.sync="f20sel_node2h[1]"
+                :msg= "'node2h_desc'" ></zfilter3>
+                <!-- <zfilter3 v-if="item.id == 42" :headerinput= "[ 5, 42]" :items="get_node('node2', [0], 'node2_0', 'node0', true, sel_node0)" :selected.sync="f10sel_node2[0]" :node= "'node2'"></zfilter3>
+                <zfilter3 v-if="item.id == 41" :headerinput= "[ 5, 41]" :items="get_node('node2', f10sel_node2[0].map(x => x.id), 'node2_0', 'node0', true, sel_node0)" :selected.sync="f10sel_node2[1]" :node= "'node2'"></zfilter3> -->
+
+                <!-- then for the node .slice(-1)[0] -->
+                <zfilter3 v-if="item.id == 40" :headerinput= "[ 5, 40]"
+                :items="temple.filter(itm => itm.h_path.some(r => f20sel_node2h[1].map(a => a.id).indexOf(r) >=0))"
+                :selected.sync="f20sel_node2"
+                :msg= "'node2_desc'" ></zfilter3>
+
+
               <!-- <zfilter3 v-if="item.id == 42" :headerinput= "[ 5, 42]" :items="get_temple([0],sel_node0)" :selected.sync="f20sel_node2[0]" :node= "'node2'"></zfilter3>
               <zfilter3 v-if="item.id == 41" :headerinput= "[ 5, 41]" :items="get_temple(f20sel_node2[0].map(x => x.id),sel_node0)" :selected.sync="f20sel_node2[1]" :node= "'node2'"></zfilter3>
               <zfilter3 v-if="item.id == 40" :headerinput= "[ 5, 40]" :items="get_temple(f20sel_node2[1].map(x => x.id),sel_node0)" :selected.sync="f20sel_node2[2]" :node= "'node2'"></zfilter3> -->
@@ -155,6 +187,8 @@
             <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
                 {{$t('stat_message.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
           <!-- 43 node4 is pps -->
+          <zfilter3 v-if="item.id == 43" :headerinput= "[ 5, 43]"
+          :items="pps.filter(x => max_node4.includes(x.id))" :selected.sync="sel_node4" :msg= "'node4_desc'" ></zfilter3>
             <!-- <zfilter3 v-if="item.id == 43" :headerinput= "[ 5, 43]" :items="get_pps([0],sel_node0)" :selected.sync="f30sel_node4[0]" :node= "'node4'" :msg ="'node4_desc'"></zfilter3> -->
 
             <template v-if="item.id == 40">
@@ -162,6 +196,25 @@
               <v-list-group v-for="item in [{id: 42, model: false},{id: 41, model: false},{id: 40, model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="" sub-group>
                 <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>
                 {{$t('stat_message.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
+                <!-- first get for hierarchy -->
+                <zfilter3 v-if="item.id == 42" :headerinput= "[ 5, 42]"
+                :items="temple_hier.filter(x => max_node2h_pps.includes(x.id) && x.path.length == 1)"
+                :selected.sync="f30sel_node2h[0]"
+                :msg= "'node2h_desc'" ></zfilter3>
+                <zfilter3 v-if="item.id == 41" :headerinput= "[ 5, 41]"
+                :items="temple_hier.filter(x => max_node2h_pps.includes(x.id) && x.path.length == 2 && x.path.some(r => f30sel_node2h[0].map(a => a.id).indexOf(r) >=0))"
+                :selected.sync="f30sel_node2h[1]"
+                :msg= "'node2h_desc'" ></zfilter3>
+                <!-- <zfilter3 v-if="item.id == 42" :headerinput= "[ 5, 42]" :items="get_node('node2', [0], 'node2_0', 'node0', true, sel_node0)" :selected.sync="f10sel_node2[0]" :node= "'node2'"></zfilter3>
+                <zfilter3 v-if="item.id == 41" :headerinput= "[ 5, 41]" :items="get_node('node2', f10sel_node2[0].map(x => x.id), 'node2_0', 'node0', true, sel_node0)" :selected.sync="f10sel_node2[1]" :node= "'node2'"></zfilter3> -->
+
+                <!-- then for the node .slice(-1)[0] -->
+                <zfilter3 v-if="item.id == 40" :headerinput= "[ 5, 40]"
+                :items="temple.filter(itm => itm.h_path.some(r => f30sel_node2h[1].map(a => a.id).indexOf(r) >=0))"
+                :selected.sync="f30sel_node2"
+                :msg= "'node2_desc'" ></zfilter3>
+
+
                 <!-- <zfilter3 v-if="item.id == 42" :headerinput= "[ 5, 42]" :items="get_temple2([0],f30sel_node4[f30sel_node4_bomheight - 1])" :selected.sync="f30sel_node2[0]" :node= "'node2'"></zfilter3>
                 <zfilter3 v-if="item.id == 41" :headerinput= "[ 5, 41]" :items="get_temple2(f30sel_node2[0].map(x => x.id),f30sel_node4[f30sel_node4_bomheight - 1])" :selected.sync="f30sel_node2[1]" :node= "'node2'"></zfilter3>
                 <zfilter3 v-if="item.id == 40" :headerinput= "[ 5, 40]" :items="get_temple2(f30sel_node2[1].map(x => x.id),f30sel_node4[f30sel_node4_bomheight - 1])" :selected.sync="f30sel_node2[2]" :node= "'node2'"></zfilter3> -->
@@ -231,8 +284,8 @@
     </v-toolbar>
     <v-content>
       <!-- Select the component based on ztool value -->
-      <div v-if="ztool=='Saints'"><zdetails :sourceFile="selSaints()" :node = "'node1'" ></zdetails></div>
-      <div v-else-if="ztool=='Temples'"><zdetails :sourceFile="selTemples()" :node = "'node2'"></zdetails></div>
+      <div v-if="ztool=='Saints'"><zsaints :sourceFile="selSaints()" :node = "'node1'" ></zsaints></div>
+      <div v-else-if="ztool=='Temples'"><ztemples :sourceFile="selTemples()" :node = "'node2'"></ztemples></div>
       <div v-else-if="ztool=='Songs'"><zSongs  :sourceFile="selSongs()" :main_ln_id="main_ln_id" :all_ln_id="all_ln_id"></zSongs></div>
       <div v-else-if="ztool=='About'"><HelloWorld/></div>
       <div v-else-if="ztool=='Contact'"><HelloWorld/></div>
@@ -253,7 +306,7 @@
       <!-- main_ln_id: {{main_ln_id}}
       add_ln_id: {{add_ln_id}}
       all_ln_id: {{all_ln_id}} -->
-      max_f10node2h: {{max_f10node2h}}
+      max_node2h: {{max_node2h}}
     </v-footer>
   </v-app>
 </template>
@@ -267,7 +320,8 @@ import zfilter3 from './components/03filter'
 
 // import zFilterN from './components/01FilterNew'
 import zHome from './components/10Home'
-import zdetails from './components/20saints_temples_details'
+import zsaints from './components/20saints'
+import ztemples from './components/25temples'
 // import zTemples from './components/25Temples'
 import zSongs from './components/30Songs'
 import { mapState } from 'vuex'
@@ -318,29 +372,44 @@ export default {
       f10sel_node3: [],
 
       // node1: saint
-      f20sel_node1_bomheight: 2,
-      f20sel_node1: [[],[]],
+      // f10sel_node1h_bomheight: 1,
+      f20sel_node1h: [[]],
+      f20sel_node1: [],
+
       // node2: temple
-      f20sel_node2_bomheight: 3,
-      f20sel_node2: [[],[],[]],
-      // node3: song - auto selected based on node 1 and node 2
-      f20sel_node3_bomheight: 1,
-      f20sel_node3: [[]],
-      // node2: temple by pps
-      f30sel_node2_bomheight: 3,
-      f30sel_node2: [[],[],[]],
+      // f10sel_node2_bomheight: 3,
+      f20sel_node2h: [[],[]],
+      f20sel_node2: [],
+
+
+      // node1: saint
+      // f20sel_node1_bomheight: 2,
+      // f20sel_node1: [[],[]],
+      // node2: temple
+      // f20sel_node2_bomheight: 3,
+      // f20sel_node2: [[],[],[]],
+
+
       // node4: pps
-      f30sel_node4_bomheight: 1,
-      f30sel_node4: [[]],
+      sel_node4: [],
+      // node2: temple by pps
+      f30sel_node2h: [[],[]],
+      f30sel_node2: [],
+
+
+      // f30sel_node2_bomheight: 3,
+      // f30sel_node2: [[],[],[]],
+      // f30sel_node4_bomheight: 1,
+      // f30sel_node4: [[]],
       // node1: saint derived on selection of pps and temples
-      f30sel_node1_bomheight: 1,
-      f30sel_node1: [[]],
+      // f30sel_node1_bomheight: 1,
+      // f30sel_node1: [[]],
       // node3: song - auto selected based on node 2 and node 4
-      f30sel_node3_bomheight: 1,
-      f30sel_node3: [[]],
+      // f30sel_node3_bomheight: 1,
+      // f30sel_node3: [[]],
 
 
-      sel_node1: [[]],
+      // sel_node1: [[]],
 
       // mlang: 1,
       // alang: [2],
@@ -371,22 +440,37 @@ export default {
     // IDEA: if ism is changed subsequently F10, F20 , f30 should be filtered should be revaluate
     sel_node0 : function () {
       for (var i = 0; i < this.f10sel_node1h.length; i++) {
-        this.f10sel_node1h[i] = this.f10sel_node1h[i].filter( item => this.max_f10node1h.includes(item.id));
+        this.f10sel_node1h[i] = this.f10sel_node1h[i].filter( item => this.max_node1h.includes(item.id));
       }
-
       this.f10sel_node1 = this.f10sel_node1.filter(itm => itm.h_path.some(r => this.f10sel_node1h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
 
       for (var i = 0; i < this.f10sel_node2h.length; i++) {
-        this.f10sel_node2h[i] = this.f10sel_node2h[i].filter( item => this.max_f10node2h.includes(item.id));
+        this.f10sel_node2h[i] = this.f10sel_node2h[i].filter( item => this.max_node2h.includes(item.id));
       };
-
       this.f10sel_node2 = this.f10sel_node2.filter(itm => itm.h_path.some(r => this.f10sel_node2h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
 
       for (var i = 0; i < this.f10sel_node3h.length; i++) {
-        this.f10sel_node3h[i] = this.f10sel_node3h[i].filter( item => this.max_f10node3h.includes(item.id));
+        this.f10sel_node3h[i] = this.f10sel_node3h[i].filter( item => this.max_node3h.includes(item.id));
       };
-
       this.f10sel_node3 = this.f10sel_node3.filter(itm => itm.h_path.some(r => this.f10sel_node3h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
+
+      for (var i = 0; i < this.f20sel_node1h.length; i++) {
+        this.f20sel_node1h[i] = this.f20sel_node1h[i].filter( item => this.max_node1h.includes(item.id));
+      }
+      this.f20sel_node1 = this.f20sel_node1.filter(itm => itm.h_path.some(r => this.f20sel_node1h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
+
+      for (var i = 0; i < this.f20sel_node2h.length; i++) {
+        this.f20sel_node2h[i] = this.f20sel_node2h[i].filter( item => this.max_node2h.includes(item.id));
+      };
+      this.f20sel_node2 = this.f20sel_node2.filter(itm => itm.h_path.some(r => this.f20sel_node2h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
+
+      this.sel_node4 = this.sel_node4.filter(item => this.max_node4.includes(item.id))
+      // code to filter out f30sel_node2h..
+      for (var i = 0; i < this.f30sel_node2h.length; i++) {
+        this.f30sel_node2h[i] = this.f30sel_node2h[i].filter( item => this.max_node2h_pps.includes(item.id));
+      };
+      // code to filter out f30sel_node2..
+      this.f30sel_node2 = this.f30sel_node2.filter(itm => itm.h_path.some(r => this.f30sel_node2h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
 
     },
 
@@ -447,109 +531,90 @@ export default {
       deep: true
     },
 
-
-
-    sel_node0_x : function () {
-      // alert ("sel_node0 " + JSON.stringify(this.sel_node0))
-      // alert ("f10sel_node1[0] before " + JSON.stringify(this.f10sel_node1[0]))
-      for (var i = 0; i < this.f10sel_node1_bomheight; i++) {
-        this.f10sel_node1[i] = this.f10sel_node1[i].filter( item => this.get_saint((this.f10sel_node1[i-1] || [{id: 0}]).map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-      };
-      // alert ("f10sel_node1[0] after " + JSON.stringify(this.f10sel_node1[0]))
-      // this.f10sel_node1[0] = this.f10sel_node1[0].filter( item => this.get_saint([0],this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-      for (var i = 0; i < this.f10sel_node2_bomheight; i++) {
-        this.f10sel_node2[i] = this.f10sel_node2[i].filter( item => this.get_temple((this.f10sel_node2[i-1] || [{id: 0}]).map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-      };
-      // this.f10sel_node2[0] = this.f10sel_node2[0].filter( item => this.get_temple([0],this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-      for (var i = 0; i < this.f10sel_node3_bomheight; i++) {
-        this.f10sel_node3[i] = this.f10sel_node3[i].filter( item => this.get_song((this.f10sel_node3[i-1] || [{id: 0}]).map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-      };
-      // if (this.radios == 21) { this.selSaints = this.f10sel_node1[this.f10sel_node1_bomheight - 1] };
-
-      for (var i = 0; i < this.f20sel_node1_bomheight; i++) {
-        this.f20sel_node1[i] = this.f20sel_node1[i].filter( item => this.get_saint((this.f20sel_node1[i-1] || [{id: 0}]).map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-      };
-      // this.f10sel_node1[0] = this.f10sel_node1[0].filter( item => this.get_saint([0],this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-      for (var i = 0; i < this.f20sel_node2_bomheight; i++) {
-        this.f20sel_node2[i] = this.f20sel_node2[i].filter( item => this.get_temple((this.f20sel_node2[i-1] || [{id: 0}]).map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-      };
-      this.f20sel_node3[0] = this.get_song2(this.f20sel_node1[this.f20sel_node1_bomheight - 1],this.f20sel_node2[this.f20sel_node2_bomheight - 1], this.sel_node0[this.sel_node0_bomheight - 1]);
-
-      for (var i = 0; i < this.f30sel_node4_bomheight; i++) {
-        this.f30sel_node4[i] = this.f30sel_node4[i].filter( item => this.get_pps((this.f30sel_node4[i-1] || [{id: 0}]).map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-      };
-      this.f30sel_node3[0] = this.get_song3(this.f30sel_node2[this.f30sel_node2_bomheight - 1], this.sel_node0[this.sel_node0_bomheight - 1]);
-      this.f30sel_node1[0] = this.get_saint3(this.f30sel_node2[this.f30sel_node2_bomheight - 1], this.sel_node0[this.sel_node0_bomheight - 1]);
-      for (var i = 0; i < this.f30sel_node2_bomheight; i++) {
-        this.f30sel_node2[i] = this.f30sel_node2[i].filter( item => this.get_temple2((this.f30sel_node2[i-1] || [{id: 0}]).map(x => x.id),this.f30sel_node4[this.f30sel_node4_bomheight - 1]).includes(item));
-      };
-
-    },
-
-    f10sel_node1_x : {
+    f20sel_node1h : {
       handler: function () {
-        for (var i = 1; i < this.f10sel_node1_bomheight; i++) {
-          this.f10sel_node1[i] = this.f10sel_node1[i].filter( item => this.get_saint(this.f10sel_node1[i-1].map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-        }
-      },
-      deep: true
-    },
-
-    f10sel_node2_x : {
-      handler: function () {
-        for (var i = 1; i < this.f10sel_node2_bomheight; i++) {
-          this.f10sel_node2[i] = this.f10sel_node2[i].filter( item => this.get_temple(this.f10sel_node2[i-1].map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-        }
-      },
-      deep: true
-    },
-    f10sel_node3_x : {
-      handler: function () {
-        for (var i = 1; i < this.f10sel_node3_bomheight; i++) {
-          this.f10sel_node3[i] = this.f10sel_node3[i].filter( item => this.get_song(this.f10sel_node3[i-1].map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-        }
-      },
-      deep: true
-    },
-
-    f20sel_node1_x : {
-      handler: function () {
-        for (var i = 1; i < this.f20sel_node1_bomheight; i++) {
-          this.f20sel_node1[i] = this.f20sel_node1[i].filter( item => this.get_saint(this.f20sel_node1[i-1].map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
+        for (var i = 1; i < this.f20sel_node1h.length; i++) {
+          this.f20sel_node1h[i] = this.f20sel_node1h[i].filter(
+            item => item.path.some(r =>
+                                      Array.from
+                                      (new Set((
+                                        this.f20sel_node1h[i-1]
+                                        .map(a => a.path))
+                                        .reduce((acc, a) => acc.concat(a),[])
+                                        ))
+                                        .indexOf(r) >=0)
+          );
         };
-        this.f20sel_node3[0] = this.get_song2(this.f20sel_node1[this.f20sel_node1_bomheight - 1],this.f20sel_node2[this.f20sel_node2_bomheight - 1], this.sel_node0[this.sel_node0_bomheight - 1])
+        this.f20sel_node1 = this.f20sel_node1.filter(itm => itm.h_path.some(r => this.f20sel_node1h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
       },
       deep: true
     },
 
-    f20sel_node2_x : {
+    f20sel_node2h : {
       handler: function () {
-        for (var i = 1; i < this.f20sel_node2_bomheight; i++) {
-          this.f20sel_node2[i] = this.f20sel_node2[i].filter( item => this.get_temple(this.f20sel_node2[i-1].map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
+        for (var i = 1; i < this.f20sel_node2h.length; i++) {
+          this.f20sel_node2h[i] = this.f20sel_node2h[i].filter(
+            item => item.path.some(r =>
+                                      Array.from
+                                      (new Set((
+                                        this.f20sel_node2h[i-1]
+                                        .map(a => a.path))
+                                        .reduce((acc, a) => acc.concat(a),[])
+                                        ))
+                                        .indexOf(r) >=0)
+          );
         };
-        this.f20sel_node3[0] = this.get_song2(this.f20sel_node1[this.f20sel_node1_bomheight - 1],this.f20sel_node2[this.f20sel_node2_bomheight - 1], this.sel_node0[this.sel_node0_bomheight - 1])
+        this.f20sel_node2 = this.f20sel_node2.filter(itm => itm.h_path.some(r => this.f20sel_node2h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
       },
       deep: true
     },
 
-    f30sel_node4_x : function () {
-        for (var i = 0; i < this.f30sel_node2_bomheight; i++) {
-          this.f30sel_node2[i] = this.f30sel_node2[i].filter( item => this.get_temple2((this.f30sel_node2[i-1] || [{id: 0}]).map(x => x.id),this.f30sel_node4[this.f30sel_node4_bomheight - 1]).includes(item));
-        };
-        this.f30sel_node3[0] = this.get_song3(this.f30sel_node2[this.f30sel_node2_bomheight - 1], this.sel_node0[this.sel_node0_bomheight - 1])
-        this.f30sel_node1[0] = this.get_saint3(this.f30sel_node2[this.f30sel_node2_bomheight - 1], this.sel_node0[this.sel_node0_bomheight - 1])
 
+    sel_node4 : function () {
+      // code to filter out f30sel_node2h..
+      // code to filter out f30sel_node2h..
+      for (var i = 0; i < this.f30sel_node2h.length; i++) {
+        this.f30sel_node2h[i] = this.f30sel_node2h[i].filter( item => this.max_node2h_pps.includes(item.id));
+      };
+      // code to filter out f30sel_node2..
+      this.f30sel_node2 = this.f30sel_node2.filter(itm => itm.h_path.some(r => this.f30sel_node2h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
+
+
+      // for (var i = 1; i < this.f30sel_node2h.length; i++) {
+      //   this.f30sel_node2h[i] = this.f30sel_node2h[i].filter(
+      //     item => item.path.some(r =>
+      //                               Array.from
+      //                               (new Set((
+      //                                 this.f30sel_node2h[i-1]
+      //                                 .map(a => a.path))
+      //                                 .reduce((acc, a) => acc.concat(a),[])
+      //                                 ))
+      //                                 .indexOf(r) >=0)
+      //   );
+      // };
+      //
+      // // code to filter out f30sel_node2..
+      // this.f30sel_node2 = this.f30sel_node2.filter(itm => itm.h_path.some(r => this.f30sel_node2h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
     },
 
-
-    f30sel_node2_x : {
+    f30sel_node2h : {
       handler: function () {
-        for (var i = 1; i < this.f30sel_node2_bomheight; i++) {
-          this.f30sel_node2[i] = this.f30sel_node2[i].filter( item => this.get_temple2(this.f30sel_node2[i-1].map(x => x.id),this.f30sel_node4[this.f30sel_node4_bomheight - 1]).includes(item));
+        for (var i = 1; i < this.f30sel_node2h.length; i++) {
+          this.f30sel_node2h[i] = this.f30sel_node2h[i].filter(
+            item => item.path.some(r =>
+                                      Array.from
+                                      (new Set((
+                                        this.f30sel_node2h[i-1]
+                                        .map(a => a.path))
+                                        .reduce((acc, a) => acc.concat(a),[])
+                                        ))
+                                        .indexOf(r) >=0)
+          );
         };
-        this.f30sel_node3[0] = this.get_song3(this.f30sel_node2[this.f30sel_node2_bomheight - 1], this.sel_node0[this.sel_node0_bomheight - 1])
-        this.f30sel_node1[0] = this.get_saint3(this.f30sel_node2[this.f30sel_node2_bomheight - 1], this.sel_node0[this.sel_node0_bomheight - 1])
-
+        // for (var i = 1; i < this.f30sel_node2h.length; i++) {
+        //     this.f30sel_node2h[i] = this.f30sel_node2h[i].filter( item => this.max_node2h_pps.includes(item.id));
+        //   };
+        this.f30sel_node2 = this.f30sel_node2.filter(itm => itm.h_path.some(r => this.f30sel_node2h.slice(-1)[0].map(a => a.id).indexOf(r) >=0))
       },
       deep: true
     },
@@ -565,7 +630,8 @@ export default {
     HelloWorld,
     zfilter3,
     zHome,
-    zdetails,
+    zsaints,
+    ztemples,
     // zSaints,
     // zTemples,
     zSongs
@@ -573,8 +639,8 @@ export default {
   computed: {
     ...mapState(
       ['languages', 'ism',
-        'saint', 'saint_hier','ism_saint', 'temple', 'temple_hier', 'ism_temple', 'song', 'song_hier', 'ism_song',
-        'saint_song', 'temple_song', 'pps', 'all_ln_id'
+        'saint', 'saint_hier','ism_saint', 'temple_saint', 'temple', 'temple_hier', 'ism_temple', 'pps_temple', 'song', 'song_hier', 'ism_song',
+        'saint_song', 'temple_song', 'pps', 'ism_pps', 'all_ln_id'
 
       ]
     ),
@@ -630,7 +696,7 @@ export default {
     //   return this.sel_node0.map(x => x.id)
     // },
 
-    max_f10node1h: function () {
+    max_node1h: function () {
       // based on sel_node0 accumulate the hier paths
       // accumulate to-id (saint_id) from ism_saint where id is in sel_node0_id
       var acc1 = Array.from
@@ -650,7 +716,7 @@ export default {
       return acc2;
     },
 
-    max_f10node2h: function () {
+    max_node2h: function () {
       // based on sel_node0 accumulate the hier paths
       // accumulate to-id (saint_id) from ism_saint where id is in sel_node0_id
       var acc1 = Array.from
@@ -670,7 +736,7 @@ export default {
       return acc2;
     },
 
-    max_f10node3h: function () {
+    max_node3h: function () {
       // based on sel_node0 accumulate the hier paths
       // accumulate to-id (saint_id) from ism_saint where id is in sel_node0_id
       var acc1 = Array.from
@@ -690,23 +756,93 @@ export default {
       return acc2;
     },
 
-    // f10sel_node1_x : {
-    //   handler: function () {
-    //     for (var i = 1; i < this.f10sel_node1_bomheight; i++) {
-    //       this.f10sel_node1[i] = this.f10sel_node1[i].filter( item => this.get_saint(this.f10sel_node1[i-1].map(x => x.id),this.sel_node0[this.sel_node0_bomheight - 1]).includes(item));
-    //     }
-    //   },
-    //   deep: true
-    // },
+    max_node2h_pps: function () {
+      // based on sel_node4 (pps) accumulate the hier paths
+      // accumulate to-id (saint_id) from ism_saint where id is in sel_node0_id
+      var acc1 = Array.from
+              (new Set((
+              this.pps_temple.filter(itm => this.sel_node4.map(x => x.id).includes(itm.id))
+              .map(a => a.to_id))
+              .reduce((acc, a) => acc.concat(a),[])
+              ));
+      // accumulate h_path id from saint/temple where id is in previous step
+      var acc2 = Array.from
+              (new Set((
+              this.temple.filter(itm => acc1.includes(itm.id))
+              .map(a => a.h_path))
+              .reduce((acc, a) => acc.concat(a),[])
+              ));
+
+      return acc2;
+    },
+
+    max_node4: function () {
+      // based on sel_node0 accumulate the pps ids
+      var acc1 = Array.from
+              (new Set((
+              this.ism_pps.filter(itm => this.sel_node0.map(x => x.id).includes(itm.id))
+              .map(a => a.to_id))
+              .reduce((acc, a) => acc.concat(a),[])
+              ));
+
+      return acc1;
+    },
+
+    // f20sel_node3: song - auto selected based on node 1 and node 2
+    f20sel_node3 : function () {
+      // accumulate to_id (song_id) from saint_song
+      var acc1 = Array.from
+              (new Set((
+              this.saint_song.filter(itm => this.f20sel_node1.map(x => x.id).includes(itm.id))
+              .map(a => a.to_id))
+              .reduce((acc, a) => acc.concat(a),[])
+              ));
+      // accumulate to_id (song_id) from temple_song
+      var acc2 = Array.from
+              (new Set((
+              this.temple_song.filter(itm => this.f20sel_node2.map(x => x.id).includes(itm.id))
+              .map(a => a.to_id))
+              .reduce((acc, a) => acc.concat(a),[])
+              ));
+
+      // take the common of acc1 and acc2
+      var acc3 = acc1.filter(value => -1 !== acc2.indexOf(value));
+
+      return acc3;
+
+    },
+
+    // f30sel_node3 and 1 : song / saint- auto selected based on node 2 - pps
+    f30sel_node1 : function () {
+      // accumulate to_id (saint_id) from temple_saint
+      return Array.from
+              (new Set((
+              this.temple_saint.filter(itm => this.f30sel_node2.map(x => x.id).includes(itm.id))
+              .map(a => a.to_id))
+              .reduce((acc, a) => acc.concat(a),[])
+              ));
+    },
+
+    f30sel_node3 : function () {
+      // accumulate to_id (song_id) from temple_song
+      return Array.from
+              (new Set((
+              this.temple_song.filter(itm => this.f30sel_node2.map(x => x.id).includes(itm.id))
+              .map(a => a.to_id))
+              .reduce((acc, a) => acc.concat(a),[])
+              ));
+    },
+
+
 
     // get hierarcy height of node1
     // f10node1h_depth: function () {
-    //   if (this.max_f10node1h.length == 0) {
+    //   if (this.max_node1h.length == 0) {
     //     return 0
     //   } else {
-    //     return Math.max(...(this.saint_hier.filter(itm => itm.path.some(r => this.max_f10node1h.indexOf(r) >=0))
+    //     return Math.max(...(this.saint_hier.filter(itm => itm.path.some(r => this.max_node1h.indexOf(r) >=0))
     //       .map(el => el.path.length)));
-    //     // return this.saint_hier.filter(itm => itm.path.some(r => this.max_f10node1h.indexOf(r) >=0)).reduce(function (result, val) {
+    //     // return this.saint_hier.filter(itm => itm.path.some(r => this.max_node1h.indexOf(r) >=0)).reduce(function (result, val) {
     //     //         return Math.max(result, val.path.length);
     //     //     }, 0);
     //
@@ -759,20 +895,20 @@ export default {
 
     selSaints: function () {
       // alert ("Hello from methods")
-      if (this.radios == 21) { return this.f10sel_node1[this.f10sel_node1_bomheight - 1] }
-      else if (this.radios == 22) { return this.f20sel_node1[this.f20sel_node1_bomheight - 1] }
-      else if (this.radios == 23) { return this.f30sel_node1[this.f30sel_node1_bomheight - 1] }
+      if (this.radios == 21) { return this.f10sel_node1.map(a => a.id) }
+      else if (this.radios == 22) { return this.f20sel_node1.map(a => a.id) }
+      else if (this.radios == 23) { return this.f30sel_node1 }
     },
 
     selTemples: function () {
-      if (this.radios == 21) { return this.f10sel_node2[this.f10sel_node2_bomheight - 1] }
-      else if (this.radios == 22) { return this.f20sel_node2[this.f20sel_node2_bomheight - 1] }
-      else if (this.radios == 23) { return this.f30sel_node2[this.f30sel_node2_bomheight - 1] }
+      if (this.radios == 21) { return this.f10sel_node2.map(a => a.id) }
+      else if (this.radios == 22) { return this.f20sel_node2.map(a => a.id) }
+      else if (this.radios == 23) { return this.f30sel_node2.map(a => a.id) }
     },
     selSongs: function () {
-      if (this.radios == 21) { return this.f10sel_node3[this.f10sel_node3_bomheight - 1] }
-      else if (this.radios == 22) { return this.f20sel_node3[this.f20sel_node3_bomheight - 1] }
-      else if (this.radios == 23) { return this.f30sel_node3[this.f30sel_node3_bomheight - 1] }
+      if (this.radios == 21) { return this.f10sel_node3.map(a => a.id) }
+      else if (this.radios == 22) { return this.f20sel_node3 }
+      else if (this.radios == 23) { return this.f30sel_node3 }
     },
 
 

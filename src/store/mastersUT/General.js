@@ -91,7 +91,12 @@ export var pps = [
 //   {id: 2, ln_id: 'te', desc:  '275 సావ ఆలయాలు'}
 // ];
 
-export var pps_ism = [
-  {ism_id: 1, pps_id: 1},
-  {ism_id: 2, pps_id: 2}
+export var ism_pps = [
+  {id: 1, to_id: [1]},
+  {id: 2, to_id: [2]}
 ];
+//
+// export var pps_ism = [
+//   {ism_id: 1, pps_id: 1},
+//   {ism_id: 2, pps_id: 2}
+// ];

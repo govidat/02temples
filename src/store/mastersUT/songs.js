@@ -115,37 +115,37 @@
 // ];
 
 
-export var song_ism_old = [
-  {ism_id: 1, song_id: 10001},
-  {ism_id: 2, song_id: 10002},
-  {ism_id: 1, song_id: 11001},
-  {ism_id: 1, song_id: 11002},
-  {ism_id: 2, song_id: 17002},
-  {ism_id: 1, song_id: 667},
-  {ism_id: 1, song_id: 1762},
-  {ism_id: 1, song_id: 1736},
-  {ism_id: 1, song_id: 2417},
-  {ism_id: 1, song_id: 2784},
-  {ism_id: 2, song_id: 3571}
-];
+// export var song_ism_old = [
+//   {ism_id: 1, song_id: 10001},
+//   {ism_id: 2, song_id: 10002},
+//   {ism_id: 1, song_id: 11001},
+//   {ism_id: 1, song_id: 11002},
+//   {ism_id: 2, song_id: 17002},
+//   {ism_id: 1, song_id: 667},
+//   {ism_id: 1, song_id: 1762},
+//   {ism_id: 1, song_id: 1736},
+//   {ism_id: 1, song_id: 2417},
+//   {ism_id: 1, song_id: 2784},
+//   {ism_id: 2, song_id: 3571}
+// ];
 
-export var saint_song = [
-  {saint_id: 4, song_id: 667},
-  {saint_id: 5, song_id: 1762},
-  {saint_id: 10, song_id: 1736},
-  {saint_id: 4, song_id: 2417},
-  {saint_id: 5, song_id: 2784},
-  {saint_id: 12, song_id: 3571}
-];
-
-export var temple_song = [
-  {temple_id: 202, song_id: 667},
-  {temple_id: 202, song_id: 1762},
-  {temple_id: 226, song_id: 1736},
-  {temple_id: 205, song_id: 2417},
-  {temple_id: 226, song_id: 2784},
-  {temple_id: 276, song_id: 3571}
-];
+// export var saint_song = [
+//   {saint_id: 4, song_id: 667},
+//   {saint_id: 5, song_id: 1762},
+//   {saint_id: 10, song_id: 1736},
+//   {saint_id: 4, song_id: 2417},
+//   {saint_id: 5, song_id: 2784},
+//   {saint_id: 12, song_id: 3571}
+// ];
+//
+// export var temple_song = [
+//   {temple_id: 202, song_id: 667},
+//   {temple_id: 202, song_id: 1762},
+//   {temple_id: 226, song_id: 1736},
+//   {temple_id: 205, song_id: 2417},
+//   {temple_id: 226, song_id: 2784},
+//   {temple_id: 276, song_id: 3571}
+// ];
 
 export var song = [
   {id: 667, h_path: [1, 11]},
@@ -168,4 +168,17 @@ export var song_hier = [
 export var ism_song = [
   {id: 1, to_id: [667, 1762, 1736, 2417, 2784]},
   {id: 2, to_id: [3571]}
+];
+
+export var saint_song = [
+  {id: 4, to_id: [667, 1736, 2417]},
+  {id: 5, to_id: [1762, 2784]},
+  {id: 10, to_id: [3571]}
+];
+
+export var temple_song = [
+  {id: 2, to_id: [667, 1762]},
+  {id: 5, to_id: [2417]},
+  {id: 26, to_id: [1736]},
+  {id: 76, to_id: [3571]}
 ];

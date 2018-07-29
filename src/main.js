@@ -9,11 +9,12 @@ import { store } from './store/store.js'
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 import { messages } from './store/mastersUT/messages.js'
-
+// import { messages2 } from './store/mastersUT/messages2.js'
 // Create VueI18n instance with options
 const i18n = new VueI18n({
   locale: 'en', // set locale
-  messages, // set locale messages
+  fallbackLocale: 'en',
+  messages // set locale messages
 })
 Vue.use(Vuetify, {
   lang: {
@@ -21,6 +22,17 @@ Vue.use(Vuetify, {
   }
 })
 // Vue.use(Vuetify)
+// merge messages2 into messages
+
+// Object.assign(messages.en, messages2.en)
+messages.en = {...messages.en, ...store.state.messages2.en, ...store.state.node1_messages.en, ...store.state.node2_messages.en, ...store.state.node3_messages.en}
+messages.ta = {...messages.ta, ...store.state.messages2.ta, ...store.state.node1_messages.ta, ...store.state.node2_messages.ta, ...store.state.node3_messages.ta}
+messages.te = {...messages.te, ...store.state.messages2.te, ...store.state.node1_messages.te, ...store.state.node2_messages.te, ...store.state.node3_messages.te}
+
+// messages.en = {...messages.en, ...store.state.node1_messages.en}
+// messages.ta = {...messages.ta, ...store.state.node1_messages.ta}
+// messages.te = {...messages.te, ...store.state.node1_messages.te}
+
 
 Vue.config.productionTip = false
 

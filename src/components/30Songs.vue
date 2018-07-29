@@ -13,21 +13,52 @@
         <div slot="header">
           {{item}}
         </div>
+            
+          <v-card v-for="i in $t('song_text.' + item).length">
+            <!-- <template v-for= "subitem in item.detail"> -->
+              <v-card-text>
+                    {{$t('song_text.' + item)[i-1]}}
+              </v-card-text>
+          </v-card>
 
-        <template v-if="songsDetails.findIndex(itm => itm.song_id ===  item) >= 0">
+          <table v-if="$t('song_word.' + item).length >0">
+            <tr>
+              <th></th>
+              <th>{{"="}}</th>
+            </tr>
+            <tr v-for="i in $t('song_word.' + item).length">
+              <td>{{ $t('song_word.' + item)[i-1] }}</td>
+              <td>{{ $t('word_meaning.' + item)[i-1] }}</td>
+            </tr>
+          </table>
+
+          <!-- Details -->
+          <!-- To print only for expln_text availability -->
+          <!-- <v-card v-for="i in Math.max($t('expln_header.' + item).length,$t('expln_text.' + item).length)"> -->
+          <v-card v-for="i in $t('expln_text.' + item).length">
+            <v-card-title>
+              {{$t('expln_header.' + item)[i-1]}}
+            </v-card-title>
+            <v-card-text v-for="j in $t('expln_text.' + item)[i-1].length">
+              {{$t('expln_text.' + item)[i-1][j-1]}}
+            </v-card-text>
+          </v-card>
+
+
+        <!-- <template v-if="songsDetails.findIndex(itm => itm.song_id ===  item) >= 0">
           <template v-for="lang in allLang">
             <template v-if="songsDetails.findIndex(itm => (itm.song_id ===  item && itm.lang_text === lang)) >= 0">
               <z1Songs  :isongsDb="songsDetails.find(itm => (itm.song_id ===  item && itm.lang_text === lang))"></z1Songs>
             </template>
           </template>
 
-        </template>
+        </template> -->
 
-        <template v-else>
+        <!-- <template v-else>
           <v-alert type="warning" :value="true">
                 No data available for this selection.
           </v-alert>
-        </template>
+        </template> -->
       </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
@@ -36,7 +67,7 @@
 
 import { mapGetters } from 'vuex'
 // import { mapActions } from 'vuex'
-import z1Songs from './30SongsDetails'
+// import z1Songs from './30SongsDetails'
 
 export default {
   // here sourceFile is selSongs - this has id and some comp Details
@@ -55,28 +86,28 @@ export default {
       item: 0
     }
   },
-  created() {
-      // defaulted first page Action is triggered
-      if (this.sourceFilePage.length > 0) {
-          this.$store.dispatch('songsDetailsAct', this.sourceFilePage)
-      };
-  },
-
-  watch: {
-    sourceFilePage: function()  {
-      // Whenever the page is changed, check for ids not in state and despatch Action
-      let remxObjId = this.sourceFilePage.filter(a => this.songsDetailsId.indexOf(a) < 0);
-      if (remxObjId.length > 0) {
-          this.$store.dispatch('songsDetailsAct', remxObjId)
-      };
-
-    }
-  },
+  // created() {
+  //     // defaulted first page Action is triggered
+  //     if (this.sourceFilePage.length > 0) {
+  //         this.$store.dispatch('songsDetailsAct', this.sourceFilePage)
+  //     };
+  // },
+  //
+  // watch: {
+  //   sourceFilePage: function()  {
+  //     // Whenever the page is changed, check for ids not in state and despatch Action
+  //     let remxObjId = this.sourceFilePage.filter(a => this.songsDetailsId.indexOf(a) < 0);
+  //     if (remxObjId.length > 0) {
+  //         this.$store.dispatch('songsDetailsAct', remxObjId)
+  //     };
+  //
+  //   }
+  // },
   computed: {
-    ...mapGetters({
-      songsDetails: 'songsDetailsGet',
-      songsDetailsId: 'songsDetailsIdGet'
-      }),
+    // ...mapGetters({
+    //   songsDetails: 'songsDetailsGet',
+    //   songsDetailsId: 'songsDetailsIdGet'
+    //   }),
     calcLength: function () {
         // alert("length" + Math.ceil(this.sourceFile.length / this.itemspp))
       return Math.ceil(this.sourceFile.length / this.itemspp)
@@ -90,9 +121,22 @@ export default {
 
   },
 
-  components: {
-      z1Songs
-  }
+  // components: {
+  //     z1Songs
+  // }
 
 }
 </script>
+<style scoped>
+table {
+  border: 1px solid black;
+  font: 16px ;
+}
+th {
+  background-color: rgb(228, 240, 245);
+}
+th,td {
+  border: 1px solid black;
+  padding:4px 6px;
+}
+</style>

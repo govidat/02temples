@@ -28,10 +28,10 @@ export var messages = {
        98: 'Contact',
        99: 'Home'
     },
-    node0_desc: {
-      1: 'msgVaishnavism',
-      2: 'Saivism'
-    },
+    // node0_desc: {
+    //   1: 'msgVaishnavism',
+    //   2: 'Saivism'
+    // },
     node4_desc: {
       1: 'Divya Desam',
       2: '275 Saiva Sthalangal'
@@ -106,10 +106,10 @@ export var messages = {
        98: 'தொடர்புக்கு',
        99: 'முகப்பு பக்கம்'
     },
-    node0_desc: {
-      1: 'வைணவ',
-      2: 'சைவ'
-    },
+    // node0_desc: {
+    //   1: 'வைணவ',
+    //   2: 'சைவ'
+    // },
     node4_desc: {
       1: '108 திவ்ய தேசம்',
       2: '275 சைவ ஸ்தலங்கள்'
@@ -184,10 +184,10 @@ export var messages = {
        99: 'హోమ్ పేజీ',
        99: 'హోమ్ పేజీ'
     },
-    node0_desc: {
-      1: 'వైష్ణవ',
-      2: 'శైవమతానికి'
-    },
+    // node0_desc: {
+    //   1: 'వైష్ణవ',
+    //   2: 'శైవమతానికి'
+    // },
     node4_desc: {
       1: '108 దివ్య దేశము',
       2: '275 సావ ఆలయాలు'

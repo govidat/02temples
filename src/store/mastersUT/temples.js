@@ -121,3 +121,8 @@ export var ism_temple = [
   {id: 1, to_id: [2, 5, 26]},
   {id: 2, to_id: [76]}
 ];
+
+export var pps_temple = [
+  {id: 1, to_id: [2, 5, 26]},
+  {id: 2, to_id: [76]}
+];

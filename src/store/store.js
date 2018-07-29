@@ -3,13 +3,19 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 import { languages } from './customize.js'
-import {ism, pps, pps_ism } from './mastersUT/General.js'
-import {saint, saint_hier, ism_saint, saint_temple, } from './mastersUT/saints.js'
+import {ism, pps, ism_pps } from './mastersUT/General.js'
+import {saint, saint_hier, ism_saint, temple_saint, } from './mastersUT/saints.js'
 
-import {temple, temple_hier, ism_temple, temple_pps} from './mastersUT/temples.js'
+import {temple, temple_hier, ism_temple, pps_temple} from './mastersUT/temples.js'
 import {song, song_hier, ism_song, temple_song, saint_song} from './mastersUT/songs.js'
-import {saint_detail} from './mastersUT/saintdetail.js';
-import {temple_detail} from './mastersUT/templedetail.js';
+// import {saint_detail} from './mastersUT/saintdetail.js';
+// import {temple_detail} from './mastersUT/templedetail.js';
+
+import { messages2 } from './mastersUT/messages2.js';
+import { node1_messages } from './mastersUT/node1_messages.js';
+import { node2_messages } from './mastersUT/node2_messages.js';
+import { node3_messages } from './mastersUT/node3_messages.js';
+
 
 // import {saint2, saint_hier, saint_hier_desc, ism_saint} from './mastersUT/saints.js'
 
@@ -18,6 +24,11 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     languages: languages,
+    messages2: messages2,
+    // saint-details
+    node1_messages: node1_messages,
+    node2_messages: node2_messages,
+    node3_messages: node3_messages,
 
     add_ln_id: [],
     all_ln_id : ['en'],
@@ -34,17 +45,17 @@ export const store = new Vuex.Store({
     // saint_ism: saint_ism,
     // saint_ism_old: saint_ism_old,
 
-    saint_temple: saint_temple,
+    temple_saint: temple_saint,
 
     temple: temple,
     temple_hier: temple_hier,
     ism_temple: ism_temple,
-
+    pps_temple: pps_temple,
     // temple_desc: temple_desc,
     // temple_ism: temple_ism,
     // temple_ism_old: temple_ism_old,
 
-    temple_pps: temple_pps,
+    // temple_pps: temple_pps,
     song: song,
     song_hier: song_hier,
     ism_song: ism_song,
@@ -58,10 +69,10 @@ export const store = new Vuex.Store({
 
     pps: pps,
     // pps_desc: pps_desc,
-    pps_ism: pps_ism,
+    ism_pps: ism_pps,
 
-    saint_detail: saint_detail,
-    temple_detail: temple_detail,
+    // saint_detail: saint_detail,
+    // temple_detail: temple_detail,
 
     songsDetails: [],
     songsDetailsId: [],
@@ -72,188 +83,6 @@ export const store = new Vuex.Store({
   },
 
   getters: {
-
-    // idea tabname is a variable passed eg saint; in the state action and mutation has been created for 'initStore'
-    // this initStore has mapping of state.map_desc.get(saint) = state.get_saint_desc
-    // this initStore action has been triggered in the main.js
-    // get_desc2: (state, getters) => (item) => {
-    //   // itemid, main_ln_id, default_ln_id, default desc, tabname
-    //   // alert ("Hello from desc3" + tabname + JSON.stringify(state.map_desc.get(tabname).find(itm => (itm.id == itemid && itm.ln_id == main_ln_id))))
-    //   alert ("Hello from desc2")
-    //   return getters.get_desc(item, state.main_ln_id, 1, "NA", 'header')
-    // },
-    //
-    // // get_desc3: (state, getters) => (itemid, main_ln_id, def_ln_id, def_desc, tabname) => {
-    // get_desc3: (state, getters) => {
-    //   // itemid, main_ln_id, default_ln_id, default desc, tabname
-    //   // alert ("Hello from desc3" + tabname + JSON.stringify(state.map_desc.get(tabname).find(itm => (itm.id == itemid && itm.ln_id == main_ln_id))))
-    //   alert ("Hello from desc3")
-    //   return getters.get_desc(1, state.main_ln_id, 1, "NA", 'header')
-    // },
-
-    // get_desc2: (state, getters) => (itemid, def_ln_id, def_desc, tabname) => {
-    //   // itemid, main_ln_id, default_ln_id, default desc, tabname
-    //   var y = {};
-    //   y.desc = def_desc;
-    //   return (
-    //     (
-    //     state.map_desc.get(tabname).find(itm => (itm.id == itemid && itm.ln_id == state.main_ln_id)) ||
-    //     state.map_desc.get(tabname).find(itm => (itm.id == itemid && itm.ln_id == def_ln_id)) ||
-    //     y
-    //     ).desc
-    //   )
-    // },
-
-    // get_desc: (state, getters) => (itemid, def_ln_id, def_desc, tabname) => {
-    //   var y = {};
-    //   y.desc = def_desc;
-    //   return (
-    //     (
-    //     state.map_desc.get(tabname).find(itm => (itm.id == itemid && itm.ln_id == state.main_ln_id)) ||
-    //     state.map_desc.get(tabname).find(itm => (itm.id == itemid && itm.ln_id == def_ln_id)) ||
-    //     y
-    //     ).desc
-    //   )
-    // },
-
-// idea saint and table have a _detail. This is displayed in the respective pages. DRY code below
-    // get_detail: (state, getters) => (itemid, tabname) => {
-    //   // itemid, all_ln_id[], tabname(string)
-    //   return (
-    //     state.map_detail.get(tabname).filter(itm => (itm.id ===  itemid) && state.all_ln_id.includes(itm.ln_id)) || []
-    //   )
-    // },
-
-    // get_ism: (state, getters) => (hierpath) => {
-    //   // [parentid] , [null]
-    //     // alert("Hello from get_ism")
-    //     return state.ism.filter( item => hierpath.includes(item.h_path));
-    // },
-
-// get node based on p_id array and then by a superior table state.map_nodeid.get(supernode)
-// sample ('node1', [0], 'node1_0', 'node0', 'id', 'to_id', sel_ism ) for saintbyism
-    // get_node: (state, getters) => (sourcenode, p_id_arr, linktab, supernode, linktab_id_is_source, sel_supernode ) => {
-    //
-    //   var sel_supernode_id = sel_supernode.map(x => x.id)
-    //   // get source by the parent id array
-    //   var source_by_p_id = state.map_node.get(sourcenode).filter( item => p_id_arr.includes(item.p_id))
-    //   // from the link table filter the records that match the selected supernode ids
-    //   var link_by_supernode = state.map_node.get(linktab).filter(item => sel_supernode_id.includes(linktab_id_is_source ? item.to_id : item.id))
-    //   // now get the source node ids from the above selTemples
-    //   var sourceid_link = link_by_supernode.map(item => linktab_id_is_source ? item.id : item.to_id )
-    //   // next filter the sourcenode by the above step
-    //   var source_by_supernode = state.map_node.get(sourcenode).filter(item => sourceid_link.includes(item.id))
-    //   // now get the common denominator of the source by parent and the above step
-    //   var zcommon = source_by_p_id.filter(value => -1 !== source_by_supernode.indexOf(value))
-    //   // alert ("sel_supernode_id" + JSON.stringify(sel_supernode_id))
-    //   // alert ("state.map_node.get(sourcenode)" + JSON.stringify(state.map_node.get(sourcenode)))
-    //   // alert ("state.map_node.get(linktab)" + JSON.stringify(state.map_node.get(linktab)))
-    //   // alert ("link_by_supernode" + JSON.stringify(link_by_supernode))
-    //   // alert ("sourceid_link" + JSON.stringify(sourceid_link))
-    //   // alert ("source_by_supernode" + JSON.stringify(source_by_supernode))
-    //   // alert ("zcommon" + JSON.stringify(zcommon))
-    //
-    //   return zcommon;
-    //
-    //
-    // },
-
-
-    // get_saint: (state, getters) => (parentarr, ismarr) => {
-    //   // [parentid] , [{id: 1, p_id: 0}]
-    //     var saint_ism_byism = state.saint_ism_old.filter( item => ismarr.map(x => x.id).includes(item.ism_id));
-    //     var saintid_byism = saint_ism_byism.map(x => x.saint_id);
-    //     var saint_byism = state.saint.filter(item => saintid_byism.includes(item.id))
-    //     var saint_byism_byparent = saint_byism.filter( item => parentarr.includes(item.p_id));
-    //     // alert ("get_saint" + JSON.stringify(saint_byism_byparent))
-    //     return saint_byism_byparent;
-    //     // return [{id:1},{id:2},{id:3}];
-    // },
-
-    // get_temple: (state, getters) => (parentarr, ismarr) => {
-    //   // [parentid] , [{id: 1, p_id: 0}]
-    //     var temple_ism_byism = state.temple_ism_old.filter( item => ismarr.map(x => x.id).includes(item.ism_id));
-    //     var templeid_byism = temple_ism_byism.map(x => x.temple_id);
-    //     var temple_byism = state.temple.filter(item => templeid_byism.includes(item.id))
-    //     var temple_byism_byparent = temple_byism.filter( item => parentarr.includes(item.p_id));
-    //     // alert ("get_temple" + JSON.stringify(temple_byism_byparent))
-    //     return temple_byism_byparent;
-    //     // return [{id:1},{id:2},{id:3}];
-    // },
-
-    // get_temple2: (state, getters) => (parentarr, ppsarr) => {
-    //   // [parentid] , [{id: 1, p_id: 0}]
-    //     var temple_pps_bypps = state.temple_pps.filter( item => ppsarr.map(x => x.id).includes(item.pps_id));
-    //     var templeid_bypps = temple_pps_bypps.map(x => x.temple_id);
-    //     var temple_bypps = state.temple.filter(item => templeid_bypps.includes(item.id))
-    //     var temple_bypps_byparent = temple_bypps.filter( item => parentarr.includes(item.p_id));
-    //     return temple_bypps_byparent;
-    //     // return [{id:1},{id:2},{id:3}];
-    // },
-
-
-    // get_song: (state, getters) => (parentarr, ismarr) => {
-    //   // [parentid] , [{id: 1, p_id: 0}]
-    //     var song_ism_byism = state.song_ism_old.filter( item => ismarr.map(x => x.id).includes(item.ism_id));
-    //     var songid_byism = song_ism_byism.map(x => x.song_id);
-    //     var song_byism = state.song.filter(item => songid_byism.includes(item.id))
-    //     var song_byism_byparent = song_byism.filter( item => parentarr.includes(item.p_id));
-    //     // alert ("get_song" + JSON.stringify(song_byism_byparent))
-    //     return song_byism_byparent;
-    //     // return [{id:1},{id:2},{id:3}];
-    // },
-
-    // get_song2: (state, getters) => (saintarr, templearr, ismarr) => {
-    //   // [{saint}], [{templeid}] , [{id: ismid, p_id: 0}]
-    //     var song_ism_byism = state.song_ism_old.filter( item => ismarr.map(x => x.id).includes(item.ism_id));
-    //     var songid_byism = song_ism_byism.map(x => x.song_id);
-    //     var songid_bysaint = state.saint_song.filter(item => saintarr.map(x => x.id).includes(item.saint_id)).map(x => x.song_id);
-    //     var songid_bytemple = state.temple_song.filter( item => templearr.map(x => x.id).includes(item.temple_id)).map(x => x.song_id);
-    //     var songid = songid_bytemple.filter(value => -1 !== songid_bysaint.indexOf(value)).filter(value => -1 !== songid_byism.indexOf(value))
-    //     var song_by = state.song.filter(item => songid.includes(item.id))
-    //
-    //     return song_by;
-    //     // return [{id:1},{id:2},{id:3}];
-    // },
-
-    // get_song3: (state, getters) => (templearr, ismarr) => {
-    //   // [{saint}], [{templeid}] , [{id: ismid, p_id: 0}]
-    //     var song_ism_byism = state.song_ism_old.filter( item => ismarr.map(x => x.id).includes(item.ism_id));
-    //     var songid_byism = song_ism_byism.map(x => x.song_id);
-    //     // var songid_bysaint = state.saint_song.filter(item => saintarr.map(x => x.id).includes(item.saint_id)).map(x => x.song_id);
-    //     var songid_bytemple = state.temple_song.filter( item => templearr.map(x => x.id).includes(item.temple_id)).map(x => x.song_id);
-    //     var songid = songid_bytemple.filter(value => -1 !== songid_byism.indexOf(value))
-    //     var song_by = state.song.filter(item => songid.includes(item.id))
-    //
-    //     return song_by;
-    //     // return [{id:1},{id:2},{id:3}];
-    // },
-    //
-    // get_saint3: (state, getters) => (templearr, ismarr) => {
-    //   // [{saint}], [{templeid}] , [{id: ismid, p_id: 0}]
-    //     var saint_ism_byism = state.saint_ism_old.filter( item => ismarr.map(x => x.id).includes(item.ism_id));
-    //     var saintid_byism = saint_ism_byism.map(x => x.saint_id);
-    //     // var songid_bysaint = state.saint_song.filter(item => saintarr.map(x => x.id).includes(item.saint_id)).map(x => x.song_id);
-    //     var saintid_bytemple = state.saint_temple.filter( item => templearr.map(x => x.id).includes(item.temple_id)).map(x => x.saint_id);
-    //     var saintid = saintid_bytemple.filter(value => -1 !== saintid_byism.indexOf(value))
-    //     var saint_by = state.saint.filter(item => saintid.includes(item.id))
-    //
-    //     return saint_by;
-    //     // return [{id:1},{id:2},{id:3}];
-    // },
-    //
-    //
-    //
-    // get_pps: (state, getters) => (parentarr, ismarr) => {
-    //   // [parentid] , [{id: 1, p_id: 0}]
-    //     var pps_ism_byism = state.pps_ism.filter( item => ismarr.map(x => x.id).includes(item.ism_id));
-    //     var ppsid_byism = pps_ism_byism.map(x => x.pps_id);
-    //     var pps_byism = state.pps.filter(item => ppsid_byism.includes(item.id))
-    //     var pps_byism_byparent = pps_byism.filter( item => parentarr.includes(item.p_id));
-    //     return pps_byism_byparent;
-    //     // return [{id:1},{id:2},{id:3}];
-    // },
-
 
   },
 

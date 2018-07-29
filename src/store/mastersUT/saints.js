@@ -107,3 +107,10 @@ export var ism_saint = [
   {id: 1, to_id: [4,5,10]},
   {id: 2, to_id: [12]},
 ];
+
+export var temple_saint = [
+  {id: 2, to_id: [4,5]},
+  {id: 5, to_id: [4]},
+  {id: 26, to_id: [5]},
+  {id: 76, to_id: [12]},    
+];
