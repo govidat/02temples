@@ -13,7 +13,7 @@
         <div slot="header">
           {{item}}
         </div>
-            
+
           <v-card v-for="i in $t('song_text.' + item).length">
             <!-- <template v-for= "subitem in item.detail"> -->
               <v-card-text>
@@ -43,30 +43,15 @@
               {{$t('expln_text.' + item)[i-1][j-1]}}
             </v-card-text>
           </v-card>
-
-
-        <!-- <template v-if="songsDetails.findIndex(itm => itm.song_id ===  item) >= 0">
-          <template v-for="lang in allLang">
-            <template v-if="songsDetails.findIndex(itm => (itm.song_id ===  item && itm.lang_text === lang)) >= 0">
-              <z1Songs  :isongsDb="songsDetails.find(itm => (itm.song_id ===  item && itm.lang_text === lang))"></z1Songs>
-            </template>
-          </template>
-
-        </template> -->
-
-        <!-- <template v-else>
-          <v-alert type="warning" :value="true">
-                No data available for this selection.
-          </v-alert>
-        </template> -->
       </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
 </template>
 <script>
 
-import { mapGetters } from 'vuex'
-// import { mapActions } from 'vuex'
+// import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 // import z1Songs from './30SongsDetails'
 
 export default {
@@ -77,8 +62,8 @@ export default {
   // get all the entries in the songsDetails merged into one array of objects
   // check if the array has an entry for a song id. if not trigger an action to get it from firebase and update songsDetails
   // in the comp above check for a particula songId and lang
-
-  props: ['sourceFile', 'mainLang', 'allLang'],
+  props: ['sourceFile'],
+  // props: ['sourceFile', 'mainLang', 'allLang'],
   data () {
     return {
       page: 1,
@@ -92,22 +77,26 @@ export default {
   //         this.$store.dispatch('songsDetailsAct', this.sourceFilePage)
   //     };
   // },
-  //
-  // watch: {
-  //   sourceFilePage: function()  {
-  //     // Whenever the page is changed, check for ids not in state and despatch Action
-  //     let remxObjId = this.sourceFilePage.filter(a => this.songsDetailsId.indexOf(a) < 0);
-  //     if (remxObjId.length > 0) {
-  //         this.$store.dispatch('songsDetailsAct', remxObjId)
-  //     };
-  //
-  //   }
-  // },
+
+  watch: {
+
+    sourceFile : {
+      immediate: true,
+      handler: function () {
+        let remxObjId = this.sourceFilePage.filter(a => this.songsDetailsId.indexOf(a) < 0);
+        // alert("remxObjId" + JSON.stringify(remxObjId))
+        if (remxObjId.length > 0) {
+            this.$store.dispatch('songsDetailsAct', remxObjId)
+        };
+      }
+    }
+
+  },
   computed: {
-    // ...mapGetters({
-    //   songsDetails: 'songsDetailsGet',
-    //   songsDetailsId: 'songsDetailsIdGet'
-    //   }),
+    ...mapState(
+      ['songsDetailsId']
+    ),
+
     calcLength: function () {
         // alert("length" + Math.ceil(this.sourceFile.length / this.itemspp))
       return Math.ceil(this.sourceFile.length / this.itemspp)
@@ -118,12 +107,7 @@ export default {
       // return this.sourceFile.slice((this.page-1)*this.itemspp , this.page*this.itemspp)
       return this.sourceFile.slice((this.page-1)*this.itemspp , this.page*this.itemspp)
     },
-
   },
-
-  // components: {
-  //     z1Songs
-  // }
 
 }
 </script>

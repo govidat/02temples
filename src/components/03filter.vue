@@ -125,10 +125,10 @@ import { mapGetters } from 'vuex'
       //   ['header_desc']
       // ),
 
-      ...mapGetters({
-      // getheaderdesc: 'get_header_desc',
-      get_desc: 'get_desc',
-      }),
+      // ...mapGetters({
+      // // getheaderdesc: 'get_header_desc',
+      // get_desc: 'get_desc',
+      // }),
 
       headers: function () {
         return [

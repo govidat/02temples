@@ -14,10 +14,8 @@ import {song, song_hier, ism_song, temple_song, saint_song} from './mastersUT/so
 import { messages2 } from './mastersUT/messages2.js';
 import { node1_messages } from './mastersUT/node1_messages.js';
 import { node2_messages } from './mastersUT/node2_messages.js';
-import { node3_messages } from './mastersUT/node3_messages.js';
+// import { node3_messages } from './mastersUT/node3_messages.js';
 
-
-// import {saint2, saint_hier, saint_hier_desc, ism_saint} from './mastersUT/saints.js'
 
 Vue.use(Vuex)
 
@@ -28,22 +26,39 @@ export const store = new Vuex.Store({
     // saint-details
     node1_messages: node1_messages,
     node2_messages: node2_messages,
-    node3_messages: node3_messages,
+    // node3_messages: node3_messages,
+    node3_messages: {
+      en: {
+        song_text: {},
+        song_word: {},
+        word_meaning: {},
+        expln_header: {},
+        expln_text: {}
+      },
+      ta: {
+        song_text: {},
+        song_word: {},
+        word_meaning: {},
+        expln_header: {},
+        expln_text: {}
+      },
+      te: {
+        song_text: {},
+        song_word: {},
+        word_meaning: {},
+        expln_header: {},
+        expln_text: {}
+    }
+    },
 
-    add_ln_id: [],
-    all_ln_id : ['en'],
-    // header_desc: header_desc,
+    // add_ln_id: [],
+    // all_ln_id : ['en'],
 
     ism: ism,
-    // ism_desc: ism_desc,
 
     saint: saint,
     saint_hier: saint_hier,
     ism_saint: ism_saint,
-
-    // saint_desc: saint_desc,
-    // saint_ism: saint_ism,
-    // saint_ism_old: saint_ism_old,
 
     temple_saint: temple_saint,
 
@@ -51,24 +66,16 @@ export const store = new Vuex.Store({
     temple_hier: temple_hier,
     ism_temple: ism_temple,
     pps_temple: pps_temple,
-    // temple_desc: temple_desc,
-    // temple_ism: temple_ism,
-    // temple_ism_old: temple_ism_old,
 
-    // temple_pps: temple_pps,
     song: song,
     song_hier: song_hier,
     ism_song: ism_song,
 
-    // song_desc: song_desc,
-    // song_ism: song_ism,
-    // song_ism_old: song_ism_old,
 
     saint_song: saint_song,
     temple_song: temple_song,
 
     pps: pps,
-    // pps_desc: pps_desc,
     ism_pps: ism_pps,
 
     // saint_detail: saint_detail,
@@ -76,9 +83,6 @@ export const store = new Vuex.Store({
 
     songsDetails: [],
     songsDetailsId: [],
-
-    // ism_saint: ism_saint,
-
 
   },
 
@@ -88,49 +92,88 @@ export const store = new Vuex.Store({
 
   mutations: {
 
-      initStore (state) {
-        // using the Map set and get function to refer subsequently
-        state.map_desc = new Map();
-        // state.map_desc.set('header', state.header_desc).set('node0', state.ism_desc).set('node1', state.saint_desc).set('node2', state.temple_desc).set('node3', state.song_desc).set('node4', state.pps_desc);
-        state.map_desc.set('node2', state.temple_desc).set('node3', state.song_desc);
-        state.map_detail = new Map();
-        state.map_detail.set('node1', state.saint_detail).set('node2', state.temple_detail);
-        state.map_node = new Map();
-        state.map_node.set('node0', state.ism).set('node1', state.saint).set('node2', state.temple).set('node3', state.song).set('node1_0', state.saint_ism).set('node2_0', state.temple_ism).set('node3_0', state.song_ism);
-      },
+      // initStore (state) {
+      //   // using the Map set and get function to refer subsequently
+      //   state.map_desc = new Map();
+      //   // state.map_desc.set('header', state.header_desc).set('node0', state.ism_desc).set('node1', state.saint_desc).set('node2', state.temple_desc).set('node3', state.song_desc).set('node4', state.pps_desc);
+      //   state.map_desc.set('node2', state.temple_desc).set('node3', state.song_desc);
+      //   state.map_detail = new Map();
+      //   state.map_detail.set('node1', state.saint_detail).set('node2', state.temple_detail);
+      //   state.map_node = new Map();
+      //   state.map_node.set('node0', state.ism).set('node1', state.saint).set('node2', state.temple).set('node3', state.song).set('node1_0', state.saint_ism).set('node2_0', state.temple_ism).set('node3_0', state.song_ism);
+      // },
 
-      update_locale (state, payload) {
-          // state.main_ln_id = payload;
-          // var x = [payload];
-          state.add_ln_id = state.add_ln_id.filter(x => x != payload);
-          state.all_ln_id = [payload].concat(state.add_ln_id);
-        },
+      // update_locale (state, payload) {
+      //     // state.main_ln_id = payload;
+      //     // var x = [payload];
+      //     state.add_ln_id = state.add_ln_id.filter(x => x != payload);
+      //     state.all_ln_id = [payload].concat(state.add_ln_id);
+      //   },
 
-      update_add_ln (state, payload) {
-          state.add_ln_id = payload[0];
-          // var x = [state.main_ln_id];
-          // state.all_ln_id = [state.main_ln_id].concat(payload);
-          state.all_ln_id = [payload[1]].concat(payload[0]);
-        },
+      // update_add_ln (state, payload) {
+      //     state.add_ln_id = payload[0];
+      //     // var x = [state.main_ln_id];
+      //     // state.all_ln_id = [state.main_ln_id].concat(payload);
+      //     state.all_ln_id = [payload[1]].concat(payload[0]);
+      //   },
 
 
 
     songsDetailsMut (state, payload) {
-      // payload 0 is the array of Details
-      // payload 1 is the Id number that is getting added
-        state.songsDetails.push(payload[0]);
+      // payload is an object for a langid and itemid -- revx
+      // {
+      // "song_id": 667,
+      // "lang_text": "Tamil",
+      // "song_text": ["அல்லிமாமலர் மங்கைநாதன் அரங்கன்மெய்யடி யார்கள்தம்", "எல்லையிலடி மைத்திறத்தினில் என்றுமேவு மனத்தனாம்", "கொல்லிகாவலன் கூடல்நாயகன் கோழிக்கோன்குல சேகரன்", "சொல்லினின்தமிழ் மாலைவல்லவர் தொண்டர்தொண்டர்க ளாவரே."],
+      // "song_word": ["அல்லி மாமலர் மங்கைநாதன்", "அரங்கன்", "மெய்அடியார்கள் தம்", "என்றும் மேவு மனத்தன் ஆம்", "கொல்லி காவலன்", "கூடல் நாயகன்", "கோழி கோன்", "குலசேகரன்", "சொல்லின்", "இன் தமிழ் மாலை வல்லவர்", "தொண்டர் தொண்டர்கள் ஆவர்"],
+      // "word_meaning": ["அகவிதழ்களையுடைய சிறந்த (தாமரை) மலரில் பிறந்த பிராட்டிக்குக் கணவனான", "ஸ்ரீரங்கநாதனுடைய", "உண்மையான பக்தர்களுடைய", "எப்போதும் பொருந்திய திருவுள்ளத்தை யுடையவரும்", "கொல்லிநகர்க்கு அரசரும்", "மதுரைக்கு அரசரும்", "உறையூருக்கு அரசருமான", "குலசேகராழ்வருடைய", "ஸ்ரீஸூக்திளாலே அமைந்த", "இனிய தமிழ்ப்பாசுரங்களை ஒதவல்லவர்கள்", "தாஸாநுதாஸராகப் பெறுவர்"],
+      // "expln_header": ["TaExpln of xyz"],
+      // "expln_text":[["***- எல்லையி லடிமைத்திறமாவது- “அடியா ரடியார்தம் மடியா ரடியார்தமக்கடியார் தம் அடியா ரடியோங்களே” என்கிற சேஷத்வகாஷ்டை.", "அடிவரவு: தேட்டு தோடேறு தோய்த்த பொய் ஆதி காரினம் மாலை மொய்த்து அல்லி மெய்.", "ஸாம்ஸாரிகர் படியில் மிக்க வெறுப்பு உண்டாகி, அவர்களைக் காண்பதும் அவர்களோடு ஸஹவாஸஞ் செய்வதும் அஸஹ்யமான நிலைமை தமக்குப் பிறந்தபடியை அருளிச்செய்கிறார்."]]
 
-        if (state.songsDetailsId.indexOf(payload[1]) === -1) {
-            state.songsDetailsId.push(payload[1]);
-        };
-        // state.songsDetailsId.push(payload[1]);
-      }
+      // }
+      // alert (JSON.stringify(payload.lang_text));
+      // alert (Object.keys(payload[0]).length);
+
+        if (payload.lang_text == "English") {
+          if (payload.song_text) {Object.assign(state.node3_messages.en.song_text, {[payload.song_id]: payload.song_text})}
+          if (payload.song_word) {Object.assign(state.node3_messages.en.song_word, {[payload.song_id]: payload.song_word})}
+          if (payload.word_meaning) {Object.assign(state.node3_messages.en.word_meaning, {[payload.song_id]: payload.word_meaning})}
+          if (payload.expln_header) {Object.assign(state.node3_messages.en.expln_header, {[payload.song_id]: payload.expln_header})}
+          if (payload.expln_text) {Object.assign(state.node3_messages.en.expln_text, {[payload.song_id]: payload.expln_text})}
+
+        }
+        else if (payload.lang_text == "Tamil") {
+          if (payload.song_text) {Object.assign(state.node3_messages.ta.song_text, {[payload.song_id]: payload.song_text})}
+          if (payload.song_word) {Object.assign(state.node3_messages.ta.song_word, {[payload.song_id]: payload.song_word})}
+          if (payload.word_meaning) {Object.assign(state.node3_messages.ta.word_meaning, {[payload.song_id]: payload.word_meaning})}
+          if (payload.expln_header) {Object.assign(state.node3_messages.ta.expln_header, {[payload.song_id]: payload.expln_header})}
+          if (payload.expln_text) {Object.assign(state.node3_messages.ta.expln_text, {[payload.song_id]: payload.expln_text})}
+        }
+        else if (payload.lang_text == "Telugu") {
+          if (payload.song_text) {Object.assign(state.node3_messages.te.song_text, {[payload.song_id]: payload.song_text})}
+          if (payload.song_word) {Object.assign(state.node3_messages.te.song_word, {[payload.song_id]: payload.song_word})}
+          if (payload.word_meaning) {Object.assign(state.node3_messages.te.word_meaning, {[payload.song_id]: payload.word_meaning})}
+          if (payload.expln_header) {Object.assign(state.node3_messages.te.expln_header, {[payload.song_id]: payload.expln_header})}
+          if (payload.expln_text) {Object.assign(state.node3_messages.te.expln_text, {[payload.song_id]: payload.expln_text})}
+        }
+
+        // state.songsDetails.push(payload[0]);
+        // if (state.songsDetailsId.indexOf(payload[1]) === -1) {
+        //     state.songsDetailsId.push(payload[1]);
+        // };
+      },
+
+      songsDetailsIdMut (state, payload) {
+          if (state.songsDetailsId.indexOf(payload.song_id) === -1) {
+              state.songsDetailsId.push(payload);
+          };
+        }
   },
 
   actions: {
-    initStore: ({commit}) => {
-      commit('initStore');
-    },
+    // initStore: ({commit}) => {
+    //   commit('initStore');
+    // },
 
     // update_main_ln: ({commit}, payload) => {
     //   alert ("hellp from methods")
@@ -140,40 +183,23 @@ export const store = new Vuex.Store({
 
     songsDetailsAct: ({commit, state}, payload) => {
       // payload is an array of Ids from sourceFilePage
-      // alert("from action - payload" + payload)
       payload.forEach(function(element) {
         // alert("from action - songsDetailsId element " + element + "state" + state.songsDetailsId)
         const a = element
-//0524        rObj = [];
-        //0524 var rObj = {};
-        //0524        rObj["Id"] = a;
-        //0524        rObj["Content"] = [];
-        // const asongsDetails = []
         // axios.get('https://templesvuet.firebaseio.com/mSongsDetails.json?orderBy="Id"&equalTo=' + a )
-        // axios.get('https://templesvuet.firebaseio.com/wsongsDetails.json?orderBy="song_id"&equalTo=' + a )
-        axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/songdetail?song_id=eq.' + a )
+        axios.get('https://templesvuet.firebaseio.com/xsongsDetails.json?orderBy="song_id"&equalTo=' + a )
+        // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/songdetail?song_id=eq.' + a )
           .then(res => {
             const data = res.data
             for (let key in data) {
               if ( data[key] !== null && Object.keys(data[key]).length >0) {
-                commit('songsDetailsMut', [data[key], a])
-                // const sdetail = data[key]
-                // alert( "sdetail" + sdetail.Ln + Object.keys(sdetail).length)
-//0524                rObj.push(sdetail)
-                //0524              rObj["Content"].push(sdetail)
+                // commit('songsDetailsMut', [data[key], a])
+                commit('songsDetailsMut', data[key])
               }
-//0524            }
-            // console.log(asongsDetails.length)
-//0524            if (rObj.length >0) {
-            //0524            if (rObj["Content"].length >0) {
-//0524              if (sdetail.length >0) {
-//0524                commit('songsDetailsMut', [sdetail, a])
-//0524              }
-//0524              commit('songsDetailsMut', [rObj, a])
-//0524            }
             }
 //0524          .catch(error => console.log(error))
           })
+          commit('songsDetailsIdMut', a)
       // before commit the mutation a check is done for lenght. else undefined objects where gettin in
       })
     }
