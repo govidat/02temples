@@ -33,4 +33,11 @@ https://github.com/kazupon/vue-i18n
 npm install vue-i18n
 modify main.js
 
+****** dropped this
+tried vue-i18n and it works with some limitations. Need to update the store through Axios and make them reflect in the i18n. Hence trying vex-i18n now
+https://github.com/dkfbasel/vuex-i18n
+
+$ npm install vuex-i18n
+
+****** Have dropped usage of vex-i18n
 

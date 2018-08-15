@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+
 import { languages } from './customize.js'
 import {ism, pps, ism_pps } from './mastersUT/General.js'
 import {saint, saint_hier, ism_saint, temple_saint, } from './mastersUT/saints.js'
@@ -11,9 +12,10 @@ import {song, song_hier, ism_song, temple_song, saint_song} from './mastersUT/so
 // import {saint_detail} from './mastersUT/saintdetail.js';
 // import {temple_detail} from './mastersUT/templedetail.js';
 
-import { messages2 } from './mastersUT/messages2.js';
-import { node1_messages } from './mastersUT/node1_messages.js';
-import { node2_messages } from './mastersUT/node2_messages.js';
+// import { messages } from './mastersUT/messages.js'
+// import { messages2 } from './mastersUT/messages2.js';
+// import { node1_messages } from './mastersUT/node1_messages.js';
+// import { node2_messages } from './mastersUT/node2_messages.js';
 // import { node3_messages } from './mastersUT/node3_messages.js';
 
 
@@ -22,32 +24,42 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     languages: languages,
-    messages2: messages2,
+    // messages: messages,
+    // messages2: messages2,
     // saint-details
-    node1_messages: node1_messages,
-    node2_messages: node2_messages,
+   // node1_messages: node1_messages,
+    // node2_messages: node2_messages,
     // node3_messages: node3_messages,
+    node1_messages: {
+      en: {saint_expln_header_text: {}},
+      ta: {saint_expln_header_text: {}},
+      te: {saint_expln_header_text: {}}
+    },
+
+    node2_messages: {
+      en: {temple_expln_header_text: {}},
+      ta: {temple_expln_header_text: {}},
+      te: {temple_expln_header_text: {}}
+    },
+
     node3_messages: {
       en: {
         song_text: {},
         song_word: {},
         word_meaning: {},
-        expln_header: {},
-        expln_text: {}
+        song_expln_header_text: {}
       },
       ta: {
         song_text: {},
         song_word: {},
         word_meaning: {},
-        expln_header: {},
-        expln_text: {}
+        song_expln_header_text: {}
       },
       te: {
         song_text: {},
         song_word: {},
         word_meaning: {},
-        expln_header: {},
-        expln_text: {}
+        song_expln_header_text: {}
     }
     },
 
@@ -81,9 +93,11 @@ export const store = new Vuex.Store({
     // saint_detail: saint_detail,
     // temple_detail: temple_detail,
 
-    songsDetails: [],
+    // songsDetails: [],
     songsDetailsId: [],
-
+    templesDetailsId: [],
+    saintsDetailsId: [],
+    isLoading: false,
   },
 
   getters: {
@@ -116,58 +130,83 @@ export const store = new Vuex.Store({
       //     // state.all_ln_id = [state.main_ln_id].concat(payload);
       //     state.all_ln_id = [payload[1]].concat(payload[0]);
       //   },
+      saintsDetailsMut (state, payload) {
+          if (payload.ln_id == "en") {
+            if (payload.expln_header_text) {Object.assign(state.node1_messages.en.saint_expln_header_text, {[payload.saint_id]: payload.expln_header_text})}
+          }
+          else if (payload.ln_id == "ta") {
+            if (payload.expln_header_text) {Object.assign(state.node1_messages.ta.saint_expln_header_text, {[payload.saint_id]: payload.expln_header_text})}
+          }
+          else if (payload.ln_id == "te") {
+            if (payload.expln_header_text) {Object.assign(state.node1_messages.te.saint_expln_header_text, {[payload.saint_id]: payload.expln_header_text})}
+          }
+          if (state.isLoading) {
+            state.isLoading = false
+          };
+        },
 
+      saintsDetailsIdMut (state, payload) {
+          if (state.saintsDetailsId.indexOf(payload.saint_id) === -1) {
+              state.saintsDetailsId.push(payload);
+          };
+      },
+
+      templesDetailsMut (state, payload) {
+          if (payload.ln_id == "en") {
+            if (payload.expln_header_text) {Object.assign(state.node2_messages.en.temple_expln_header_text, {[payload.temple_id]: payload.expln_header_text})}
+          }
+          else if (payload.ln_id == "ta") {
+            if (payload.expln_header_text) {Object.assign(state.node2_messages.ta.temple_expln_header_text, {[payload.temple_id]: payload.expln_header_text})}
+          }
+          else if (payload.ln_id == "te") {
+            if (payload.expln_header_text) {Object.assign(state.node2_messages.te.temple_expln_header_text, {[payload.temple_id]: payload.expln_header_text})}
+          }
+          if (state.isLoading) {
+            state.isLoading = false
+          };
+        },
+
+      templesDetailsIdMut (state, payload) {
+          if (state.templesDetailsId.indexOf(payload.temple_id) === -1) {
+              state.templesDetailsId.push(payload);
+          };
+      },
 
 
     songsDetailsMut (state, payload) {
-      // payload is an object for a langid and itemid -- revx
-      // {
-      // "song_id": 667,
-      // "lang_text": "Tamil",
-      // "song_text": ["அல்லிமாமலர் மங்கைநாதன் அரங்கன்மெய்யடி யார்கள்தம்", "எல்லையிலடி மைத்திறத்தினில் என்றுமேவு மனத்தனாம்", "கொல்லிகாவலன் கூடல்நாயகன் கோழிக்கோன்குல சேகரன்", "சொல்லினின்தமிழ் மாலைவல்லவர் தொண்டர்தொண்டர்க ளாவரே."],
-      // "song_word": ["அல்லி மாமலர் மங்கைநாதன்", "அரங்கன்", "மெய்அடியார்கள் தம்", "என்றும் மேவு மனத்தன் ஆம்", "கொல்லி காவலன்", "கூடல் நாயகன்", "கோழி கோன்", "குலசேகரன்", "சொல்லின்", "இன் தமிழ் மாலை வல்லவர்", "தொண்டர் தொண்டர்கள் ஆவர்"],
-      // "word_meaning": ["அகவிதழ்களையுடைய சிறந்த (தாமரை) மலரில் பிறந்த பிராட்டிக்குக் கணவனான", "ஸ்ரீரங்கநாதனுடைய", "உண்மையான பக்தர்களுடைய", "எப்போதும் பொருந்திய திருவுள்ளத்தை யுடையவரும்", "கொல்லிநகர்க்கு அரசரும்", "மதுரைக்கு அரசரும்", "உறையூருக்கு அரசருமான", "குலசேகராழ்வருடைய", "ஸ்ரீஸூக்திளாலே அமைந்த", "இனிய தமிழ்ப்பாசுரங்களை ஒதவல்லவர்கள்", "தாஸாநுதாஸராகப் பெறுவர்"],
-      // "expln_header": ["TaExpln of xyz"],
-      // "expln_text":[["***- எல்லையி லடிமைத்திறமாவது- “அடியா ரடியார்தம் மடியா ரடியார்தமக்கடியார் தம் அடியா ரடியோங்களே” என்கிற சேஷத்வகாஷ்டை.", "அடிவரவு: தேட்டு தோடேறு தோய்த்த பொய் ஆதி காரினம் மாலை மொய்த்து அல்லி மெய்.", "ஸாம்ஸாரிகர் படியில் மிக்க வெறுப்பு உண்டாகி, அவர்களைக் காண்பதும் அவர்களோடு ஸஹவாஸஞ் செய்வதும் அஸஹ்யமான நிலைமை தமக்குப் பிறந்தபடியை அருளிச்செய்கிறார்."]]
-
-      // }
-      // alert (JSON.stringify(payload.lang_text));
-      // alert (Object.keys(payload[0]).length);
-
-        if (payload.lang_text == "English") {
+        if (payload.ln_id == "en") {
           if (payload.song_text) {Object.assign(state.node3_messages.en.song_text, {[payload.song_id]: payload.song_text})}
           if (payload.song_word) {Object.assign(state.node3_messages.en.song_word, {[payload.song_id]: payload.song_word})}
           if (payload.word_meaning) {Object.assign(state.node3_messages.en.word_meaning, {[payload.song_id]: payload.word_meaning})}
-          if (payload.expln_header) {Object.assign(state.node3_messages.en.expln_header, {[payload.song_id]: payload.expln_header})}
-          if (payload.expln_text) {Object.assign(state.node3_messages.en.expln_text, {[payload.song_id]: payload.expln_text})}
-
+          if (payload.expln_header_text) {Object.assign(state.node3_messages.en.song_expln_header_text, {[payload.song_id]: payload.expln_header_text})}
         }
-        else if (payload.lang_text == "Tamil") {
+        else if (payload.ln_id == "ta") {
           if (payload.song_text) {Object.assign(state.node3_messages.ta.song_text, {[payload.song_id]: payload.song_text})}
           if (payload.song_word) {Object.assign(state.node3_messages.ta.song_word, {[payload.song_id]: payload.song_word})}
           if (payload.word_meaning) {Object.assign(state.node3_messages.ta.word_meaning, {[payload.song_id]: payload.word_meaning})}
-          if (payload.expln_header) {Object.assign(state.node3_messages.ta.expln_header, {[payload.song_id]: payload.expln_header})}
-          if (payload.expln_text) {Object.assign(state.node3_messages.ta.expln_text, {[payload.song_id]: payload.expln_text})}
+          if (payload.expln_header_text) {Object.assign(state.node3_messages.ta.song_expln_header_text, {[payload.song_id]: payload.expln_header_text})}
         }
-        else if (payload.lang_text == "Telugu") {
+        else if (payload.ln_id == "te") {
           if (payload.song_text) {Object.assign(state.node3_messages.te.song_text, {[payload.song_id]: payload.song_text})}
           if (payload.song_word) {Object.assign(state.node3_messages.te.song_word, {[payload.song_id]: payload.song_word})}
           if (payload.word_meaning) {Object.assign(state.node3_messages.te.word_meaning, {[payload.song_id]: payload.word_meaning})}
-          if (payload.expln_header) {Object.assign(state.node3_messages.te.expln_header, {[payload.song_id]: payload.expln_header})}
-          if (payload.expln_text) {Object.assign(state.node3_messages.te.expln_text, {[payload.song_id]: payload.expln_text})}
+          if (payload.expln_header_text) {Object.assign(state.node3_messages.te.song_expln_header_text, {[payload.song_id]: payload.expln_header_text})}
         }
-
-        // state.songsDetails.push(payload[0]);
-        // if (state.songsDetailsId.indexOf(payload[1]) === -1) {
-        //     state.songsDetailsId.push(payload[1]);
-        // };
+        if (state.isLoading) {
+          state.isLoading = false
+        };
       },
 
       songsDetailsIdMut (state, payload) {
           if (state.songsDetailsId.indexOf(payload.song_id) === -1) {
               state.songsDetailsId.push(payload);
           };
-        }
+      },
+
+      isLoadingMut (state, payload) {
+          state.isLoading = payload;
+      }
+
   },
 
   actions: {
@@ -179,21 +218,64 @@ export const store = new Vuex.Store({
     //   alert ("hellp from methods")
     //   commit('update_main_ln', payload);
     // },
-
-
-    songsDetailsAct: ({commit, state}, payload) => {
+    saintsDetailsAct: ({commit, state}, payload) => {
       // payload is an array of Ids from sourceFilePage
+      commit('isLoadingMut', true)
+
       payload.forEach(function(element) {
-        // alert("from action - songsDetailsId element " + element + "state" + state.songsDetailsId)
         const a = element
-        // axios.get('https://templesvuet.firebaseio.com/mSongsDetails.json?orderBy="Id"&equalTo=' + a )
-        axios.get('https://templesvuet.firebaseio.com/xsongsDetails.json?orderBy="song_id"&equalTo=' + a )
-        // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/songdetail?song_id=eq.' + a )
+        // axios.get('https://templesvuet.firebaseio.com/xsaintsDetails.json?orderBy="saint_id"&equalTo=' + a )
+        axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/saintdetail?saint_id=eq.' + a )
           .then(res => {
             const data = res.data
             for (let key in data) {
               if ( data[key] !== null && Object.keys(data[key]).length >0) {
-                // commit('songsDetailsMut', [data[key], a])
+                commit('saintsDetailsMut', data[key])
+              }
+            }
+//0524          .catch(error => console.log(error))
+          })
+          commit('saintsDetailsIdMut', a)
+      // before commit the mutation a check is done for lenght. else undefined objects where gettin in
+      })
+    },
+
+    templesDetailsAct: ({commit, state}, payload) => {
+      // payload is an array of Ids from sourceFilePage
+      commit('isLoadingMut', true)
+
+      payload.forEach(function(element) {
+        const a = element
+        // axios.get('https://templesvuet.firebaseio.com/xtemplesDetails.json?orderBy="temple_id"&equalTo=' + a )
+        axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/templedetail?temple_id=eq.' + a )
+          .then(res => {
+            const data = res.data
+            for (let key in data) {
+              if ( data[key] !== null && Object.keys(data[key]).length >0) {
+                commit('templesDetailsMut', data[key])
+              }
+            }
+//0524          .catch(error => console.log(error))
+          })
+          commit('templesDetailsIdMut', a)
+      // before commit the mutation a check is done for lenght. else undefined objects where gettin in
+      })
+    },
+
+    songsDetailsAct: ({commit, state}, payload) => {
+      // payload is an array of Ids from sourceFilePage
+      commit('isLoadingMut', true)
+
+      payload.forEach(function(element) {
+        // alert("from action - songsDetailsId element " + element + "state" + state.songsDetailsId)
+        const a = element
+        // axios.get('https://templesvuet.firebaseio.com/mSongsDetails.json?orderBy="Id"&equalTo=' + a )
+        // axios.get('https://templesvuet.firebaseio.com/xsongsDetails.json?orderBy="song_id"&equalTo=' + a )
+        axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/songdetail?song_id=eq.' + a )
+          .then(res => {
+            const data = res.data
+            for (let key in data) {
+              if ( data[key] !== null && Object.keys(data[key]).length >0) {
                 commit('songsDetailsMut', data[key])
               }
             }

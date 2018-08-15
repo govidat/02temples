@@ -1,11 +1,11 @@
 export var node2_messages = {
   en: {
-    temple_name: {
-      2: 'EnThirukkozhi - Sri Azhagiya Manavala Perumal Temple',
-      5: 'EnThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple',
-      26: 'EnThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple',
-      76: 'EnSaiva Temple'
-    },
+    // temple_name: {
+    //   2: 'EnThirukkozhi - Sri Azhagiya Manavala Perumal Temple',
+    //   5: 'EnThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple',
+    //   26: 'EnThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple',
+    //   76: 'EnSaiva Temple'
+    // },
 
     temple_detail: {
       2: [['En Header1 2','En Text1 2'],['En Header2 2','En Text2 2']],
@@ -15,12 +15,12 @@ export var node2_messages = {
     }
   },
   ta: {
-    temple_name: {
-      2: 'TaThirukkozhi - Sri Azhagiya Manavala Perumal Temple',
-      5: 'TaThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple',
-      26: 'TaThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple',
-      76: 'TaSaiva Temple'
-    },
+    // temple_name: {
+    //   2: 'TaThirukkozhi - Sri Azhagiya Manavala Perumal Temple',
+    //   5: 'TaThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple',
+    //   26: 'TaThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple',
+    //   76: 'TaSaiva Temple'
+    // },
 
     temple_detail: {
       2: [['Ta Header1 2','Ta Text1 2'],['Ta Header2 2','Ta Text2 2']],
@@ -30,12 +30,12 @@ export var node2_messages = {
     }
   },
   te: {
-    temple_name: {
-      2: 'TeThirukkozhi - Sri Azhagiya Manavala Perumal Temple',
-      5: 'TeThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple',
-      26: 'TeThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple',
-      76: 'TeSaiva Temple'
-    },
+    // temple_name: {
+    //   2: 'TeThirukkozhi - Sri Azhagiya Manavala Perumal Temple',
+    //   5: 'TeThiru Anbil - Sri Vadivazhagiya Nambi Perumal Temple',
+    //   26: 'TeThiru Thalaicchanga Naanmathiyam - Sri Naan Madhiya Perumal Temple',
+    //   76: 'TeSaiva Temple'
+    // },
 
     temple_detail: {
       2: [['Te Header1 2','Te Text1 2'],['Te Header2 2','Te Text2 2']],

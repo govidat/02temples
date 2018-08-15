@@ -11,26 +11,37 @@
     <v-expansion-panel>
       <!-- <template v-for="lang in allLang"> -->
         <v-expansion-panel-content v-for="item in sourceFilePage">
-          <div slot="header">{{item}} - {{$t('saint_name.' + item)}}</div>
-          <v-card v-for="i in $t('saint_detail.' + item).length">
-            <!-- <template v-for= "subitem in item.detail"> -->
+          <div slot="header">{{item}} - {{$t('node1_desc.' + item)}}</div>
+          <template v-if="! isLoading && $te('saint_expln_header_text.' + item)">
+            <v-card v-for="i in $t('saint_expln_header_text.' + item).length">
+              <v-card-title>
+                {{$t('saint_expln_header_text.' + item)[i-1][0][0]}}
+              </v-card-title>
+              <v-card-text v-for="j in $t('saint_expln_header_text.' + item)[i-1][1].length">
+                {{$t('saint_expln_header_text.' + item)[i-1][1][j-1]}}
+              </v-card-text>
+            </v-card>
+          </template>
+
+
+          <!-- <v-card v-for="i in $t('saint_detail.' + item).length">
               <v-card-title>
                     {{$t('saint_detail.' + item)[i-1][0]}}
               </v-card-title>
               <v-card-text>
                     {{$t('saint_detail.' + item)[i-1][1]}}
               </v-card-text>
-          </v-card>
+          </v-card> -->
 
         </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
 </template>
 <script>
-  // import { mapState } from 'vuex'
-  // import { mapGetters } from 'vuex'
+  import { mapState } from 'vuex'
+  import { mapActions } from 'vuex'
   export default {
-    props: ['sourceFile', 'node'],
+    props: ['sourceFile'],
 
     data () {
       return {
@@ -38,7 +49,24 @@
         itemspp: 5,
       }
     },
+    watch: {
+      sourceFile : {
+        immediate: true,
+        handler: function () {
+          let remxObjId = this.sourceFilePage.filter(a => this.saintsDetailsId.indexOf(a) < 0);
+          // alert("remxObjId" + JSON.stringify(remxObjId))
+          if (remxObjId.length > 0) {
+              this.$store.dispatch('saintsDetailsAct', remxObjId)
+          };
+        }
+      },
+    },
+
     computed: {
+      ...mapState(
+        ['saintsDetailsId', 'isLoading']
+      ),
+
       calcLength: function () {
         return Math.ceil(this.sourceFile.length / this.itemspp)
       },

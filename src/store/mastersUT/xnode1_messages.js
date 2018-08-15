@@ -1,12 +1,12 @@
 export var node1_messages = {
   en: {
 
-    saint_name: {
-      4: 'EnThirumazhisai Alwar',
-      5: 'EnThirumangai Alwar',
-      10: 'EnNammalwar',
-      12: 'EnSekkizhar'
-    },
+    // saint_name: {
+    //   4: 'EnThirumazhisai Alwar',
+    //   5: 'EnThirumangai Alwar',
+    //   10: 'EnNammalwar',
+    //   12: 'EnSekkizhar'
+    // },
 
     saint_detail: {
       4: [['En Place4','En Details Place4'],['En Star4','En Details Star4']],
@@ -16,12 +16,12 @@ export var node1_messages = {
     }
   },
   ta: {
-    saint_name: {
-      4: 'TaThirumazhisai Alwar',
-      5: 'TaThirumangai Alwar',
-      10: 'TaNammalwar',
-      12: 'TaSekkizhar'
-    },
+    // saint_name: {
+    //   4: 'TaThirumazhisai Alwar',
+    //   5: 'TaThirumangai Alwar',
+    //   10: 'TaNammalwar',
+    //   12: 'TaSekkizhar'
+    // },
 
     saint_detail: {
       4: [['Ta Place4','Ta Details Place4'],['Ta Star4','Ta Details Star4']],
@@ -31,12 +31,12 @@ export var node1_messages = {
     }
   },
   te: {
-    saint_name: {
-      4: 'TeThirumazhisai Alwar',
-      5: 'TeThirumangai Alwar',
-      10: 'TeNammalwar',
-      12: 'TeSekkizhar'
-    },
+    // saint_name: {
+    //   4: 'TeThirumazhisai Alwar',
+    //   5: 'TeThirumangai Alwar',
+    //   10: 'TeNammalwar',
+    //   12: 'TeSekkizhar'
+    // },
 
     saint_detail: {
       4: [['Te Place4','Te Details Place4'],['Te Star4','Te Details Star4']],

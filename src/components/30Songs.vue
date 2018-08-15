@@ -8,41 +8,54 @@
     <div v-if="calcLength > 1" class="text-xs-center">
       <v-pagination :length=calcLength v-model="page" :total-visible="7"></v-pagination>
     </div>
+
+    <!-- <v-tabs color="transparent" fixed-tabs>
+      <v-tab v-for="item in sourceFilePage" @click.stop="zitem = item">
+              {{item}}
+      </v-tab>
+    </v-tabs>
+    <div v-if="zitem >0">
+      <z1songs :item = "zitem" ></z1songs>
+    </div> -->
+
     <v-expansion-panel>
       <v-expansion-panel-content v-for="(item,i) in sourceFilePage" :key="i">
         <div slot="header">
           {{item}}
         </div>
-
-          <v-card v-for="i in $t('song_text.' + item).length">
-            <!-- <template v-for= "subitem in item.detail"> -->
-              <v-card-text>
-                    {{$t('song_text.' + item)[i-1]}}
+        <template v-if="! isLoading">
+          <template v-if="$te('song_text.' + item)">
+            <v-card v-for="i in $t('song_text.' + item).length">
+                <v-card-text>
+                      {{$t('song_text.' + item)[i-1]}}
+                </v-card-text>
+            </v-card>
+          </template>
+          <template v-if="$te('song_word.' + item)">
+            <table v-if="$t('song_word.' + item).length >0">
+              <tr>
+                <th></th>
+                <th>{{"="}}</th>
+              </tr>
+              <tr v-for="i in $t('song_word.' + item).length">
+                <td>{{ $t('song_word.' + item)[i-1] }}</td>
+                <td>{{ $t('word_meaning.' + item)[i-1] }}</td>
+              </tr>
+            </table>
+          </template>
+          <template v-if="$te('song_expln_header_text.' + item)">
+            <v-card v-for="i in $t('song_expln_header_text.' + item).length">
+              <v-card-title>
+                {{$t('song_expln_header_text.' + item)[i-1][0][0]}}
+              </v-card-title>
+              <v-card-text v-for="j in $t('song_expln_header_text.' + item)[i-1][1].length">
+                {{$t('song_expln_header_text.' + item)[i-1][1][j-1]}}
               </v-card-text>
-          </v-card>
+            </v-card>
+          </template>
 
-          <table v-if="$t('song_word.' + item).length >0">
-            <tr>
-              <th></th>
-              <th>{{"="}}</th>
-            </tr>
-            <tr v-for="i in $t('song_word.' + item).length">
-              <td>{{ $t('song_word.' + item)[i-1] }}</td>
-              <td>{{ $t('word_meaning.' + item)[i-1] }}</td>
-            </tr>
-          </table>
-
-          <!-- Details -->
-          <!-- To print only for expln_text availability -->
-          <!-- <v-card v-for="i in Math.max($t('expln_header.' + item).length,$t('expln_text.' + item).length)"> -->
-          <v-card v-for="i in $t('expln_text.' + item).length">
-            <v-card-title>
-              {{$t('expln_header.' + item)[i-1]}}
-            </v-card-title>
-            <v-card-text v-for="j in $t('expln_text.' + item)[i-1].length">
-              {{$t('expln_text.' + item)[i-1][j-1]}}
-            </v-card-text>
-          </v-card>
+          <!-- <z1songs :item = "item" ></z1songs> -->
+        </template>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
@@ -52,7 +65,7 @@
 // import { mapGetters } from 'vuex'
 import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
-// import z1Songs from './30SongsDetails'
+// import z1songs from './30songsdetails'
 
 export default {
   // here sourceFile is selSongs - this has id and some comp Details
@@ -68,15 +81,12 @@ export default {
     return {
       page: 1,
       itemspp: 5,
-      item: 0
+      // item: 0,
+      // zitem: 0
+      // i18n: {messages: {}},
+
     }
   },
-  // created() {
-  //     // defaulted first page Action is triggered
-  //     if (this.sourceFilePage.length > 0) {
-  //         this.$store.dispatch('songsDetailsAct', this.sourceFilePage)
-  //     };
-  // },
 
   watch: {
 
@@ -89,27 +99,30 @@ export default {
             this.$store.dispatch('songsDetailsAct', remxObjId)
         };
       }
-    }
+    },
 
   },
+  // components: {
+  //   z1songs
+  // },
+
+
   computed: {
     ...mapState(
-      ['songsDetailsId']
+      ['songsDetailsId', 'isLoading']
     ),
-
     calcLength: function () {
         // alert("length" + Math.ceil(this.sourceFile.length / this.itemspp))
       return Math.ceil(this.sourceFile.length / this.itemspp)
     },
-
     sourceFilePage: function() {
       // trigger action to get mSongsDetails from firebase
       // return this.sourceFile.slice((this.page-1)*this.itemspp , this.page*this.itemspp)
       return this.sourceFile.slice((this.page-1)*this.itemspp , this.page*this.itemspp)
     },
   },
-
 }
+
 </script>
 <style scoped>
 table {

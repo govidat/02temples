@@ -9,38 +9,23 @@
       <v-pagination :length=calcLength v-model="page" :total-visible="7"></v-pagination>
     </div>
     <v-expansion-panel>
-      <!-- <template v-for="lang in allLang" && $te('temple_expln_header_text.' + item)> -->
+      <!-- <template v-for="lang in allLang"> -->
         <v-expansion-panel-content v-for="item in sourceFilePage">
           <div slot="header">{{item}} - {{$t('node2_desc.' + item)}}</div>
-          <template v-if="! isLoading && $te('temple_expln_header_text.' + item)">
-            <v-card v-for="i in $t('temple_expln_header_text.' + item).length">
-              <v-card-title>
-                {{$t('temple_expln_header_text.' + item)[i-1][0][0]}}
-              </v-card-title>
-              <v-card-text v-for="j in $t('temple_expln_header_text.' + item)[i-1][1].length">
-                {{$t('temple_expln_header_text.' + item)[i-1][1][j-1]}}
-              </v-card-text>
-            </v-card>
-          </template>
-
-          <!-- <v-card v-for="i in $t('temple_detail.' + item).length">
+          <v-card v-for="i in $t('temple_detail.' + item).length">
+            <!-- <template v-for= "subitem in item.detail"> -->
               <v-card-title>
                     {{$t('temple_detail.' + item)[i-1][0]}}
               </v-card-title>
               <v-card-text>
                     {{$t('temple_detail.' + item)[i-1][1]}}
               </v-card-text>
-          </v-card> -->
-
+          </v-card>
         </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
 </template>
 <script>
-
-import { mapState } from 'vuex'
-import { mapActions } from 'vuex'
-
   export default {
     props: ['sourceFile'],
 
@@ -50,24 +35,7 @@ import { mapActions } from 'vuex'
         itemspp: 5,
       }
     },
-    watch: {
-      sourceFile : {
-        immediate: true,
-        handler: function () {
-          let remxObjId = this.sourceFilePage.filter(a => this.templesDetailsId.indexOf(a) < 0);
-          // alert("remxObjId" + JSON.stringify(remxObjId))
-          if (remxObjId.length > 0) {
-              this.$store.dispatch('templesDetailsAct', remxObjId)
-          };
-        }
-      },
-    },
-
     computed: {
-      ...mapState(
-        ['templesDetailsId', 'isLoading']
-      ),
-
       calcLength: function () {
         return Math.ceil(this.sourceFile.length / this.itemspp)
       },

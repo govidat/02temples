@@ -96,10 +96,11 @@
               :msg= "'node3h_desc'" ></zfilter3>
 
               <!-- then for the node -->
-              <zfilter3 v-if="item.id == 50" :headerinput= "[ 5, 50]"
+              <zfilter3 v-if="item.id == 50" :headerinput= "[ 5, '']"
               :items="song.filter(itm => itm.h_path.some(r => f10sel_node3h[1].map(a => a.id).indexOf(r) >=0))"
               :selected.sync="f10sel_node3"
-              :msg= "'node3_desc'" ></zfilter3>
+              ></zfilter3>
+              <!-- :msg= "'node3_desc'" ></zfilter3> -->
             </v-list-group>
           </template>
         </v-list-group>
@@ -251,8 +252,8 @@
     </v-toolbar>
     <v-content>
       <!-- Select the component based on ztool value pass on the id's of sel-->
-      <div v-if="ztool=='Saints'"><zsaints :sourceFile="selSaints()" :node = "'node1'" ></zsaints></div>
-      <div v-else-if="ztool=='Temples'"><ztemples :sourceFile="selTemples()" :node = "'node2'"></ztemples></div>
+      <div v-if="ztool=='Saints'"><zsaints :sourceFile="selSaints()" ></zsaints></div>
+      <div v-else-if="ztool=='Temples'"><ztemples :sourceFile="selTemples()"></ztemples></div>
       <div v-else-if="ztool=='Songs'"><zsongs  :sourceFile="selSongs()"></zsongs></div>
       <!-- <div v-else-if="ztool=='Songs'"><zsongs  :sourceFile="selSongs()" :main_ln_id="main_ln_id" :all_ln_id="all_ln_id"></zsongs></div> -->
       <div v-else-if="ztool=='About'"><HelloWorld/></div>
@@ -277,7 +278,7 @@ import zfilter3 from './components/03filter'
 import zHome from './components/10Home'
 import zsaints from './components/20saints'
 import ztemples from './components/25temples'
-import zsongs from './components/30Songs'
+import zsongs from './components/30songs'
 import { mapState } from 'vuex'
 // import { mapGetters } from 'vuex'
 
@@ -339,9 +340,9 @@ export default {
   },
   name: 'App',
   watch: {
-    main_ln_id : function () {
-      this.$store.commit('update_locale', this.$i18n.locale)
-    },
+    // main_ln_id : function () {
+    //   this.$store.commit('update_locale', this.$i18n.locale)
+    // },
 
     // IDEA: if ism is changed subsequently F10, F20 , f30 should be filtered should be revaluate
     sel_node0 : function () {
@@ -518,7 +519,7 @@ export default {
     ...mapState(
       ['languages', 'ism',
         'saint', 'saint_hier','ism_saint', 'temple_saint', 'temple', 'temple_hier', 'ism_temple', 'pps_temple', 'song', 'song_hier', 'ism_song',
-        'saint_song', 'temple_song', 'pps', 'ism_pps', 'all_ln_id'
+        'saint_song', 'temple_song', 'pps', 'ism_pps', 'messages'
 
       ]
     ),

@@ -1,0 +1,77 @@
+[
+  {
+    "temple_id": 2,
+    "ln_id": "ta",
+    "expln_header_text":
+                        [
+                          [
+                            ["TaHeader1 - 2"],
+                            ["Ta Text 1 - 2"]
+                          ]
+                        ]
+  },
+  {
+    "temple_id": 2,
+    "ln_id": "en",
+    "expln_header_text":
+                      [
+                        [
+                          ["EnHeader1 - 2"],
+                          ["This sweet of decad of Tamil songs, by Kulasekara, Ruler of Kolli, King of Kudal(Madurai) saying, “When will I join the band of devotees in Arangam where the Lord resides with lotus-dame Lakshmi?”, --those who master it will be devotees of the Lord."]
+                        ],
+                        [
+                          ["EnHeader2 - 2"], ["This sweet2 "]
+                        ]
+                      ]
+  },
+  {
+    "temple_id": 2,
+    "ln_id": "te",
+    "expln_header_text": [[["TeHeader1"], ["Te Text1 - 2"]]]
+  },
+  {
+    "temple_id": 5,
+    "ln_id": "ta",
+    "expln_header_text": [[["TaHeader1 -5"], ["Ta Text1 - 5"]]]
+  },
+  {
+    "temple_id": 5,
+    "ln_id": "en",
+    "expln_header_text": [[["EnHeader1 - 5"], ["En Text 1 -5"]]]
+  },
+  {
+    "temple_id": 5,
+    "ln_id": "te",
+    "expln_header_text": [[["TeHeader1 - 5"], ["Te Text 1 -5"]]]
+  },
+  {
+    "temple_id": 26,
+    "ln_id": "ta",
+    "expln_header_text": [[["TaHeader1 - 26"], ["Ta Text1 26"]]]
+  },
+  {
+    "temple_id": 26,
+    "ln_id": "en",
+    "expln_header_text": [[["EnHeader1 - 26"], ["En text 1 - 26"]]]
+  },
+  {
+    "temple_id": 26,
+    "ln_id": "te",
+    "expln_header_text": [[["TeHeader1"], ["Te Text1"]]]
+  },
+  {
+    "temple_id": 76,
+    "ln_id": "ta",
+    "expln_header_text": [[["TaHeader 1"], ["Ta Text 1"]]]
+  },
+  {
+    "temple_id": 76,
+    "ln_id": "en",
+    "expln_header_text": [[["EnHeader1 "], ["En Text1"]]]
+  },
+  {
+    "temple_id": 76,
+    "ln_id": "te",
+    "expln_header_text": [[["TeHeader1 "], ["Te text1"]]]
+  }
+]
