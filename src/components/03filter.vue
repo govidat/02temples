@@ -50,8 +50,8 @@
               @click="changeSort(header.value)"
             >
               <v-icon v-if="header.sortable" small>arrow_upward</v-icon>
-              <span v-if="$te('stat_message.' + header.id)">
-                {{$t('stat_message.' + header.id)}}
+              <span v-if="$te('desc.' + header.id)">
+                {{$t('desc.' + header.id)}}
               </span>
 
             </th>
@@ -68,7 +68,7 @@
                 :input-value="props.selected"
               ></v-checkbox>
             </td>
-            <td>{{ props.item.id }}</td>
+            <td>{{ props.item.d_id }}</td>
             <!-- <td>{{ props.item.Name[mainLang] }}</td> -->
             <td v-if="$te(msg + '.' + props.item.id)">
               <!-- Call the function to display in the required language -->
@@ -86,7 +86,7 @@
 <!-- xxx to be deleted       -->
       <!-- {{this.mainLang}} -->
       <!-- {{items.length}} -->
-      {{ this.selected }}
+      <!-- {{ this.selected }} -->
       <!-- {{ this.selected2 }} -->
 
       <!-- {{ this.search }} -->

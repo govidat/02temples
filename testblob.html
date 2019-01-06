@@ -1,0 +1,130 @@
+<html>
+  <body>
+
+    <h2>JavaScript in Body</h2>
+
+    <p id="demo"></p>
+  <!-- <img id="test" /> -->
+  <script>
+//Option 1
+  function merge(current, update) {
+    Object.keys(update).forEach(function(key) {
+      // if update[key] exist, and it's not a string or array,
+      // we go in one level deeper
+      if (current.hasOwnProperty(key)
+          && typeof current[key] === 'object'
+          && !(current[key] instanceof Array)) {
+        merge(current[key], update[key]);
+
+      // if update[key] doesn't exist in current, or it's a string
+      // or array, then assign/overwrite current[key] to update[key]
+      } else {
+        current[key] = update[key];
+      }
+    });
+    return current;
+  }
+
+  // var x = { a: { a: 1 } }
+  // var y = { a: { b: 1 } }
+  var x = {
+    en: {
+      desc: {
+       "t00": "Temples, Saints and Divine Songs of Hinduism",
+       "t01": "Selections",
+      },
+
+    },
+
+      ta: {
+      desc: {
+       "t00": "இந்து மத கோயில்கள், ரிஷிகள் மற்றும் தெய்வீக பாடல்கள்",
+       "t01": "தேர்வுகள்",
+      },
+
+    },
+      te: {
+      desc: {
+       "t00": "హిందూ మతం దేవాలయాలు, రిషీలు మరియు దైవిక పాటలు",
+       "t01": "సెలక్షన్స్",
+      },
+    },
+  }
+  var y = {
+    "en" : { "9" : { "2" : { "2" : "en_image text 2_2", "1" : "en_image text 1", "3" : "en_image text 2_3" } } } ,
+  	"ta" : { "9" : { "2" : { "2" : "ta_image text 2_2", "1" : "ta_image text 2_1", "3" : "ta_image text 2_3" } }  },
+  	"te" : { "9" : { "2" : { "1" : "te_image text 2_1", "3" : "te_image text 2_3", "2" : "te_image text 2_2" } }  }
+  }
+
+ var z= [
+	{ "en" : { "9" : { "2" : { "2" : "en_image text 2_2", "1" : "en_image text 1", "3" : "en_image text 2_3" } } } },
+	{ "ta" : { "9" : { "2" : { "2" : "ta_image text 2_2", "1" : "ta_image text 2_1", "3" : "ta_image text 2_3" } } } },
+	{ "te" : { "9" : { "2" : { "1" : "te_image text 2_1", "3" : "te_image text 2_3", "2" : "te_image text 2_2" } } } }]
+
+ var z2 =
+    z.reduce(function(acc, x) {
+        for (var key in x) acc[key] = x[key];
+        return acc;
+    }, {})
+
+    var test = {
+      en: {
+        test: {
+         "a": "atest"
+        }
+      }
+    }
+
+// Option2
+function isObject(item) {
+    return (item && typeof item === 'object' && !Array.isArray(item));
+}
+
+function mergeDeep(target, ...sources) {
+  if (!sources.length) return target;
+  const source = sources.shift();
+
+  if (isObject(target) && isObject(source)) {
+    for (const key in source) {
+      if (isObject(source[key])) {
+        if (!target[key]) Object.assign(target, { [key]: {} });
+        mergeDeep(target[key], source[key]);
+      } else {
+        Object.assign(target, { [key]: source[key] });
+      }
+    }
+  }
+
+  return mergeDeep(target, ...sources);
+}
+
+ // var z3 = mergeDeep(x, z2);
+
+// document.getElementById("demo").innerHTML = JSON.stringify(merge(x, z2));
+// document.getElementById("demo").innerHTML = JSON.stringify(z2);
+document.getElementById("demo").innerHTML = JSON.stringify(mergeDeep(x, z2, test));
+
+    // var request = new XMLHttpRequest();
+    //
+    // request.onreadystatechange = function(){
+    //   // Process the server response here.
+    //   if (request.readyState === XMLHttpRequest.DONE) {
+    //     // Everything is good, the response was received.
+    //     console.log(request);
+    //     var resp = JSON.parse(request.responseText);
+    //     var binaryData = [];
+    //     binaryData.push(resp[0].img);
+    //     //var image2 = (URL.createObjectURL(new Blob(binaryData, {type: 'application/octet-stream'})));
+    //     var image2 = (URL.createObjectURL(new Blob(binaryData)));
+    //     console.log(image2)
+    //     document.getElementById("test").setAttribute("src", image2);
+    //   }
+    // };
+    //
+    // request.open('GET', 'http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/imgtemple2?select=img&id=eq.5&sub_id=eq.1', true);
+    // request.setRequestHeader('Content-Type', 'application/vnd.pgrst.object+json');
+    // request.setRequestHeader('Content-Type', 'application/octet-stream');
+    // request.send();
+  </script>
+</body>
+</html>

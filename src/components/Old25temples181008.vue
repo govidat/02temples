@@ -9,22 +9,31 @@
       <v-pagination :length=calcLength v-model="page" :total-visible="7"></v-pagination>
     </div>
     <v-expansion-panel>
-        <v-expansion-panel-content v-for="item in sourceFilePage" v-if="! isLoading">
-          <div slot="header">{{item.d_id}} - {{$t('desc.' + item.id)}} </div>
-          <!-- <template v-if="! isLoading && $te('9.2.expln' )"> -->
-          <template v-if="! isLoading && $te('cat'+cat_id+'['+item.d_id+']'+'.expln')">
+      <!-- <template v-for="lang in allLang" && $te('temple_expln_header_text.' + item)> -->
+        <v-expansion-panel-content v-for="item in sourceFilePage">
+          <div slot="header">{{item.d_id}} - {{$t('desc.' + item.id)}}</div>
+          <template v-if="! isLoading && $te('temple_expln_header_text.' + item.d_id)">
             <!-- <zimages :imagepath="'../static/img/lores/temples/2/1.jpg'"></zimages> -->
-            <zimages :imageid=item.d_id :cat_id=cat_id></zimages>
-            <v-card v-for="i in $t('cat'+cat_id+'['+item.d_id+']'+'.expln').length">
+            <zimages :imageid=item.d_id :cat_id=9></zimages>
+            <v-card v-for="i in $t('temple_expln_header_text.' + item.d_id).length">
               <v-card-title>
-                {{$t('cat'+cat_id+'['+item.d_id+']'+'.expln')[i-1][0][0]}}
+                {{$t('temple_expln_header_text.' + item.d_id)[i-1][0][0]}}
               </v-card-title>
-              <v-card-text v-for="j in $t('cat'+cat_id+'['+item.d_id+']'+'.expln')[i-1][1].length">
-                {{$t('cat'+cat_id+'['+item.d_id+']'+'.expln')[i-1][1][j-1]}}
+              <v-card-text v-for="j in $t('temple_expln_header_text.' + item.d_id)[i-1][1].length">
+                {{$t('temple_expln_header_text.' + item.d_id)[i-1][1][j-1]}}
               </v-card-text>
             </v-card>
-            <zmap :lat=10.863960 :lon=78.689959 :locname="'Thiruvarangam'" :locdesc="'The Temple'"></zmap>
           </template>
+
+          <!-- <v-card v-for="i in $t('temple_detail.' + item).length">
+              <v-card-title>
+                    {{$t('temple_detail.' + item)[i-1][0]}}
+              </v-card-title>
+              <v-card-text>
+                    {{$t('temple_detail.' + item)[i-1][1]}}
+              </v-card-text>
+          </v-card> -->
+
         </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
@@ -34,10 +43,9 @@
 import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
 import zimages from './25templesimgbase64'
-import zmap from './26map'
 
   export default {
-    props: ['sourceFile', 'cat_id'],
+    props: ['sourceFile'],
 
     data () {
       return {
@@ -53,15 +61,14 @@ import zmap from './26map'
                           .map(a => a.d_id);
            // alert("remxObjId" + remxObjId.toString())
           if (remxObjId.length > 0) {
-              this.$store.dispatch('text_details_act', [remxObjId, this.cat_id])
+              this.$store.dispatch('text_details_act', remxObjId)
               // this.$store.dispatch('templesDetailsAct', remxObjId)
           };
         }
       },
     },
     components: {
-      zimages,
-      zmap
+      zimages
     },
     computed: {
       ...mapState(

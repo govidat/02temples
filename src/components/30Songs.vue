@@ -24,36 +24,51 @@
           {{item}}
         </div>
         <template v-if="! isLoading">
-          <template v-if="$te('song_text.' + item)">
-            <v-card v-for="i in $t('song_text.' + item).length">
+
+          <template v-if="$te('cat'+cat_id+'['+item+']'+'.song_text')">
+            <v-card v-for="i in $t('cat'+cat_id+'['+item+']'+'.song_text').length">
                 <v-card-text>
-                      {{$t('song_text.' + item)[i-1]}}
+                      {{$t('cat'+cat_id+'['+item+']'+'.song_text')[i-1]}}
                 </v-card-text>
             </v-card>
           </template>
-          <template v-if="$te('song_word.' + item)">
-            <table v-if="$t('song_word.' + item).length >0">
+          <template v-if="$te('cat'+cat_id+'['+item+']'+'.song_word')">
+            <table v-if="$t('cat'+cat_id+'['+item+']'+'.song_word').length >0">
               <tr>
                 <th></th>
                 <th>{{"="}}</th>
               </tr>
-              <tr v-for="i in $t('song_word.' + item).length">
-                <td>{{ $t('song_word.' + item)[i-1] }}</td>
-                <td>{{ $t('word_meaning.' + item)[i-1] }}</td>
+              <tr v-for="i in $t('cat'+cat_id+'['+item+']'+'.song_word').length">
+                <td>{{ $t('cat'+cat_id+'['+item+']'+'.song_word')[i-1] }}</td>
+                <td>{{ $t('cat'+cat_id+'['+item+']'+'.song_word')[i-1] }}</td>
               </tr>
             </table>
           </template>
-          <template v-if="$te('song_expln_header_text.' + item)">
-            <v-card v-for="i in $t('song_expln_header_text.' + item).length">
+          <template v-if="$te('cat'+cat_id+'['+item+']'+'.expln_header_text')">
+            <v-card v-for="i in $t('cat'+cat_id+'['+item+']'+'.expln_header_text').length">
               <v-card-title>
-                {{$t('song_expln_header_text.' + item)[i-1][0][0]}}
+                {{$t('cat'+cat_id+'['+item+']'+'.expln_header_text')[i-1][0][0]}}
               </v-card-title>
-              <v-card-text v-for="j in $t('song_expln_header_text.' + item)[i-1][1].length">
-                {{$t('song_expln_header_text.' + item)[i-1][1][j-1]}}
+              <v-card-text v-for="j in $t('cat'+cat_id+'['+item+']'+'.expln_header_text')[i-1][1].length">
+                {{$t('cat'+cat_id+'['+item+']'+'.expln_header_text')[i-1][1][j-1]}}
               </v-card-text>
             </v-card>
           </template>
 
+          <!-- Add English explanation to other language pages -->
+          <template v-if="$i18n.locale != 'en'">
+            <template v-if="$te('cat'+cat_id+'['+item+']'+'.expln_header_text' , 'en')">
+              <v-card v-for="i in $t('cat'+cat_id+'['+item+']'+'.expln_header_text' , 'en').length">
+                <v-card-title>
+                  {{$t('cat'+cat_id+'['+item+']'+'.expln_header_text' , 'en')[i-1][0][0]}}
+                </v-card-title>
+                <v-card-text v-for="j in $t('cat'+cat_id+'['+item+']'+'.expln_header_text' , 'en')[i-1][1].length">
+                  {{$t('cat'+cat_id+'['+item+']'+'.expln_header_text' , 'en')[i-1][1][j-1]}}
+                </v-card-text>
+              </v-card>
+            </template>
+
+          </template>
           <!-- <z1songs :item = "item" ></z1songs> -->
         </template>
       </v-expansion-panel-content>
@@ -75,7 +90,7 @@ export default {
   // get all the entries in the songsDetails merged into one array of objects
   // check if the array has an entry for a song id. if not trigger an action to get it from firebase and update songsDetails
   // in the comp above check for a particula songId and lang
-  props: ['sourceFile'],
+  props: ['sourceFile', 'cat_id'],
   // props: ['sourceFile', 'mainLang', 'allLang'],
   data () {
     return {
@@ -96,7 +111,8 @@ export default {
         let remxObjId = this.sourceFilePage.filter(a => this.songsDetailsId.indexOf(a) < 0);
         // alert("remxObjId" + JSON.stringify(remxObjId))
         if (remxObjId.length > 0) {
-            this.$store.dispatch('songsDetailsAct', remxObjId)
+            this.$store.dispatch('songtext_details_act', [remxObjId, 15])
+            // this.$store.dispatch('songsDetailsAct', remxObjId)  - THIS IS OLD. SIMPLIFIED AS ABOVE
         };
       }
     },

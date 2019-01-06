@@ -41,3 +41,8 @@ $ npm install vuex-i18n
 
 ****** Have dropped usage of vex-i18n
 
+
+npm view <package-name> version
+
+** install vue2-leaflet for maps
+$ npm install vue2-leaflet --save

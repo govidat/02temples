@@ -11,7 +11,8 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "vue": "^2.5.3",
-    "vuetify": "^1.0.0"
+    "vue2-leaflet": "^1.1.1",
+    "vuetify": "^1.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

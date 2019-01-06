@@ -9,30 +9,21 @@
       <v-pagination :length=calcLength v-model="page" :total-visible="7"></v-pagination>
     </div>
     <v-expansion-panel>
-      <!-- <template v-for="lang in allLang"> -->
-        <v-expansion-panel-content v-for="item in sourceFilePage">
-          <div slot="header">{{item}} - {{$t('node1_desc.' + item)}}</div>
-          <template v-if="! isLoading && $te('saint_expln_header_text.' + item)">
-            <v-card v-for="i in $t('saint_expln_header_text.' + item).length">
+        <v-expansion-panel-content v-for="item in sourceFilePage" v-if="! isLoading">
+          <div slot="header">{{item.d_id}} - {{$t('desc.' + item.id)}} </div>
+          <!-- <template v-if="! isLoading && $te('9.2.expln' )"> -->
+          <template v-if="! isLoading && $te('cat'+cat_id+'['+item.d_id+']'+'.expln')">
+            <!-- <zimages :imagepath="'../static/img/lores/temples/2/1.jpg'"></zimages> -->
+            <zimages :imageid=item.d_id :cat_id=cat_id></zimages>
+            <v-card v-for="i in $t('cat'+cat_id+'['+item.d_id+']'+'.expln').length">
               <v-card-title>
-                {{$t('saint_expln_header_text.' + item)[i-1][0][0]}}
+                {{$t('cat'+cat_id+'['+item.d_id+']'+'.expln')[i-1][0][0]}}
               </v-card-title>
-              <v-card-text v-for="j in $t('saint_expln_header_text.' + item)[i-1][1].length">
-                {{$t('saint_expln_header_text.' + item)[i-1][1][j-1]}}
+              <v-card-text v-for="j in $t('cat'+cat_id+'['+item.d_id+']'+'.expln')[i-1][1].length">
+                {{$t('cat'+cat_id+'['+item.d_id+']'+'.expln')[i-1][1][j-1]}}
               </v-card-text>
             </v-card>
           </template>
-
-
-          <!-- <v-card v-for="i in $t('saint_detail.' + item).length">
-              <v-card-title>
-                    {{$t('saint_detail.' + item)[i-1][0]}}
-              </v-card-title>
-              <v-card-text>
-                    {{$t('saint_detail.' + item)[i-1][1]}}
-              </v-card-text>
-          </v-card> -->
-
         </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
@@ -40,8 +31,10 @@
 <script>
   import { mapState } from 'vuex'
   import { mapActions } from 'vuex'
+  import zimages from './25templesimgbase64'
+
   export default {
-    props: ['sourceFile'],
+    props: ['sourceFile', 'cat_id'],
 
     data () {
       return {
@@ -53,13 +46,18 @@
       sourceFile : {
         immediate: true,
         handler: function () {
-          let remxObjId = this.sourceFilePage.filter(a => this.saintsDetailsId.indexOf(a) < 0);
+          let remxObjId = this.sourceFilePage.filter(a => this.saintsDetailsId.indexOf(a.d_id) < 0)
+                          .map(a => a.d_id);
           // alert("remxObjId" + JSON.stringify(remxObjId))
           if (remxObjId.length > 0) {
-              this.$store.dispatch('saintsDetailsAct', remxObjId)
+              this.$store.dispatch('text_details_act', [remxObjId, this.cat_id])
+//              this.$store.dispatch('saintsDetailsAct', remxObjId)
           };
         }
       },
+    },
+    components: {
+      zimages
     },
 
     computed: {

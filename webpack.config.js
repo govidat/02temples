@@ -12,7 +12,12 @@ module.exports = {
     extensions: ['.js', '.vue'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'public': path.resolve(__dirname, './public')
+      'public': path.resolve(__dirname, './public'),
+      './images/layers.png$': path.resolve(__dirname, './node_modules/leaflet/dist/images/layers.png'),
+      './images/layers-2x.png$': path.resolve(__dirname, './node_modules/leaflet/dist/images/layers-2x.png'),
+      './images/marker-icon.png$': path.resolve(__dirname, './node_modules/leaflet/dist/images/marker-icon.png'),
+      './images/marker-icon-2x.png$': path.resolve(__dirname, './node_modules/leaflet/dist/images/marker-icon-2x.png'),
+      './images/marker-shadow.png$': path.resolve(__dirname, './node_modules/leaflet/dist/images/marker-shadow.png')
     }
   },
   module: {
