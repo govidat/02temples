@@ -18,9 +18,13 @@ export const store = new Vuex.Store({
 // Onle level deep has to be maintained while initiation, to take care of nested objects
 // Add to this when new language is introduced
     text_details_messages: {
-      en: {cat9: {}, cat8: {}, cat15: {}},
-      ta: {cat9: {}, cat8: {}, cat15: {}},
-      te: {cat9: {}, cat8: {}, cat15: {}}
+      en: {"server": {}},
+      ta: {"server": {}},
+      te: {"server": {}}
+
+      // en: {cat9: {}, cat8: {}, cat15: {}},
+      // ta: {cat9: {}, cat8: {}, cat15: {}},
+      // te: {cat9: {}, cat8: {}, cat15: {}}
     },
 
     // node1_messages: {
@@ -67,9 +71,11 @@ export const store = new Vuex.Store({
     // temple_song: temple_song,
 
     songsDetailsId: [],
-    templesDetailsId: [],
+    // templesDetailsId: [],
     saintsDetailsId: [],
+    avlblDetailsId: {8: [], 9: [], 15: []},
     isLoading: false,
+    ismmxLoading: false,
 
     // node: node,
     // hier: hier,
@@ -113,17 +119,19 @@ export const store = new Vuex.Store({
         text_details_id_mut (state, payload) {
           //payload[0] is an array of temple/saint id's payload[1] = cat_id
           // const array3 = Array.from(new Set(array1.concat(array2)));
-          if (payload[1] == 9) {
-            state.templesDetailsId = Array.from(new Set(state.templesDetailsId.concat(payload[0])));
-          } else {
-            if (payload[1] == 8) {
-              state.saintsDetailsId = Array.from(new Set(state.saintsDetailsId.concat(payload[0])));
-            } else {
-              if (payload[1] == 15) {
-                state.songsDetailsId = Array.from(new Set(state.songsDetailsId.concat(payload[0])));
-              }
-            }
-          }
+          // if (payload[1] == 9) {
+          //   state.templesDetailsId = Array.from(new Set(state.templesDetailsId.concat(payload[0])));
+          // } else {
+          //   if (payload[1] == 8) {
+          //     state.saintsDetailsId = Array.from(new Set(state.saintsDetailsId.concat(payload[0])));
+          //   } else {
+          //     if (payload[1] == 15) {
+          //       state.songsDetailsId = Array.from(new Set(state.songsDetailsId.concat(payload[0])));
+          //     }
+          //   }
+          // };
+
+          state.avlblDetailsId[payload[1]] = Array.from(new Set(state.avlblDetailsId[payload[1]].concat(payload[0])));
         },
 
 
@@ -207,7 +215,12 @@ export const store = new Vuex.Store({
 
       isLoadingMut (state, payload) {
           state.isLoading = payload;
+      },
+
+      ismmxLoadingMut (state, payload) {
+          state.ismmxLoading = payload;
       }
+
 
   },
 
@@ -236,10 +249,12 @@ export const store = new Vuex.Store({
 
       // get a string of numbers of the payload to pass it on to axios as an IN condition
       const a = payload[0].toString()
+      // alert("axios" + JSON.stringify(a))
       // expected value 2,5,6
       const b = payload[1]
+      // alert("axios" + JSON.stringify(b))
       // expected value ; cat_id 8/9
-        axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/text_detail_v2?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')' )
+        axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/mmx_text_v?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')' )
         // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/text_detail_v2?select=val&cat_id=eq.9&id=in.(' + a + ')' )
         // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/text_detail_v2?select=val&cat_id=eq.9&id=in.(2,5)' )
           .then(res => {
@@ -267,6 +282,12 @@ export const store = new Vuex.Store({
             }
           })
         commit('text_details_id_mut', payload)
+    },
+// for loading songs mmx, it takes time. Hence make isLoading = true using an action. After loading, make it to false
+
+    ismmxLoadingAct: ({commit, state}, payload) => {
+      // payload is true or false
+      commit('ismmxLoadingMut', payload)
     },
 
 //     saintsDetailsAct: ({commit, state}, payload) => {

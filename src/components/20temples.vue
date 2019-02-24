@@ -11,19 +11,9 @@
     <v-expansion-panel>
         <v-expansion-panel-content v-for="item in sourceFilePage" v-if="! isLoading">
           <div slot="header">{{item.d_id}} - {{$t('desc.' + item.id)}} </div>
-          <!-- <template v-if="! isLoading && $te('9.2.expln' )"> -->
-          <template v-if="! isLoading && $te('cat'+cat_id+'['+item.d_id+']'+'.expln')">
-            <!-- <zimages :imagepath="'../static/img/lores/temples/2/1.jpg'"></zimages> -->
-            <zimages :imageid=item.d_id :cat_id=cat_id></zimages>
-            <v-card v-for="i in $t('cat'+cat_id+'['+item.d_id+']'+'.expln').length">
-              <v-card-title>
-                {{$t('cat'+cat_id+'['+item.d_id+']'+'.expln')[i-1][0][0]}}
-              </v-card-title>
-              <v-card-text v-for="j in $t('cat'+cat_id+'['+item.d_id+']'+'.expln')[i-1][1].length">
-                {{$t('cat'+cat_id+'['+item.d_id+']'+'.expln')[i-1][1][j-1]}}
-              </v-card-text>
-            </v-card>
-            <zmap :lat=10.863960 :lon=78.689959 :locname="'Thiruvarangam'" :locdesc="'The Temple'"></zmap>
+          <template v-if="! isLoading && $te('server'+'['+cat_id+']'+'['+item.d_id+']'+'[1]')">
+            <ztext2 :textObject="$t('server'+'['+cat_id+']'+'['+item.d_id+']'+'[1]')"></ztext2>
+            <zmmx :cat_id = cat_id :d_id = item.d_id></zmmx>
           </template>
         </v-expansion-panel-content>
     </v-expansion-panel>
@@ -33,8 +23,8 @@
 
 import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
-import zimages from './25templesimgbase64'
-import zmap from './26map'
+import zmmx from './40mmx'
+import ztext2 from './35text'
 
   export default {
     props: ['sourceFile', 'cat_id'],
@@ -49,23 +39,26 @@ import zmap from './26map'
       sourceFile : {
         immediate: true,
         handler: function () {
-          let remxObjId = this.sourceFilePage.filter(a => this.templesDetailsId.indexOf(a.d_id) < 0)
-                          .map(a => a.d_id);
-           // alert("remxObjId" + remxObjId.toString())
+          let remxObjId = []
+          if (this.cat_id == 15) {
+            remxObjId = this.sourceFilePage.filter(a => this.avlblDetailsId[this.cat_id].indexOf(a) < 0);
+          } else {
+            remxObjId = this.sourceFilePage.filter(a => this.avlblDetailsId[this.cat_id].indexOf(a.d_id) < 0)
+                            .map(a => a.d_id);
+          }
           if (remxObjId.length > 0) {
               this.$store.dispatch('text_details_act', [remxObjId, this.cat_id])
-              // this.$store.dispatch('templesDetailsAct', remxObjId)
           };
         }
       },
     },
     components: {
-      zimages,
-      zmap
+      zmmx,
+      ztext2
     },
     computed: {
       ...mapState(
-        ['templesDetailsId', 'isLoading']
+        ['isLoading', 'avlblDetailsId']
       ),
 
       calcLength: function () {

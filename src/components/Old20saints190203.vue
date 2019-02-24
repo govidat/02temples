@@ -8,24 +8,23 @@
     <div v-if="calcLength > 1" class="text-xs-center">
       <v-pagination :length=calcLength v-model="page" :total-visible="7"></v-pagination>
     </div>
-
     <v-expansion-panel>
-        <v-expansion-panel-content v-for="item in sourceFilePage" v-if="! isLoading">
-          <div slot="header">{{item.d_id}} - {{$t('desc.' + item.id)}} </div>
-          <template v-if="! isLoading && $te('server'+'['+cat_id+']'+'['+item.d_id+']'+'[1]')">
-            <ztext2 :textObject="$t('server'+'['+cat_id+']'+'['+item.d_id+']'+'[1]')"></ztext2>
-            <zmmx :cat_id = cat_id :d_id = item.d_id></zmmx>
-          </template>
-        </v-expansion-panel-content>
+      <v-expansion-panel-content v-for="item in sourceFilePage" v-if="! isLoading">
+        <div slot="header">{{item.d_id}} - {{$t('desc.' + item.id)}} </div>
+        <!-- text is in 9, id, mmx_id=1 (for text), sub_id, header[]/text[[]] -->
+        <template v-if="! isLoading && $te('server'+'['+cat_id+']'+'['+item.d_id+']'+'[1]')">
+          <ztext :textObject="$t('server'+'['+cat_id+']'+'['+item.d_id+']'+'[1]')"></ztext>
+          <!-- <zmmx :sub_id="['t93', 't94']" :mapcoords=mapcoords></zmmx> -->
+        </template>
+      </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
 </template>
 <script>
-
-import { mapState } from 'vuex'
-import { mapActions } from 'vuex'
-import zmmx from './40mmx'
-import ztext2 from './35text'
+  import { mapState } from 'vuex'
+  import { mapActions } from 'vuex'
+  // import zimages from './25templesimgbase64'
+  import ztext from './35text'
 
   export default {
     props: ['sourceFile', 'cat_id'],
@@ -40,26 +39,24 @@ import ztext2 from './35text'
       sourceFile : {
         immediate: true,
         handler: function () {
-          let remxObjId = []
-          if (this.cat_id == 15) {
-            remxObjId = this.sourceFilePage.filter(a => this.avlblDetailsId[this.cat_id].indexOf(a) < 0);
-          } else {
-            remxObjId = this.sourceFilePage.filter(a => this.avlblDetailsId[this.cat_id].indexOf(a.d_id) < 0)
-                            .map(a => a.d_id);
-          }
+          let remxObjId = this.sourceFilePage.filter(a => this.saintsDetailsId.indexOf(a.d_id) < 0)
+                          .map(a => a.d_id);
+          // alert("remxObjId" + JSON.stringify(remxObjId))
           if (remxObjId.length > 0) {
               this.$store.dispatch('text_details_act', [remxObjId, this.cat_id])
+//              this.$store.dispatch('saintsDetailsAct', remxObjId)
           };
         }
       },
     },
     components: {
-      zmmx,
-      ztext2
+      // zimages,
+      ztext
     },
+
     computed: {
       ...mapState(
-        ['isLoading', 'avlblDetailsId']
+        ['saintsDetailsId', 'isLoading']
       ),
 
       calcLength: function () {

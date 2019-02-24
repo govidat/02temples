@@ -12,7 +12,13 @@
                   </v-img>
                     <!-- <v-card-title class="title">still to test {{elem.sub_id}}</v-card-title> -->
                     <!-- <v-card-title class="title">{{$t('desc.' + elem.sub_id)}} </v-card-title> -->
-                    <v-card-title class="title">{{$t('cat'+cat_id+'['+imageid+']'+'['+elem.sub_id+']')}} </v-card-title>
+                    <!-- <v-card-title class="title">{{$t('cat'+cat_id+'['+imageid+']'+'['+elem.sub_id+']')}}</v-card-title> -->
+                    <!-- <v-card-title class="title">{{ $t("message.test2") }}</v-card-title> -->
+                    <!-- <div class="container"> -->
+                      <!-- <p>Component1 locale messages: {{ i18n.messages[locale].desc.t01 }}  </p> -->
+                      <!-- <p>Component1 locale messages: {{ $t('desc.' + 't01') }}</p> -->
+                    <!-- </div> -->
+
                 </v-card>
       </v-flex>
     </v-layout>
@@ -22,7 +28,7 @@
 <script>
 
 import axios from 'axios'
-
+import i18n from '../i18n'
 
   export default {
     props: ['imageid', 'cat_id'],
@@ -40,6 +46,17 @@ import axios from 'axios'
       return {
         images: [],
          // messages: { "en" : [{"2" : "en_image text 2_2"}, {"1" : "en_image text 1"}, {"3" : "en_image text 2_3"}], "ta" : [{"2" : "ta_image text 2_2"}, {"1" : "ta_image text 2_1"}, {"3" : "ta_image text 2_3"}], "te" : [{"1" : "te_image text 2_1"}, {"3" : "te_image text 2_3"}, {"2" : "te_image text 2_2"}] }
+         i18n: {
+           messages: {
+             en: {desc: {"t01": "Hello"}},
+             ta: {desc: {"t01": "taHello"}},
+             // ta: {test2: "taabc"},
+             // te: {test2: "teabc"}
+           }
+         },
+         // locale: this.$i18n.locale,
+         // $t: this.$t.bind(i18n.messages[locale]),
+         // $t: this.$t.bind(this),
        }
     } ,
     created() {
@@ -58,13 +75,16 @@ import axios from 'axios'
                 })
 
     },
+    computed: {
+      locale: function() {
+        return this.$i18n.locale
+      },
 
-    // methods: {
-    //   // for getting any static image from the app
-    //   image(id, pic) {
-    //     return require('../assets/img/lores/temples/' + id + '/'+ pic + '.jpg')
+    //   $y: function () {
+    //     return this.$y.bind(this)
     //   },
-    // },
+    },
+
 
   }
 </script>

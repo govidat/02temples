@@ -263,8 +263,9 @@
       <!-- $i18n: {{JSON.stringify($i18n.messages.ta.cat15 || {})}} -->
       <!-- node2: {{JSON.stringify(node2_messages)}} -->
       <!-- nodemerge: {{JSON.stringify(mergeDeep(node1_messages, node2_messages))}} -->
-      <!-- selTemples: {{JSON.stringify(f30sel_node2)}}
-      selSongs: {{JSON.stringify(f30sel_node3)}} -->
+      <!-- selTemples: {{JSON.stringify(f30sel_node2)}} -->
+      <!-- selTemples: {{JSON.stringify(selTemples())}} -->
+      <!-- selSongs: {{JSON.stringify(selSongs())}} -->
     </v-footer>
   </v-app>
 </template>
@@ -275,9 +276,12 @@ import HelloWorld from './components/HelloWorld'
 import zfilter3 from './components/03filter'
 
 import zHome from './components/10Home'
+// import ztext from './components/20text'
+import ztemples from './components/20temples'
 import zsaints from './components/20saints'
-import ztemples from './components/25temples'
-import zsongs from './components/30songs'
+import zsongs from './components/20songs'
+// import ztemples from './components/25temples'
+// import zsongs from './components/30songs'
 import { mapState } from 'vuex'
 // import { mapGetters } from 'vuex'
 // import { fn_desc } from './myMixin'
@@ -512,8 +516,10 @@ export default {
     HelloWorld,
     zfilter3,
     zHome,
+    // ztext,
     zsaints,
     ztemples,
+
     // zSaints,
     // zTemples,
     zsongs

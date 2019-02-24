@@ -4,15 +4,15 @@
     <v-layout wrap>
       <v-flex>
         <v-card> -->
-      <v-container class="pa-0" fluid fill-height>
+      <!-- <v-container class="pa-0" fluid fill-height>
         <v-layout>
           <v-flex xs12 sm6 offset-sm3>
             <v-card>
               <v-card-title>
                 <div>
-                  <span>Map</span><br>
+                  <span>Interactive Map</span><br>
                 </div>
-              </v-card-title>
+              </v-card-title> -->
               <l-map
                 ref="map"
                 :zoom="zoom"
@@ -28,24 +28,18 @@
                 <l-marker :lat-lng="marker">
                   <l-popup>
                     <div @click="popupClick">
-                      {{this.locname}}
+                      {{this.mapcoords.locname}}
                       <p v-show="showParagraph">
-                        {{this.locdesc}}
+                        {{this.mapcoords.locdesc}}
                       </p>
                     </div>
                   </l-popup>
                 </l-marker>
               </l-map>
-            </v-card>
-
-                  <!-- <v-xxx
-                    >
-                  </v-xxx> -->
-                    <!-- <v-card-title class="title">{{$t('cat'+cat_id+'['+imageid+']'+'['+elem.sub_id+']')}} </v-card-title> -->
-        <!-- </v-card> -->
+            <!-- </v-card>
       </v-flex>
     </v-layout>
-  </v-container>
+  </v-container> -->
 
   </div>
 </template>
@@ -55,7 +49,7 @@ import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
 // import 'leaflet/dist/leaflet.css'
 
   export default {
-    props: ['lat', 'lon', 'locname', 'locdesc'],
+    props: ['mapcoords'],
 
     components: {
         LMap,
@@ -67,12 +61,12 @@ import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
     data () {
       return {
         zoom: 13,
-        center: L.latLng(this.lat, this.lon),
+        center: L.latLng(this.mapcoords.lat, this.mapcoords.lon),
         url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        marker: L.latLng(this.lat, this.lon),
+        marker: L.latLng(this.mapcoords.lat, this.mapcoords.lon),
         currentZoom: 13,
-        currentCenter: L.latLng(this.lat, this.lon),
+        currentCenter: L.latLng(this.mapcoords.lat, this.mapcoords.lon),
         showParagraph: true,
         mapOptions: {
           zoomSnap: 0.5
@@ -104,6 +98,7 @@ import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
       },
 
       // onResize() {
+      //   alert("hello");
       //   this.$refs.map.mapObject.invalidateSize();
       // }
 

@@ -8,13 +8,14 @@
     <div v-if="calcLength > 1" class="text-xs-center">
       <v-pagination :length=calcLength v-model="page" :total-visible="7"></v-pagination>
     </div>
-
+<!-- cat_id = 15 ; songs; source file page is an array of song numbers. different from temples and saints -->
     <v-expansion-panel>
         <v-expansion-panel-content v-for="item in sourceFilePage" v-if="! isLoading">
-          <div slot="header">{{item.d_id}} - {{$t('desc.' + item.id)}} </div>
-          <template v-if="! isLoading && $te('server'+'['+cat_id+']'+'['+item.d_id+']'+'[1]')">
-            <ztext2 :textObject="$t('server'+'['+cat_id+']'+'['+item.d_id+']'+'[1]')"></ztext2>
-            <zmmx :cat_id = cat_id :d_id = item.d_id></zmmx>
+          <div slot="header">{{item}}</div>
+          <!-- text is in 9, id, mmx_id=1 (for text), sub_id, header[]/text[[]] -->
+          <template v-if="! isLoading && $te('server'+'['+cat_id+']'+'['+item+']'+'[1]')">
+            <ztext2 :textObject="$t('server'+'['+cat_id+']'+'['+item+']'+'[1]')"></ztext2>
+            <!-- <zmmx :sub_id="['t93', 't94']" :mapcoords=mapcoords></zmmx> -->
           </template>
         </v-expansion-panel-content>
     </v-expansion-panel>

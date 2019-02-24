@@ -46,3 +46,7 @@ npm view <package-name> version
 
 ** install vue2-leaflet for maps
 $ npm install vue2-leaflet --save
+
+Audio player installation
+$ npm install vue-aplayer --save
+
