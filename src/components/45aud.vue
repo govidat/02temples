@@ -8,7 +8,7 @@
               <v-card-title>
                 Audio Language : {{cms_shell[i]["lang"]}} By - {{cms_shell[i]["author"]}}
               </v-card-title>
-              <zaudtext :cat_id = cat_id :itemid = itemid :mmx_type_id = 3 :sub_id = i ></zaudtext>
+              <zaudtext :cat_id = cat_id :itemid = itemid :mmx_type_id = mmx_type_id :sub_id = i ></zaudtext>
             </v-card>
 
             <!-- <v-card v-for="i in Object.keys(textObject).sort(function(a,b){return textObject[a]['sort_no'] - textObject[b]['sort_no']})">
@@ -25,7 +25,7 @@
 import zaudtext from './45audtext'
 
   export default {
-    props: ['itemid','cat_id', 'cms_shell'],
+    props: ['itemid','cat_id', 'cms_shell', 'mmx_type_id'],
 
     components: {
       zaudtext,
@@ -33,7 +33,7 @@ import zaudtext from './45audtext'
 
     computed: {
       // textObject: function () {
-      //   return this.$t('server'+'['+this.cat_id+']'+'['+this.itemid+']'+'[3]')
+      //   return this.$t('server'+'['+this.cat_id+']'+'['+this.itemid+']'+'[this.mmx_type_id]')
       // },
     },
 

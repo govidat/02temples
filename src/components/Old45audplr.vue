@@ -9,23 +9,17 @@
           <template v-if="! ismmxLoading">
             <v-container grid-list-sm fluid fill-height>
             <v-layout wrap>
-              <!-- 190324 <v-flex xs4 v-for="elem in mmxs[mmx_type_id]" :key="elem.key"> -->
+              <v-flex xs4 v-for="elem in audios" :key="elem.key">
                         <v-card>
                           <!-- <figcaption>Listen to the T-Rex:</figcaption> -->
-                          <!-- <audio
-                              controls
-                              :src= "'data:audio/mp3;base64, ' + mmxs + '#t=' + startTime + ',' + endTime"
-                          >
-                          </audio> -->
-
                           <aplayer
-                            autoplay: true
+                            autoplay: false
                             :music="{
-                              src: 'data:audio/mp3;base64, ' + mmxs + '#t=' + startTime + ',' + endTime
+                              src: 'data:audio/mp3;base64, ' + elem.mmx 
                             }"
                           />
                         </v-card>
-              <!-- 190324 </v-flex> -->
+              </v-flex>
             </v-layout>
           </v-container>
           </template>
@@ -46,8 +40,8 @@
 </template>
 <script>
 
-import { mapState } from 'vuex'
-import { mapActions } from 'vuex'
+// import { mapState } from 'vuex'
+// import { mapActions } from 'vuex'
 import Aplayer from 'vue-aplayer'
 import axios from 'axios'
 
@@ -62,38 +56,33 @@ import axios from 'axios'
 
     data () {
       return {
-        startTime: 17,
-        endTime: 22
-        // audios: [],
-        // ismmxLoading: false
+        audios: [],
+        ismmxLoading: false
        }
     } ,
     created() {
-      // 2 for img 3 for audio
       //do something after creating vue instance
-      // for audio the check is at sub_id level
-      // if "sub_id itemid" is not in stores avlblMmxsId then proceed as before
-      // else do not get it again
-      // (((test || {}).level1 || {}).level2 || {}).level3;
-      //190324 if ((((this.avlblMmxsId[this.cat_id] || [])[this.mmx_type_id] || [])[this.itemid] || []).indexOf(this.sub_id) < 0) {
-      if (((((this.avlblMmxsId[this.cat_id] || 'N')[this.itemid] || 'N')[this.mmx_type_id] || 'N')[this.sub_id] || 'N') == 'N') {
-      // if ((this.avlblMmxsId[this.cat_id][2]).indexOf(this.itemid) < 0) {
-        this.$store.dispatch('mmx_details_act', [this.cat_id, this.itemid, this.mmx_type_id, this.sub_id])
-
-      }
+      // this.$store.dispatch('ismmxLoadingAct', true)
+      // alert("messages turning ismmxLoading true")
+      this.ismmxLoading = true
+      axios
+                .get(
+                  'http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/mmx_cms_v?select=mmx,sub_id&cat_id=eq.' + this.cat_id + '&id=eq.' + this.itemid + '&mmx_type_id=eq.' + this.mmx_type_id + '&sub_id=eq.' + this.sub_id)
+                // ,{headers: {'Content-Type': 'application/vnd.pgrst.object+json', 'Content-Type': 'application/octet-stream'}}
+                // version for base64 single/ multiple audios
+                .then(response => {
+                  for (var i = 0; i < response.data.length; i++) {
+                    // this.audios.push(Buffer.from(response.data[i].img.replace(/\\x/g,''), 'hex').toString('base64'))
+                    this.audios.push({sub_id: response.data[i].sub_id, mmx: Buffer.from(response.data[i].mmx.replace(/\\x/g,''), 'hex').toString('base64')})
+                  }
+                  this.ismmxLoading = false
+                  // this.$store.dispatch('ismmxLoadingAct', false)
+                })
+                // alert("messages turning ismmxLoading false")
 
     },
 
     computed: {
-      ...mapState(
-        ['ismmxLoading', 'avlblMmxsId', 'mmx_cms']
-      ),
-      mmxs: function () {
-        // return is a text of audio at sub_id level
-        return (((((this.$store.state.mmx_cms || "")[this.cat_id] || "")[this.itemid] || "")[this.mmx_type_id] || "")[this.sub_id] || "")
-        //190324 return this.$store.state.mmx_cms[this.cat_id][this.itemid]
-      },
-
       // ...mapState(
       //   ['ismmxLoading']
       // )

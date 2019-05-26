@@ -18,7 +18,7 @@
         <v-list-group v-for="item in [{id: 't10', model: false},{id: 't20', model: false}]" v-model="item.model" :key="item.id" :prepend-icon="item.model ? iconup : icondn" append-icon="">
           <v-list-tile slot="activator"><v-list-tile-content> <v-list-tile-title>
               {{$t('desc.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
-          <zfilter3 v-if="! isnodeLoading && item.id == 't10'" :headerinput= "[ 't05', 't10']" :items="node.filter(x=> x.cat_id==6)" :selected.sync="sel_node0" :msg= "'desc'" ></zfilter3>
+          <zfilter3 v-if="! isnodeLoading && item.id == 't10'" :headerinput= "[ 't05', 't10']" :items="node.filter(x=> x.cat_id==5)" :selected.sync="sel_node0" :msg= "'entity'" ></zfilter3>
           <!-- following is a radio button selection of radio options -->
           <template v-if="item.id == 't20'">
             <v-container fluid><v-radio-group v-model="radios" :mandatory="false" v-for="elem in ['t21','t22','t23']">
@@ -44,13 +44,13 @@
               <zfilter3 v-if="! isnodeLoading && item.id == 't31'" :headerinput= "[ 't05', 't31']"
               :items="node.filter(x => max_nodeh.includes(x.id) && x.path.length == 1 && x.cat_id == 11)"
               :selected.sync="f10sel_node1h[0]"
-              :msg= "'desc'" ></zfilter3>
+              :msg= "'entity'" ></zfilter3>
 
               <!-- then for the node -->
               <zfilter3 v-if="! isnodeLoading && item.id == 't30'" :headerinput= "[ 't05', 't30']"
               :items="node.filter(itm => itm.path.some(r => f10sel_node1h.slice(-1)[0].map(a => a.id).indexOf(r) >=0) && itm.cat_id == 8)"
               :selected.sync="f10sel_node1"
-              :msg= "'desc'" ></zfilter3>
+              :msg= "'entity'" ></zfilter3>
 
               <!-- <zfilter3 v-if="item.id == 30" :headerinput= "[ 5, 30]" :items="get_node('node1',f10sel_node1[0].map(x => x.id), 'node1_0', 'node0', true, sel_node0)" :selected.sync="f10sel_node1[1]" :node= "'node1'"></zfilter3> -->
             </v-list-group>
@@ -65,17 +65,17 @@
               <zfilter3 v-if="! isnodeLoading && item.id == 't42'" :headerinput= "[ 't05', 't42']"
               :items="node.filter(x => max_nodeh.includes(x.id) && x.cat_id == 12 && x.path.length == 1)"
               :selected.sync="f10sel_node2h[0]"
-              :msg= "'desc'" ></zfilter3>
+              :msg= "'entity'" ></zfilter3>
               <zfilter3 v-if="! isnodeLoading && item.id == 't41'" :headerinput= "[ 't05', 't41']"
               :items="node.filter(x => max_nodeh.includes(x.id) && x.path.length == 2 && x.path.some(r => f10sel_node2h[0].map(a => a.id).indexOf(r) >=0))"
               :selected.sync="f10sel_node2h[1]"
-              :msg= "'desc'" ></zfilter3>
+              :msg= "'entity'" ></zfilter3>
 
               <!-- then for the node .slice(-1)[0] -->
               <zfilter3 v-if="! isnodeLoading && item.id == 't40'" :headerinput= "[ 't05', 't40']"
               :items="node.filter(itm => itm.path.some(r => f10sel_node2h[1].map(a => a.id).indexOf(r) >=0) && itm.cat_id == 9)"
               :selected.sync="f10sel_node2"
-              :msg= "'desc'" ></zfilter3>
+              :msg= "'entity'" ></zfilter3>
 
             </v-list-group>
           </template>
@@ -89,11 +89,11 @@
               <zfilter3 v-if="! isnodeLoading && item.id == 't52'" :headerinput= "[ 't05', 't52']"
               :items="node.filter(x => max_nodeh.includes(x.id) && x.cat_id == 13 && x.path.length == 1)"
               :selected.sync="f10sel_node3h[0]"
-              :msg= "'desc'" ></zfilter3>
+              :msg= "'entity'" ></zfilter3>
               <zfilter3 v-if="! isnodeLoading && item.id == 't51'" :headerinput= "[ 't05', 't51']"
               :items="node.filter(x => max_nodeh.includes(x.id) && x.path.length == 2 && x.path.some(r => f10sel_node3h[0].map(a => a.id).indexOf(r) >=0))"
               :selected.sync="f10sel_node3h[1]"
-              :msg= "'desc'" ></zfilter3>
+              :msg= "'entity'" ></zfilter3>
 
               <!-- then for the node - f10sel_node3 is a computed field -->
             </v-list-group>
@@ -117,13 +117,13 @@
               <zfilter3 v-if="! isnodeLoading && item.id == 't31'" :headerinput= "[ 't05', 't31']"
               :items="node.filter(x => max_nodeh.includes(x.id) && x.path.length == 1 && x.cat_id == 11)"
               :selected.sync="f20sel_node1h[0]"
-              :msg= "'desc'" ></zfilter3>
+              :msg= "'entity'" ></zfilter3>
 
               <!-- then for the node -->
               <zfilter3 v-if="! isnodeLoading && item.id == 't30'" :headerinput= "[ 't05', 't30']"
               :items="node.filter(itm => itm.path.some(r => f20sel_node1h.slice(-1)[0].map(a => a.id).indexOf(r) >=0) && itm.cat_id == 8)"
               :selected.sync="f20sel_node1"
-              :msg= "'desc'" ></zfilter3>
+              :msg= "'entity'" ></zfilter3>
             </v-list-group>
           </template>
           <!-- Sublist of 40 Temples -->
@@ -136,17 +136,17 @@
                 <zfilter3 v-if="! isnodeLoading && item.id == 't42'" :headerinput= "[ 't05', 't42']"
                 :items="node.filter(x => max_nodeh.includes(x.id) && x.cat_id == 12 && x.path.length == 1)"
                 :selected.sync="f20sel_node2h[0]"
-                :msg= "'desc'" ></zfilter3>
+                :msg= "'entity'" ></zfilter3>
                 <zfilter3 v-if="! isnodeLoading && item.id == 't41'" :headerinput= "[ 't05', 't41']"
                 :items="node.filter(x => max_nodeh.includes(x.id) && x.path.length == 2 && x.path.some(r => f20sel_node2h[0].map(a => a.id).indexOf(r) >=0))"
                 :selected.sync="f20sel_node2h[1]"
-                :msg= "'desc'" ></zfilter3>
+                :msg= "'entity'" ></zfilter3>
 
                 <!-- then for the node .slice(-1)[0] -->
                 <zfilter3 v-if="! isnodeLoading && item.id == 't40'" :headerinput= "[ 't05', 't40']"
                 :items="node.filter(itm => itm.path.some(r => f20sel_node2h[1].map(a => a.id).indexOf(r) >=0) && itm.cat_id == 9)"
                 :selected.sync="f20sel_node2"
-                :msg= "'desc'" ></zfilter3>
+                :msg= "'entity'" ></zfilter3>
 
             </v-list-group>
           </template>
@@ -154,6 +154,7 @@
         </v-list-group>
       </v-list>
 
+<!--  temples sung by saints t23-->
       <v-list v-else-if="radios == 't23'">
         <!-- 43 PPS 40 Temples -->
         <v-list-group v-for="item in [{id: 't43', model: false},{id: 't40', model: false}]"
@@ -162,8 +163,8 @@
                 {{$t('desc.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
           <!-- 43 node4 is pps -->
           <zfilter3 v-if="! isnodeLoading && item.id == 't43'" :headerinput= "[ 't05', 't43']"
-          :items="node.filter(x => max_nodeh.includes(x.id) && x.cat_id == 14)"
-          :selected.sync="sel_node4" :msg= "'desc'" ></zfilter3>
+          :items="node.filter(x => max_nodeh.includes(x.id) && x.cat_id == 93)"
+          :selected.sync="sel_node4" :msg= "'entity'" ></zfilter3>
 
             <template v-if="item.id == 't40'">
               <!-- Sublist => 42 State 41 District 40 Temple-->
@@ -174,17 +175,17 @@
                 <zfilter3 v-if="! isnodeLoading && item.id == 't42'" :headerinput= "[ 't05', 't42']"
                 :items="node.filter(x => max_nodeh_pps.includes(x.id) && x.path.length == 1)"
                 :selected.sync="f30sel_node2h[0]"
-                :msg= "'desc'" ></zfilter3>
+                :msg= "'entity'" ></zfilter3>
                 <zfilter3 v-if="! isnodeLoading && item.id == 't41'" :headerinput= "[ 't05', 't41']"
                 :items="node.filter(x => max_nodeh_pps.includes(x.id) && x.path.length == 2 && x.path.some(r => f30sel_node2h[0].map(a => a.id).indexOf(r) >=0))"
                 :selected.sync="f30sel_node2h[1]"
-                :msg= "'desc'" ></zfilter3>
+                :msg= "'entity'" ></zfilter3>
 
                 <!-- then for the node .slice(-1)[0] -->
                 <zfilter3 v-if="! isnodeLoading && item.id == 't40'" :headerinput= "[ 't05', 't40']"
                 :items="node.filter(itm => itm.path.some(r => f30sel_node2h[1].map(a => a.id).indexOf(r) >=0) && itm.cat_id == 9)"
                 :selected.sync="f30sel_node2"
-                :msg= "'desc'" ></zfilter3>
+                :msg= "'entity'" ></zfilter3>
 
               </v-list-group>
             </template>
@@ -258,14 +259,6 @@
     </v-content>
     <v-footer :fixed="fixed" app>
       <span>Govidat &copy; 2018</span>
-      <!-- selSaints : {{JSON.stringify(f30sel_node1)}}
-      {{selSaints()}} -->
-      <!-- $i18n: {{JSON.stringify($i18n.messages.ta.cat15 || {})}} -->
-      <!-- node2: {{JSON.stringify(node2_messages)}} -->
-      <!-- nodemerge: {{JSON.stringify(mergeDeep(node1_messages, node2_messages))}} -->
-      <!-- selTemples: {{JSON.stringify(f30sel_node2)}} -->
-      <!-- selTemples: {{JSON.stringify(selTemples())}} -->
-      <!-- selSongs: {{JSON.stringify(selSongs())}} -->
     </v-footer>
   </v-app>
 </template>
@@ -303,7 +296,7 @@ export default {
       ztool: 0,
       toggle_exclusive: 0,
 
-      sel_node0: [{id: 101, d_id: 1, cat_id: 6, path: []}],
+      sel_node0: [{id: 101, d_id: 1, cat_id: 5, path: []}],
 
       f10sel_node1h: [[]],
       f10sel_node1: [],
@@ -328,8 +321,8 @@ export default {
       // sel_node4: [],
       // f30sel_node2h: [[],[]],
       // f30sel_node2: [],
-      sel_node4: [{ "cat_id": 14, "d_id": 1, "id": 103, "path": [ 103 ] } ],
-      f30sel_node2h: [[{ "cat_id": 12, "d_id": 31, "id": 504, "path": [ 504 ] } ],[{ "cat_id": 12, "d_id": 1, "id": 505, "path": [ 504, 505 ] } ]],
+      sel_node4: [{ "cat_id": 93, "d_id": 1, "id": 103, "path": [ 103 ] } ],
+      f30sel_node2h: [[{ "cat_id": 92, "d_id": 2, "id": 504, "path": [ 504 ] } ],[{ "cat_id": 91, "d_id": 1, "id": 505, "path": [ 504, 505 ] } ]],
       f30sel_node2: [{ "cat_id": 9, "d_id": 2, "id": 109, "path": [ 504, 505 ] } ],
 
       ztoolbar1: [
@@ -344,6 +337,11 @@ export default {
     }
   },
   name: 'App',
+
+  // mounted() {
+  //      this.$store.dispatch('initnode')
+  // },
+
   watch: {
     // main_ln_id : function () {
     //   this.$store.commit('update_locale', this.$i18n.locale)

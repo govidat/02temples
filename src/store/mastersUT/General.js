@@ -52,4 +52,19 @@ export var song_range = [
   {id: 510, to_id: [[667,670]]},
   {id: 511, to_id: [[1762,1763]]},
   {id: 512, to_id: [[3571,3572]]},
+];
+
+// ides is to get this directly from postgres subsequently
+export var cat_master = [
+  {cat_name_en: "saint" , cat_id: 8},
+  {cat_name_en: "temple" , cat_id: 9},
+  {cat_name_en: "song" , cat_id: 15},
+  {cat_name_en: "district" , cat_id: 91},
+  {cat_name_en: "state" , cat_id: 92},
+  {cat_name_en: "ism" , cat_id: 5},
+  {cat_name_en: "view" , cat_id: 6},
+  {cat_name_en: "temple_group" , cat_id: 93},
+  {cat_name_en: "saint_group" , cat_id: 81},
+  {cat_name_en: "song_comp" , cat_id: 151},
+  {cat_name_en: "song_group" , cat_id: 152},
 ]

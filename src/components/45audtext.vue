@@ -8,9 +8,10 @@
     <v-card-text>
       <p v-for="j in textObject['item']">{{j}}</p>
     </v-card-text>
+    <!-- play_circle_filled/ pause_circle_filled -->
     <v-btn flat icon color="indigo" v-on:click="zswitch">
               <v-icon v-if="! playRequested">play_circle_filled</v-icon>
-              <v-icon v-else>pause_circle_filled</v-icon>
+              <v-icon v-else>chevron_left</v-icon>
     </v-btn>
     <zaudplr v-if="playRequested" :cat_id = cat_id :itemid = itemid :mmx_type_id = 3 :sub_id = sub_id></zaudplr>
   </div>

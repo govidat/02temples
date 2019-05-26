@@ -2,24 +2,18 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import {isObject, mergeDeep} from '../helper.js'
+// import i18n from '../i18n.js'
 import { languages } from './customize.js'
 // import {node, node_matrix, song_range } from './mastersUT/General.js'
-import {node_matrix, song_range, cat_master } from './mastersUT/General.js'
+import {node_matrix, song_range } from './mastersUT/General.js'
+
+// import {temple_song, saint_song} from './mastersUT/songs.js'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
     languages: languages,
-
-// One level deep has to be maintained while initiation, to take care of nested objects
-// Add to this when new language is introduced
-// this is to get entity descriptions after initiating the session
-    entity_desc_messages: {
-      en: {"entity": {}},
-      ta: {"entity": {}},
-      te: {"entity": {}}
-    },
 
 // One level deep has to be maintained while initiation, to take care of nested objects
 // Add to this when new language is introduced
@@ -37,17 +31,6 @@ export const store = new Vuex.Store({
       15: {}
     },
 
-    map_coords: {
-      8: {},
-      9: {},
-      15: {}
-    },
-
-    mmx_shell: {
-      8: {},
-      9: {},
-      15: {}
-    },
 
     node: [],
     isnodeLoading: false,
@@ -55,6 +38,9 @@ export const store = new Vuex.Store({
     // similar to the usage in isLoading flag for saints, temples and songs
 
 
+    // songsDetailsId: [],
+    // templesDetailsId: [],
+    // saintsDetailsId: [],
     avlblDetailsId: {8: [], 9: [], 15: []},
 //  data to be updated as {catid: {mmxid: [itemid...]}}
 // using below, as it is not reactive to directly check the mmx_cms
@@ -62,9 +48,10 @@ export const store = new Vuex.Store({
     isLoading: false,
     ismmxLoading: false,
 
+    // node: node,
+    // hier: hier,
     node_matrix: node_matrix,
     song_range: song_range,
-    cat_master: cat_master,
   },
 
   getters: {
@@ -80,14 +67,6 @@ export const store = new Vuex.Store({
           };
 
       },
-
-      init_entity_mut (state, payload) {
-        // payload is an array. with an object named val. val is an object of {en:..}, {ta:..}, {te:..}
-          var t1 = payload[0].val
-        // t1 = {en: {}, ta...}
-          state.entity_desc_messages = mergeDeep(state.entity_desc_messages, t1)
-      },
-
 
       text_details_mut (state, payload) {
         // payload is an array. each element has a val. each val is an array of [{en:..}, {ta:..}, {te:..}]
@@ -105,37 +84,20 @@ export const store = new Vuex.Store({
         if (state.isLoading) {
           state.isLoading = false
         };
+          // alert("state.isLoading after mut" + state.isLoading)
       },
-
-      map_coords_mut (state, payload) {
-        // payload is an array. each element has a val. each val is an object {cat_id: id : {coords}}
-        var t1 = {}
-        for (var i =0; i < payload.length; i++) {
-          var zt1 = payload[i].val
-          var t1 = Object.assign(t1, zt1)
-        }
-        state.map_coords = mergeDeep(state.map_coords, t1)
-      },
-
-      mmx_shell_mut (state, payload) {
-        // payload is an array. each element has a val. each val is an object {cat_id: id : {coords}}
-        var t1 = {}
-        for (var i =0; i < payload.length; i++) {
-          var zt1 = payload[i].val
-          var t1 = Object.assign(t1, zt1)
-        }
-        state.mmx_shell = mergeDeep(state.mmx_shell, t1)
-      },
-
 
       mmx_details_mut (state, payload) {
+        // alert("mutation" + JSON.stringify(payload))
         // payload is an array. - [res.data, zcatid, zitemid, zmmxtypeid]
         //190324 var t1 = []  - Get it as an object/ can also be used when sub_id wise accessed from server
         var t1 = {}
         for (var i = 0; i < payload[0].length; i++) {
+          // this.images.push(Buffer.from(response.data[i].img.replace(/\\x/g,''), 'hex').toString('base64'))
           // idea is to get an object like {sub_id: []...}
           var zsubid = payload[0][i].sub_id
           var zt1 = {[zsubid]: Buffer.from(payload[0][i].mmx.replace(/\\x/g,''), 'hex').toString('base64')}
+          // t1.push({sub_id: payload[0][i].sub_id, mmx: Buffer.from(payload[0][i].mmx.replace(/\\x/g,''), 'hex').toString('base64')})
           var t1 = Object.assign(t1, zt1)
         }
 
@@ -143,11 +105,16 @@ export const store = new Vuex.Store({
         //updateObj = { data: { [rowIdx]: { [prop]: {$set: val} } } };
         // const t1 = { [payload[0]]: { [payload[2]]: [payload[1]]}}
         const t2 = {[payload[1]]: {[payload[2]]: { [payload[3]]: t1 }} }
+        // alert("mmx mutation t2" + JSON.stringify(t2))
+        //Object.assign(target, source)
+        // alert("state.mmx_cms - before" + JSON.stringify(state.mmx_cms))
         state.mmx_cms = mergeDeep(state.mmx_cms, t2)
+        // alert("state.mmx_cms - after" + JSON.stringify(state.mmx_cms))
 
         if (state.ismmxLoading) {
           state.ismmxLoading = false
         };
+          // alert("state.isLoading after mut" + state.isLoading)
       },
 
       text_details_id_mut (state, payload) {
@@ -156,6 +123,7 @@ export const store = new Vuex.Store({
 
       mmx_details_id_mut (state, payload) {
         // payload is [zcatid, zitemid, zmmxtypeid , 'All'/ zsubid]
+        // alert("mmx_details_id_mut - payload" + JSON.stringify(payload))
         //updateObj = { data: { [rowIdx]: { [prop]: {$set: val} } } };
         var t1 = {}
         if (payload[3] ==="All") {
@@ -165,7 +133,11 @@ export const store = new Vuex.Store({
           //190324 t1 = { [payload[0]]: { [payload[2]]: {[payload[1]]: [payload[3]] }}}
           t1 = { [payload[0]]: { [payload[1]]: {[payload[2]]: {[payload[3]]: 'y'} }}}
         }
+        // const t1 = { [payload[0]]: { [payload[2]]: [payload[1]]}}
+        // alert("mmx_details_id_mut - before" + JSON.stringify(t1))
+        // alert("avlblMmxsId - before" + JSON.stringify(state.avlblMmxsId))
         state.avlblMmxsId = mergeDeep(state.avlblMmxsId, t1)
+        // alert("avlblMmxsId - after" + JSON.stringify(state.avlblMmxsId))
         // state.avlblDetailsId[payload[1]] = Array.from(new Set(state.avlblDetailsId[payload[1]].concat(payload[0])));
       },
 
@@ -188,10 +160,8 @@ export const store = new Vuex.Store({
   actions: {
     initnode: ({commit}) => {
       commit('isnodeLoadingMut', true)
-//      axios.get('https://templesvuet.firebaseio.com/General_fb_node.json')
+      axios.get('https://templesvuet.firebaseio.com/General_fb_node.json')
       // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/hierview?')
-      // axios.get('/hierview')
-      axios.get('/entity_parent_v4')
         .then(res => {
           const data = res.data
           commit('initnodemut', data)
@@ -205,25 +175,70 @@ export const store = new Vuex.Store({
         })
     },
 
-    init_entity_act: ({commit}) => {
-//      commit('isnodeLoadingMut', true)
-//      axios.get('https://templesvuet.firebaseio.com/General_fb_node.json')
-      // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/hierview?')
-      axios.get('/entity_desc_v')
-        .then(res => {
-          const data = res.data
-          commit('init_entity_mut', data)
-          // for (let key in data) {
-          //   if ( data[key] !== null && Object.keys(data[key]).length >0) {
-          //               alert ("Hello" + JSON.stringify(data))
-          //     commit('initnodemut', data[key])
-          //   }
-          // }
-//0524          .catch(error => console.log(error))
-        })
-    },
 
     text_details_act: ({commit, state}, payload) => {
+      // payload is an array of Ids from sourceFilePage
+      commit('isLoadingMut', true)
+
+      // get a string of numbers of the payload to pass it on to axios as an IN condition
+      const a = payload[0].toString()
+      // alert("axios" + JSON.stringify(a))
+      // expected value 2,5,6
+      const b = payload[1]
+      // alert("axios" + JSON.stringify(b))
+      // expected value ; cat_id 8/9
+        axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/mmx_text_v?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')' )
+        // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/text_detail_v2?select=val&cat_id=eq.9&id=in.(' + a + ')' )
+        // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/text_detail_v2?select=val&cat_id=eq.9&id=in.(2,5)' )
+          .then(res => {
+            // alert("axios" + JSON.stringify(res.data))
+            if (res.data.length > 0) {
+              commit('text_details_mut', res.data)
+            }
+          })
+        commit('text_details_id_mut', payload)
+    },
+
+    mmx_details_act: ({commit, state}, payload) => {
+      // payload is an array of cat_id, itemid, mmx_typeid, 'All'/ sub_id
+      // alert("axios" + JSON.stringify(payload))
+
+      commit('ismmxLoadingMut', true)
+
+      // get a string of numbers of the payload to pass it on to axios as an IN condition
+      const zcatid = payload[0]
+      const zitemid = payload[1]
+      const zmmxtypeid = payload[2]
+      const zsubid = payload[3]
+      // alert("axios" + JSON.stringify(zcatid) + "-" + JSON.stringify(zitemid) + "-" + JSON.stringify(zmmxtypeid) )
+
+      if (zsubid==="All") {
+        axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/mmx_cms_v?select=mmx,sub_id&cat_id=eq.' + zcatid + '&id=eq.' + zitemid + '&mmx_type_id=eq.' + zmmxtypeid)
+        .then(res => {
+          if (res.data.length > 0) {commit('mmx_details_mut', [res.data, zcatid, zitemid, zmmxtypeid])}
+          })
+        commit('mmx_details_id_mut', [zcatid, zitemid, zmmxtypeid, 'All'])
+      } else {
+        axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/mmx_cms_v?select=mmx,sub_id&cat_id=eq.' + zcatid + '&id=eq.' + zitemid + '&mmx_type_id=eq.' + zmmxtypeid + '&sub_id=eq.' + zsubid)
+        .then(res => {
+          if (res.data.length > 0) {commit('mmx_details_mut', [res.data, zcatid, zitemid, zmmxtypeid])}
+          })
+        commit('mmx_details_id_mut', [zcatid, zitemid, zmmxtypeid, zsubid])
+      }
+        // axios.get(
+        //   'http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/mmx_cms_v?select=mmx,sub_id&cat_id=eq.' + zcatid + '&id=eq.' + zitemid + '&mmx_type_id=eq.' + zmmxtypeid
+        // )
+        // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/text_detail_v2?select=val&cat_id=eq.9&id=in.(' + a + ')' )
+        // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/text_detail_v2?select=val&cat_id=eq.9&id=in.(2,5)' )
+          // .then(res => {
+          //   if (res.data.length > 0) {commit('mmx_details_mut', [res.data, zcatid, zitemid, zmmxtypeid])}
+          //   })
+      // commit('mmx_details_id_mut', [zcatid, zitemid, zmmxtypeid])
+    },
+
+
+
+    zsongtext_details_act: ({commit, state}, payload) => {
       // payload is an array of Ids from sourceFilePage
       commit('isLoadingMut', true)
 
@@ -232,86 +247,19 @@ export const store = new Vuex.Store({
       // expected value 2,5,6
       const b = payload[1]
       // expected value ; cat_id 8/9
-      // get the text details from mmx_text_v
-      axios.all([
-          // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/mmx_text_v?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')'),
-          // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/map_coords_v?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')'),
-          // axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/mmx_cms_shell_v2?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')' )
-          axios.get('/mmx_text_v?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')'),
-          axios.get('/map_coords_v?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')'),
-          axios.get('/mmx_cms_shell_v2?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')' )
-
-        ])
-        .then(axios.spread((res1, res2, res3) => {
-          // do something with both responses
-          if (res1.data.length > 0) {
-            commit('text_details_mut', res1.data)
-          }
-          commit('text_details_id_mut', payload)
-
-          if (res2.data.length > 0) {
-            // alert("map coords" + JSON.stringify(res))
-            commit('map_coords_mut', res2.data)
-          }
-
-          if (res3.data.length > 0) {
-            // alert("mmx_shell" + JSON.stringify(res))
-            commit('mmx_shell_mut', res3.data)
-          }
-        }));
-
-      //   axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/mmx_text_v?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')' )
-      //     .then(res => {
-      //       if (res.data.length > 0) {
-      //         commit('text_details_mut', res.data)
-      //       }
-      //     })
-      //   commit('text_details_id_mut', payload)
-      // // get the map_coords details from mmx_text_v
-      //   axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/map_coords_v?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')' )
-      //     .then(res => {
-      //       if (res.data.length > 0) {
-      //         // alert("map coords" + JSON.stringify(res))
-      //         commit('map_coords_mut', res.data)
-      //       }
-      //     })
-      // // get the shell details from mmx_cms_v2
-      //   axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/mmx_cms_shell_v2?select=val&cat_id=eq.'+ b + '&id=in.(' + a + ')' )
-      //     .then(res => {
-      //       if (res.data.length > 0) {
-      //         // alert("mmx_shell" + JSON.stringify(res))
-      //         commit('mmx_shell_mut', res.data)
-      //       }
-      //     })
-
-
-
-
+        axios.get('http://ec2-18-216-142-169.us-east-2.compute.amazonaws.com:3000/songtext_detail_v2?select=val&id=in.(' + a + ')' )
+          .then(res => {
+            if (res.data.length > 0) {
+              commit('text_details_mut', res.data)
+            }
+          })
+        commit('text_details_id_mut', payload)
     },
+// for loading songs mmx, it takes time. Hence make isLoading = true using an action. After loading, make it to false
 
-    mmx_details_act: ({commit, state}, payload) => {
-      // payload is an array of cat_id, itemid, mmx_typeid, 'All'/ sub_id
-      commit('ismmxLoadingMut', true)
-
-      // get a string of numbers of the payload to pass it on to axios as an IN condition
-      const zcatid = payload[0]
-      const zitemid = payload[1]
-      const zmmxtypeid = payload[2]
-      const zsubid = payload[3]
-
-      if (zsubid==="All") {
-        axios.get('/mmx_cms_v?select=mmx,sub_id&cat_id=eq.' + zcatid + '&id=eq.' + zitemid + '&mmx_type_id=eq.' + zmmxtypeid)
-        .then(res => {
-          if (res.data.length > 0) {commit('mmx_details_mut', [res.data, zcatid, zitemid, zmmxtypeid])}
-          })
-        commit('mmx_details_id_mut', [zcatid, zitemid, zmmxtypeid, 'All'])
-      } else {
-        axios.get('/mmx_cms_v?select=mmx,sub_id&cat_id=eq.' + zcatid + '&id=eq.' + zitemid + '&mmx_type_id=eq.' + zmmxtypeid + '&sub_id=eq.' + zsubid)
-        .then(res => {
-          if (res.data.length > 0) {commit('mmx_details_mut', [res.data, zcatid, zitemid, zmmxtypeid])}
-          })
-        commit('mmx_details_id_mut', [zcatid, zitemid, zmmxtypeid, zsubid])
-      }
+    ismmxLoadingAct: ({commit, state}, payload) => {
+      // payload is true or false
+      commit('ismmxLoadingMut', payload)
     },
 
 

@@ -16,6 +16,12 @@
           <template v-if="! isLoading && $te('server'+'['+cat_id+']'+'['+item+']'+'[1]')">
             <ztext2 :textObject="$t('server'+'['+cat_id+']'+'['+item+']'+'[1]')"></ztext2>
             <!-- <zmmx :sub_id="['t93', 't94']" :mapcoords=mapcoords></zmmx> -->
+            <zmmx :cat_id = cat_id :d_id = item></zmmx>
+          </template>
+          <template v-else>
+            <v-alert type="warning" :value="true">
+                  Oops ! No Data available for this selection !
+            </v-alert>
           </template>
         </v-expansion-panel-content>
     </v-expansion-panel>

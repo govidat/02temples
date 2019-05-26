@@ -28,10 +28,12 @@
                 <l-marker :lat-lng="marker">
                   <l-popup>
                     <div @click="popupClick">
-                      {{this.mapcoords.locname}}
+
+                      <!-- {{this.mapcoords.locname}}
                       <p v-show="showParagraph">
                         {{this.mapcoords.locdesc}}
-                      </p>
+                      </p> -->
+                      <ztext3 :textObject="$t('server'+'['+cat_id+']'+'['+itemid+']'+'[' + mmx_type_id+ ']'+'[1]')"></ztext3>
                     </div>
                   </l-popup>
                 </l-marker>
@@ -47,15 +49,17 @@
 
 import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
 // import 'leaflet/dist/leaflet.css'
+import ztext3 from './42imgtext'
 
   export default {
-    props: ['mapcoords'],
+    props: ['mapcoords', 'mmx_type_id', 'itemid', 'cat_id'],
 
     components: {
         LMap,
         LTileLayer,
         LMarker,
-        LPopup
+        LPopup,
+        ztext3
       },
 
     data () {

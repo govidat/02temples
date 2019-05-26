@@ -16,6 +16,11 @@
             <ztext2 :textObject="$t('server'+'['+cat_id+']'+'['+item.d_id+']'+'[1]')"></ztext2>
             <zmmx :cat_id = cat_id :d_id = item.d_id></zmmx>
           </template>
+          <template v-else>
+            <v-alert type="warning" :value="true">
+                  Oops ! No Data available for this selection !
+            </v-alert>
+          </template>          
         </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
