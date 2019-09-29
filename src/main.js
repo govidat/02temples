@@ -4,11 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import '@fortawesome/fontawesome-free/css/all.css'
 import 'babel-polyfill'
 import Vuex from 'vuex'
 import { store } from './store/store.js'
 import axios from 'axios'
-// this seting is to direct to DEV/QA/PRDN environment
+// this seting is to direct to DEV/QA/PRDN environment for getting the data from postgres
 axios.defaults.baseURL = 'http://18.221.15.229/devapi'
 
 import L from 'leaflet'
@@ -42,9 +43,6 @@ new Vue({
   mounted() {
    this.$store.dispatch('initnode')
    this.$store.dispatch('init_entity_act')
-   // setTimeout(function () {
-   //  alert("Hello")
-   //  }.bind(this), 2000)
   },
   components: { App },
   template: '<App/>'

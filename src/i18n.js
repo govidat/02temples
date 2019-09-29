@@ -6,7 +6,9 @@ Vue.use(VueI18n) // you don't need this in main.js
 
 import { store } from './store/store.js'
 // this seting is to direct to DEV/QA/PRDN environment
-import { messages } from './store/mastersUT/messages.js'
+// import { messages } from './store/mastersUT/messages.js'
+// import { messages } from './store/customize.js'
+import { messages } from './customize.js'
 // import {isObject, mergeDeep} from './helper.js' // this has issues on reactivity. hence not used
 
 // 2

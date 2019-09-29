@@ -37,7 +37,8 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        // test: /\.(png|jpg|gif|svg)$/,  --- this change was done to get the fontawesome working
+        test: /\.(png|jpg|gif|svg|jpe|woff|woff2|eot|ttf)$/,
         loader: 'file-loader',
         options: {
           objectAssign: 'Object.assign'

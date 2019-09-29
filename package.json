@@ -9,6 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
     "babel-polyfill": "^6.26.0",
     "vue": "^2.5.3",
     "vue-aplayer": "^1.6.1",
@@ -16,6 +17,7 @@
     "vuetify": "^1.2.2"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",

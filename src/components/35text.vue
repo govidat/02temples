@@ -7,7 +7,9 @@
                 {{textObject[i]["header"]}}
               </v-card-title>
               <v-card-text>
-                <p v-for="j in textObject[i]['item']">{{j}}</p>
+                <!-- some song text have lrc time in [0:00.00] format. They need to be removed before display -->
+                <p v-for="j in textObject[i]['item']">{{j.replace(/\[.*?\]/g, '')}}</p>
+                <!-- <p v-for="j in textObject[i]['item']">{{j}}</p> -->
               </v-card-text>
             </v-card>
   </div>

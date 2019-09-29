@@ -73,9 +73,7 @@
             <td v-if="$te(msg + '.' + props.item.id)">
               <!-- Call the function to display in the required language -->
               {{$t(msg + '.' + props.item.id)}}
-              <!-- {{ get_desc(props.item.id, 'en', 'NA', node ) }} -->
             </td>
-            <!-- <td class="text-xs-right">{{ props.item.calories }}</td> -->
           </tr>
 
         </template>
@@ -83,13 +81,6 @@
             Your search for "{{ search }}" found no results.
         </v-alert>
       </v-data-table>
-<!-- xxx to be deleted       -->
-      <!-- {{this.mainLang}} -->
-      <!-- {{items.length}} -->
-      <!-- {{ this.selected }} -->
-      <!-- {{ this.selected2 }} -->
-
-      <!-- {{ this.search }} -->
     </v-card>
   </div>
 
@@ -100,7 +91,6 @@
 // import { fn_desc } from '../myMixin'
 import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
-// import { mapState } from 'vuex'
 
   export default {
 
@@ -112,13 +102,6 @@ import { mapGetters } from 'vuex'
       pagination: {
         sortBy: 'id'
       },
-      // return {
-      //   selected: this.selected2
-      // },
-      // selected: this.selected2 || [],
-      // selected: this.selected2.slice(0) || [],
-
-      // selected: [],
       search: '',
 
     }),

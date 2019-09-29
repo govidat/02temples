@@ -21,26 +21,3 @@ export function mergeDeep(target, ...sources) {
 
   return mergeDeep(target, ...sources);
 }
-
-// target is not mutated
-
-// export function mergeDeep(target, ...sources) {
-//   let output = Object.assign({}, target);
-//
-//   if (!sources.length) return target;
-//   const source = sources.shift();
-//
-//   if (isObject(target) && isObject(source)) {
-//     Object.keys(source).forEach(key => {
-//       if (isObject(source[key])) {
-//         if (!(key in target))
-//           Object.assign(output, { [key]: source[key] });
-//         else
-//           output[key] = mergeDeep(target[key], source[key]);
-//       } else {
-//         Object.assign(output, { [key]: source[key] });
-//       }
-//     });
-//   }
-//   return output;
-// }
