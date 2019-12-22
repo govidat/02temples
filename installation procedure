@@ -12,7 +12,7 @@ $ npm run dev
 Copied the content from 0101Templesvuet
 
 Install axios
-$ npm install axios
+$ npm install axios --save
 
 For IE and Safari support
 
@@ -30,7 +30,7 @@ for language support
 
 https://github.com/kazupon/vue-i18n
 
-npm install vue-i18n
+npm install vue-i18n --save
 modify main.js
 
 ****** dropped this
