@@ -15,7 +15,7 @@
     "vue": "^2.5.3",
     "vue-aplayer": "^1.6.1",
     "vue2-leaflet": "^1.1.1",
-    "vuetify": "^1.2.2"
+    "vuetify": "1.2.x"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
