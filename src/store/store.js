@@ -2,13 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import {isObject, mergeDeep} from '../helper.js'
-// import { languages } from './customize.js'
-import { languages, zicons } from '../customize.js'
+import { ln_site, ln_song_master, ln_sanscript, zicons } from '../customize.js'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    languages: languages,
+    ln_site: ln_site,
+    ln_song_master: ln_song_master,
+    ln_sanscript: ln_sanscript,
     zicons: zicons,
 // One level deep has to be maintained while initiation, to take care of nested objects
 // Add to this when new language is introduced
@@ -46,9 +47,11 @@ export const store = new Vuex.Store({
     isLoading: false,
     ismmxLoading: false,
     // better to have some initial values
-    ln_song: ['ta', 'en'],
+    ln_song: ['ta', 'en', 'sa', 'te'],
+    ln_song_transliteration: ['ta', 'en'],
     ln_song_meaning: ['ta', 'en'],
     ln_song_explanation: ['ta', 'en'],
+    ln_song_lyrics: 'ta',
     // better to have some initial values - this is for no of loops and word/line/para
     splitchoice: 3,
     zloop: 10,
@@ -156,8 +159,10 @@ export const store = new Vuex.Store({
 
       ismmxLoadingMut (state, payload) { state.ismmxLoading = payload},
       upd_ln_song (state, payload) { state.ln_song = payload },
+      upd_ln_song_transliteration (state, payload) { state.ln_song_transliteration = payload },
       upd_ln_song_meaning (state, payload) { state.ln_song_meaning = payload },
       upd_ln_song_explanation (state, payload) { state.ln_song_explanation = payload },
+      upd_ln_song_lyrics (state, payload) { state.ln_song_lyrics = payload },
       upd_zloop (state, payload) { state.zloop = payload },
       upd_zloop_gap_sec (state, payload) { state.zloop_gap_sec = payload },
       upd_splitchoice (state, payload) { state.splitchoice = payload },

@@ -50,3 +50,12 @@ $ npm install vue2-leaflet --save
 Audio player installation
 $ npm install vue-aplayer --save
 
+Transliteration package installation
+$ npm install @sanskrit-coders/sanscript --save
+
+in main.js
+import Sanscript from '@sanskrit-coders/sanscript';
+// Object.definePrototype(Vue.prototype, '$Sanscript', { value: Sanscript });
+Vue.prototype.$Sanscript = Sanscript;
+
+(https://vuejsdevelopers.com/2017/04/22/vue-js-libraries-plugins/)

@@ -18,7 +18,7 @@
       <!-- 10 - node0/ ism 20 - radios -->
 
       <v-list>
-        <v-list-group v-for="item in ['t10','t20']" :key="item" :prepend-icon="zicons[item]" no-action>
+        <v-list-group v-for="item in ['t10','t20']" :key="item" :prepend-icon="zicons[item]">
             <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>{{$t('desc.' + item)}}</v-list-tile-title></v-list-tile-content></v-list-tile>
         <!-- <v-list-group v-for="item in [{id: 't10', model: false},{id: 't20', model: false}]" :key="item.id" v-model="item.model" :prepend-icon="zicons[item.id]" no-action>
             <v-list-tile slot="activator"><v-list-tile-content><v-list-tile-title>{{$t('desc.' + item.id)}}</v-list-tile-title></v-list-tile-content></v-list-tile> -->
@@ -146,7 +146,7 @@
       <v-snackbar v-model="snackbar_lan" :right=true :timeout=6000 :top=true :vertical=true :auto-height=true>
                 <p>{{$t('desc.t81')}}</p>
                 <v-radio-group v-model="$i18n.locale" row background-color="white">
-                  <div v-for="item in languages" :key="item.key">
+                  <div v-for="item in ln_site" :key="item.key">
                     <v-radio :label="item.text" :value="item.value"></v-radio>
                   </div>
                 </v-radio-group>
@@ -200,6 +200,7 @@
     </v-content>
     <v-footer :fixed="fixed" app>
       <span>Govidat &copy; 2018</span>
+      <!-- {{$Sanscript.t('ga##Na##pa##te', 'hk', 'tamil')}} -->
       <!-- {{sel_saint_id.length}} -->
       <v-spacer></v-spacer>
 
@@ -340,7 +341,7 @@ export default {
   components: { HelloWorld, zfilter4, zHome, zsaints, ztemples, zsongs },
   computed: {
     ...mapState(
-      ['languages','node', 'song_range','isnodeLoading', 'isentityLoading', 'zicons']
+      ['ln_site','node', 'song_range','isnodeLoading', 'isentityLoading', 'zicons']
     ),
 
 

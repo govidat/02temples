@@ -5,10 +5,6 @@
       <v-layout wrap>
         <v-card>
             <template v-if="playcounter < maxcounter && playRequested">
-              <!-- <template v-if="splitchoice != 3">{{$t('desc.' + 'm10')}} : {{~~(playcounter/zloop) + 1}} / {{Math.max(this.zsplit.length-1, 1)}}</template>
-              <template>{{$t('desc.' + 'm09')}} : {{(playcounter % zloop)+1}} / {{zloop}} </template> -->
-              <!-- playcounter {{playcounter}} /  maxcounter {{maxcounter}} / Wordno {{~~(playcounter/zloop) + 1}} / Start/endtime {{zsplit[~~(playcounter/zloop)]}} / {{zsplit[~~(playcounter/zloop) + 1]}} -->
-                <!-- :music="{src: 'data:audio/mp3;base64, ' + mmxs + '#t=' + zsplit[~~(playcounter/zloop)] + ',' + zsplit[~~(playcounter/zloop) + 1] , -->
               <aplayer
                 :key=playcounter
                 autoplay showLrc mutex
@@ -18,16 +14,9 @@
                 ref="zapl"
                 :music="{src: 'data:audio/mp3;base64, ' + mmxs,
                          lrc: zlrc,
-                         title: ztitle,
-                         artist: zartist,
-
+                title: ' ',
+                artist: ' ', 
                 }"/>
-                <!-- {{zplaytime}} -->
-              <!-- <audio
-                :key=playcounter controls autoplay
-                v-on:pause="playcounter += 1"
-                :src = "'data:audio/mp3;base64, ' + mmxs">
-              </audio> -->
             </template>
             <v-btn v-if="playcounter <= maxcounter" v-on:click="zswitch">
               <template v-if="! playRequested">{{$t('desc.' + 'm04')}}<v-icon>play_circle_filled</v-icon></template>
@@ -56,7 +45,7 @@ import axios from 'axios'
 
 
   export default {
-    props: ['itemid', 'mmx_type_id', 'sub_id', 'zsplit', 'maxcounter'],
+    props: ['itemid', 'mmx_type_id', 'sub_id', 'zsplit', 'maxcounter', 'zlrc'],
     components: {
         Aplayer
       },
@@ -66,22 +55,12 @@ import axios from 'axios'
         // splitchoice 1 = by word, 2 = by line 3 = none. This is to be built into a component
         // splitchoice: 3,
         playcounter: 0,
-        // zloop: 20,
-        // zlrc: '[00:00.05]APlayer\n[00:01.01]is\n[00:02.00]amazing',
-        zlrc: '[00:01.00]ॐ [00:03.50]विश्वं [00:04.00]विष्णु: [00:04.40]वषट्कारो [00:06.00]भूत-भव्य-भवत-प्रभुः [00:08.20]भूत-कृत [00:09.00]भूत-भृत[00:09.70] भावो भूतात्मा [00:10.40]भूतभावनः',
-        ztitle: 'VishnuSahasranamam',
-        zartist: 'MSS',
+        // ztitle: 'VishnuSahasranamam',
+        // zartist: 'MSS',
         playRequested: true,
         zplaytime: 0
        }
     } ,
-    // https://stackoverflow.com/questions/48388877/vue-js-how-i-can-bind-the-playbackrate-of-a-html5-video-element
-    // directives: {
-    //   zplbrate(el, binding) {
-    //     this.$refs.zap.el.playbackRate = binding.value;
-    //   }
-    // },
-
 
 // emit an intimation that the it has played out its full quota.
     watch: {
@@ -91,12 +70,6 @@ import axios from 'axios'
       this.$emit('playcounterevent', this.playcounter)
       if (this.playcounter >= this.maxcounter) { this.$emit('playedout'); this.$emit('playcounterevent', 0) }
       },
-
-      // splitchoice: function() {
-      //   if (this.splitchoice == 1 && this.zsplit_word.length > 0) { zsplit = this.zsplit_word}
-      //   else if (this.splitchoice == 2 && this.zsplit_line.length > 0) {zsplit = this.zsplit_line}
-      //   else { zsplit =[] }
-      // },
     },
 
     methods: {
@@ -108,7 +81,6 @@ import axios from 'axios'
         this.$refs.zapl.audio.volume = 1;
         this.$refs.zapl.audio.currentTime = this.zsplit[~~(this.playcounter/this.zloop)] || 0;
         // above || 0 is to handle no split requirement
-        // alert("hello from zplbrate")
 
       },
       timecounter() {
@@ -116,8 +88,6 @@ import axios from 'axios'
           this.$refs.zapl.audio.pause()
         }
 
-        // this.zplaytime = this.$refs.zapl.audio.currentTime
-        // alert("currentTime" + this.$refs.zapl.audio.currentTime)
       },
 
     },
@@ -132,20 +102,14 @@ import axios from 'axios'
         this.$store.dispatch('mmx_details_act', [this.itemid, this.mmx_type_id, this.sub_id])
       }
 
-      // set playbackRate
-      // this.$refs.zapl.audio.playbackRate = 2.0
-
     },
 
     computed: {
       ...mapState(['ismmxLoading', 'avlblMmxsId', 'mmx_cms', 'splitchoice', 'zloop', 'zloop_gap_sec', 'zplaybackrate']),
       mmxs: function () {
-        // return is a text of audio at sub_id level
+        // return is a file of audio at sub_id level
         return ((((this.$store.state.mmx_cms || "")[this.itemid] || "")[this.mmx_type_id] || "")[this.sub_id] || "")
       },
-
-
-
     },
 
   }

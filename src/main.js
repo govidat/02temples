@@ -9,8 +9,13 @@ import 'babel-polyfill'
 import Vuex from 'vuex'
 import { store } from './store/store.js'
 import axios from 'axios'
+import Sanscript from '@sanskrit-coders/sanscript';
+// Object.definePrototype(Vue.prototype, '$Sanscript', { value: Sanscript });
+Vue.prototype.$Sanscript = Sanscript;
+
 // this seting is to direct to DEV/QA/PRDN environment for getting the data from postgres
-axios.defaults.baseURL = 'http://18.221.15.229/devapi'
+// axios.defaults.baseURL = 'http://18.221.15.229/devapi'
+axios.defaults.baseURL = 'http://18.220.88.60/api'
 
 import L from 'leaflet'
 import "leaflet/dist/leaflet.css"

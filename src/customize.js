@@ -1,13 +1,36 @@
-export var languages = [
+// export var languages = [
+//   {text: 'English', value: 'en', script: 'hk'},
+//   {text: 'தமிழ்', value: 'ta', script: 'tamil'},
+//   {text: 'తెలుగు', value: 'te', script: 'telugu'},
+// ];
+export var ln_site = [
   {text: 'English', value: 'en'},
   {text: 'தமிழ்', value: 'ta'},
-  {text: 'తెలుగు', value: 'te'}
-
-  // {text: 'A', value: 'en'},
-  // {text: 'அ', value: 'ta'},
-  // {text: 'అ', value: 'te'}
+  {text: 'తెలుగు', value: 'te'},
 ];
 
+export var ln_song_master = [
+  {text: 'English', value: 'en'},
+  {text: 'தமிழ்', value: 'ta'},
+  {text: 'తెలుగు', value: 'te'},
+  {text: 'संस्कृतम्', value: 'sa'},
+];
+
+
+export var ln_sanscript = [
+  {text: 'English', value: 'en', script: 'hk'},
+  {text: 'தமிழ்', value: 'ta', script: 'tamil'},
+  {text: 'తెలుగు', value: 'te', script: 'telugu'},
+  {text: 'संस्कृतम्', value: 'sa', script: 'devanagari'},
+  {text: 'বাংলা', value: 'bn', script: 'bengali'},
+  {text: 'ગુજરાતી', value: 'gu', script: 'gujarati'},
+  {text: 'ਪੰਜਾਬੀ', value: 'pa', script: 'gurmukhi'},
+  {text: 'ಕನ್ನಡ', value: 'kn', script: 'kannada'},
+  {text: 'മലയാളം', value: 'ml', script: 'malayalam'},
+  {text: 'ଓଡ଼ିଆ', value: 'or', script: 'oriya'},
+];
+
+// script is being used for Sanscript Transliteration github sanskrit/sanscript.js
 // when new language is added, make additions to i18n.js and store.js > text_details_messages:
 export var messages = {
   en: {
@@ -21,7 +44,7 @@ export var messages = {
       }
     },
     desc: {
-     "t00": "Temples, Saints and Divine Songs of Hinduism",
+     "t00": "Temples, Saints and Songs of Hinduism",
      "t01": "Selections",
      "t05": "Id",
      "t10": "Vaishnavism/Saivism",
@@ -43,7 +66,9 @@ export var messages = {
      "t82": "Song language(s)",
      "t83": "Song meaning language(s)",
      "t84": "Song explanation language(s)",
-     "t85": "Close (Autoclose in 60s)",
+     "t85": "Close (Autoclose in 120s)",
+     "t86": "Song transliteration language(s)",
+     "t87": "Lyrics language",
      "t92": "Photos",
      "t93": "Audios",
      "t94": "Videos",
@@ -53,6 +78,7 @@ export var messages = {
      "t99": "Home",
      "e01": "enData not selected yet. Please select atleast one item using the filter panel on the left.",
      "e02": "enOops ! No Data available for this selection !",
+     "e03": "(en If audio does not play automatically, then you have to enable auto play settings in your browser)",
      "m01": "Play",
      "m02": "Stop",
      "m03": "Pause",
@@ -112,6 +138,8 @@ export var messages = {
      "t83": "taSong meaning language(s)",
      "t84": "taSong explanation language(s)",
      "t85": "taClose (Autoclose in 60s)",
+     "t86": "taSong transliteration language(s)",
+     "t87": "taLyrics language",
      "t92": "taPhotos",
      "t93": "taAudios",
      "t94": "taVideos",
@@ -121,6 +149,7 @@ export var messages = {
      "t99": "முகப்பு பக்கம்",
      "e01": "taData not selected yet. Please select atleast one item using the filter panel on the left.",
      "e02": "taOops ! No Data available for this selection !",
+     "e03": "(ta If audio does not play automatically, then you have to enable auto play settings in your browser)",
      "m01": "taPlay",
      "m02": "taStop",
      "m03": "taPause",
@@ -179,6 +208,8 @@ export var messages = {
      "t83": "taSong meaning language(s)",
      "t84": "taSong explanation language(s)",
      "t85": "teClose (Autoclose in 60s)",
+     "t86": "teSong transliteration language(s)",
+     "t87": "teLyrics language",
      "t92": "tePhotos",
      "t93": "teAudios",
      "t94": "teVideos",
@@ -188,6 +219,7 @@ export var messages = {
      "t99": "హోమ్ పేజీ",
      "e01": "teData not selected yet. Please select atleast one item using the filter panel on the left.",
      "e02": "teOops ! No Data available for this selection !",
+     "e03": "(te If audio does not play automatically, then you have to enable auto play settings in your browser)",
      "m01": "tePlay",
      "m02": "teStop",
      "m03": "tePause",

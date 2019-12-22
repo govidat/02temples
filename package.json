@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
+    "@sanskrit-coders/sanscript": "^1.0.2",
     "babel-polyfill": "^6.26.0",
     "vue": "^2.5.3",
     "vue-aplayer": "^1.6.1",
